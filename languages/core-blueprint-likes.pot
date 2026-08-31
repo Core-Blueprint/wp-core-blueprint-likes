@@ -1,0 +1,341 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Core Blueprint Likes 1.0.0-rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-27 18:55+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Active label"
+msgstr ""
+
+msgid "Allow logged-in users to like other WordPress users. This is useful for public member/profile pages, for example with Core Blueprint Profiles. Users cannot like themselves. Dislikes are not available for user profiles."
+msgstr ""
+
+msgid "Built-in icon"
+msgstr ""
+
+msgid "Choose an image or SVG stored in your WordPress Media Library."
+msgstr ""
+
+msgid "Choose from Media Library"
+msgstr ""
+
+msgid "Choose reaction icon"
+msgstr ""
+
+msgid "Choose which public post types may receive reactions. Optional overrides let each post type use its own wording, icons, dislike setting and logged-out visibility."
+msgstr ""
+
+msgid "Core Blueprint"
+msgstr ""
+
+msgid "Core Blueprint Likes"
+msgstr ""
+
+msgid "Created at (UTC)"
+msgstr ""
+
+msgid "Current user has disliked"
+msgstr ""
+
+msgid "Current user has disliked target"
+msgstr ""
+
+msgid "Current user has liked"
+msgstr ""
+
+msgid "Current user has liked target"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Dislike"
+msgstr ""
+
+msgid "dislike button when dislikes are enabled for the current post type."
+msgstr ""
+
+msgid "Dislike count"
+msgstr ""
+
+msgid "dislike count when dislikes are enabled for the current post type."
+msgstr ""
+
+msgid "Dislike overrides"
+msgstr ""
+
+msgid "Dislike this item"
+msgstr ""
+
+msgid "Disliked"
+msgstr ""
+
+msgid "dislikes"
+msgstr ""
+
+msgid "Dislikes"
+msgstr ""
+
+msgid "Dislikes are not enabled for this item."
+msgstr ""
+
+msgid "Each post type can inherit, enable or disable dislikes independently."
+msgstr ""
+
+msgid "Enable dislikes by default for enabled post types"
+msgstr ""
+
+msgid "Enable likes for user profiles"
+msgstr ""
+
+msgid "Enable reactions for this post type"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "explicit user target when user likes are enabled."
+msgstr ""
+
+msgid "False"
+msgstr ""
+
+msgid "Frontend usage"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Global defaults"
+msgstr ""
+
+msgid "Icon source"
+msgstr ""
+
+msgid "Inherit global active label"
+msgstr ""
+
+msgid "Inherit global icon"
+msgstr ""
+
+msgid "Inherit global label"
+msgstr ""
+
+msgid "Inherit global logged-out message"
+msgstr ""
+
+msgid "Inherit global setting"
+msgstr ""
+
+msgid "Inline SVG"
+msgstr ""
+
+msgid "is"
+msgstr ""
+
+msgid "Label"
+msgstr ""
+
+msgid "Leave empty to inherit the global message."
+msgstr ""
+
+msgid "Like"
+msgstr ""
+
+msgid "like button for the current target."
+msgstr ""
+
+msgid "Like count"
+msgstr ""
+
+msgid "like count for the current target."
+msgstr ""
+
+msgid "Like overrides"
+msgstr ""
+
+msgid "Like this item"
+msgstr ""
+
+msgid "Liked"
+msgstr ""
+
+msgid "likes"
+msgstr ""
+
+msgid "Likes"
+msgstr ""
+
+msgid "Likes settings"
+msgstr ""
+
+msgid "Likes: Most liked posts"
+msgstr ""
+
+msgid "Likes: Posts liked by current user"
+msgstr ""
+
+msgid "Logged-in users only"
+msgstr ""
+
+msgid "Logged-out message"
+msgstr ""
+
+msgid "Logged-out visitor overrides"
+msgstr ""
+
+msgid "Logged-out visitors"
+msgstr ""
+
+msgid "Manage Likes"
+msgstr ""
+
+msgid "Media Library"
+msgstr ""
+
+msgid "Paste safe inline SVG markup. External URL references are not stored."
+msgstr ""
+
+msgid "Please log in to react to this content."
+msgstr ""
+
+msgid "Post types"
+msgstr ""
+
+msgid "Privacy-first likes and optional dislikes for selected WordPress content types and, optionally, user profiles. Reactions are always account-based and store no IP address, fingerprint, browser, device or location data."
+msgstr ""
+
+msgid "Reaction"
+msgstr ""
+
+msgid "Reaction visibility"
+msgstr ""
+
+msgid "Reactions"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove dislike from this item"
+msgstr ""
+
+msgid "Remove like from this item"
+msgstr ""
+
+msgid "requires PHP 8.0 or higher. This server runs PHP %s."
+msgstr ""
+
+msgid "Save settings"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Show reactions only for logged-in users"
+msgstr ""
+
+msgid "Show to everyone with login notice"
+msgstr ""
+
+msgid "Shown when a logged-out visitor clicks a visible Like or Dislike button."
+msgstr ""
+
+msgid "Target ID"
+msgstr ""
+
+msgid "Target type"
+msgstr ""
+
+msgid "The reaction could not be saved."
+msgstr ""
+
+msgid "These settings are used everywhere unless a post type overrides them. Leave a label or message empty to use its translated default, and choose where each reaction icon comes from."
+msgstr ""
+
+msgid "This reaction is not supported."
+msgstr ""
+
+msgid "Toggle post type settings"
+msgstr ""
+
+msgid "True"
+msgstr ""
+
+msgid "Updated at (UTC)"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Use this icon"
+msgstr ""
+
+msgid "User profiles"
+msgstr ""
+
+msgid "User targets"
+msgstr ""
+
+msgid "users who reacted"
+msgstr ""
+
+msgid "When enabled, logged-out visitors do not see reaction buttons or counts. When disabled, they can see reactions but must log in before reacting."
+msgstr ""
+
+msgid "You are not allowed to manage Likes."
+msgstr ""
+
+msgid "You cannot react to this item."
+msgstr ""
+
+msgid "You must be logged in to react to items."
+msgstr ""
+
+
+msgid "Heart"
+msgstr ""
+
+msgid "Heart Crack"
+msgstr ""
+
+msgid "Thumbs Up"
+msgstr ""
+
+msgid "Thumbs Down"
+msgstr ""
+
+msgid "Lightbulb"
+msgstr ""
+
+msgid "Circle Slash"
+msgstr ""
+
+msgid "Star"
+msgstr ""
+
+msgid "Sparkles"
+msgstr ""
+
+msgid "Choose from the small bundled Lucide icon set. No external icon library is loaded."
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy shortcode"
+msgstr ""
+
+msgid "Shortcode copied."
+msgstr ""
+
+msgid "Settings saved."
+msgstr ""
+
+msgid "Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration."
+msgstr ""
+
+msgid "Likes: settings changed"
+msgstr ""

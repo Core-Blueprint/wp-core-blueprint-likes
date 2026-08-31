@@ -1,0 +1,40 @@
+.cb-reaction-button {
+	display: inline-flex;
+	align-items: center;
+	gap: .45em;
+	font: inherit;
+	cursor: pointer;
+}
+
+.cb-reaction-button:disabled {
+	cursor: not-allowed;
+	opacity: .6;
+}
+
+.cb-reaction-button__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+
+.cb-reaction-button__icon svg,
+.cb-reaction-button__icon img {
+	display: block;
+	width: 1em;
+	height: 1em;
+	object-fit: contain;
+}
+
+.cb-reaction-button__count,
+.cb-reaction-count,
+.cb-like-count,
+.cb-dislike-count {
+	font-variant-numeric: tabular-nums;
+}
+
+.cb-reaction-login-message {
+	display: inline-block;
+	margin-inline-start: .65em;
+	font: inherit;
+}

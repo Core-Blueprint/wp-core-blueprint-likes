@@ -1,0 +1,345 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Core Blueprint Likes 1.0.0-rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-27 18:55+0200\n"
+"PO-Revision-Date: 2026-08-27 18:55+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Active label"
+msgstr "Actief label"
+
+msgid "Allow logged-in users to like other WordPress users. This is useful for public member/profile pages, for example with Core Blueprint Profiles. Users cannot like themselves. Dislikes are not available for user profiles."
+msgstr "Sta ingelogde gebruikers toe om andere WordPress-gebruikers te liken. Dit is handig voor openbare leden- of profielpagina's, bijvoorbeeld met Core Blueprint Profiles. Gebruikers kunnen zichzelf niet liken. Dislikes zijn niet beschikbaar voor gebruikersprofielen."
+
+msgid "Built-in icon"
+msgstr "Ingebouwd icoon"
+
+msgid "Choose an image or SVG stored in your WordPress Media Library."
+msgstr "Kies een afbeelding of SVG uit je WordPress-mediabibliotheek."
+
+msgid "Choose from Media Library"
+msgstr "Kies uit de mediabibliotheek"
+
+msgid "Choose reaction icon"
+msgstr "Kies reactie-icoon"
+
+msgid "Choose which public post types may receive reactions. Optional overrides let each post type use its own wording, icons, dislike setting and logged-out visibility."
+msgstr "Kies welke openbare posttypen reacties mogen ontvangen. Met optionele overrides kan ieder posttype eigen teksten, iconen, dislike-instelling en zichtbaarheid voor uitgelogde bezoekers gebruiken."
+
+msgid "Core Blueprint"
+msgstr "Core Blueprint"
+
+msgid "Core Blueprint Likes"
+msgstr "Core Blueprint Likes"
+
+msgid "Created at (UTC)"
+msgstr "Aangemaakt op (UTC)"
+
+msgid "Current user has disliked"
+msgstr "Huidige gebruiker heeft een dislike gegeven"
+
+msgid "Current user has disliked target"
+msgstr "Huidige gebruiker heeft dit doel een dislike gegeven"
+
+msgid "Current user has liked"
+msgstr "Huidige gebruiker heeft geliket"
+
+msgid "Current user has liked target"
+msgstr "Huidige gebruiker heeft dit doel geliket"
+
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+msgid "Dislike"
+msgstr "Dislike"
+
+msgid "dislike button when dislikes are enabled for the current post type."
+msgstr "dislike-knop wanneer dislikes voor het huidige posttype zijn ingeschakeld."
+
+msgid "Dislike count"
+msgstr "Aantal dislikes"
+
+msgid "dislike count when dislikes are enabled for the current post type."
+msgstr "aantal dislikes wanneer dislikes voor het huidige posttype zijn ingeschakeld."
+
+msgid "Dislike overrides"
+msgstr "Dislike-overschrijvingen"
+
+msgid "Dislike this item"
+msgstr "Dislike dit item"
+
+msgid "Disliked"
+msgstr "Dislike gegeven"
+
+msgid "dislikes"
+msgstr "dislikes"
+
+msgid "Dislikes"
+msgstr "Dislikes"
+
+msgid "Dislikes are not enabled for this item."
+msgstr "Dislikes zijn niet ingeschakeld voor dit item."
+
+msgid "Each post type can inherit, enable or disable dislikes independently."
+msgstr "Elk posttype kan dislikes onafhankelijk overnemen, inschakelen of uitschakelen."
+
+msgid "Enable dislikes by default for enabled post types"
+msgstr "Dislikes standaard inschakelen voor geactiveerde posttypen"
+
+msgid "Enable likes for user profiles"
+msgstr "Likes voor gebruikersprofielen inschakelen"
+
+msgid "Enable reactions for this post type"
+msgstr "Reacties inschakelen voor dit berichttype"
+
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+msgid "explicit user target when user likes are enabled."
+msgstr "expliciet gebruikersdoel wanneer likes voor gebruikers zijn ingeschakeld."
+
+msgid "False"
+msgstr "Onwaar"
+
+msgid "Frontend usage"
+msgstr "Frontend-gebruik"
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Global defaults"
+msgstr "Globale standaardinstellingen"
+
+msgid "Icon source"
+msgstr "Icoonbron"
+
+msgid "Inherit global active label"
+msgstr "Globaal actief label overnemen"
+
+msgid "Inherit global icon"
+msgstr "Neem globaal icoon over"
+
+msgid "Inherit global label"
+msgstr "Globaal label overnemen"
+
+msgid "Inherit global logged-out message"
+msgstr "Neem globale melding voor uitgelogde bezoekers over"
+
+msgid "Inherit global setting"
+msgstr "Globale instelling overnemen"
+
+msgid "Inline SVG"
+msgstr "Inline SVG"
+
+msgid "is"
+msgstr "is"
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Leave empty to inherit the global message."
+msgstr "Laat leeg om de globale melding over te nemen."
+
+msgid "Like"
+msgstr "Like"
+
+msgid "like button for the current target."
+msgstr "like-knop voor het huidige doel."
+
+msgid "Like count"
+msgstr "Aantal likes"
+
+msgid "like count for the current target."
+msgstr "aantal likes voor het huidige doel."
+
+msgid "Like overrides"
+msgstr "Like-overschrijvingen"
+
+msgid "Like this item"
+msgstr "Like dit item"
+
+msgid "Liked"
+msgstr "Geliket"
+
+msgid "likes"
+msgstr "likes"
+
+msgid "Likes"
+msgstr "Likes"
+
+msgid "Likes settings"
+msgstr "Likes-instellingen"
+
+msgid "Likes: Most liked posts"
+msgstr "Likes: meest gelikete berichten"
+
+msgid "Likes: Posts liked by current user"
+msgstr "Likes: berichten geliket door huidige gebruiker"
+
+msgid "Logged-in users only"
+msgstr "Alleen ingelogde gebruikers"
+
+msgid "Logged-out message"
+msgstr "Melding voor uitgelogde bezoekers"
+
+msgid "Logged-out visitor overrides"
+msgstr "Overrides voor uitgelogde bezoekers"
+
+msgid "Logged-out visitors"
+msgstr "Uitgelogde bezoekers"
+
+msgid "Manage Likes"
+msgstr "Likes beheren"
+
+msgid "Media Library"
+msgstr "Mediabibliotheek"
+
+msgid "Paste safe inline SVG markup. External URL references are not stored."
+msgstr "Plak veilige inline SVG-markup. Externe URL-verwijzingen worden niet opgeslagen."
+
+msgid "Please log in to react to this content."
+msgstr "Log in om op deze content te reageren."
+
+msgid "Post types"
+msgstr "Posttypen"
+
+msgid "Privacy-first likes and optional dislikes for selected WordPress content types and, optionally, user profiles. Reactions are always account-based and store no IP address, fingerprint, browser, device or location data."
+msgstr "Privacygerichte likes en optionele dislikes voor geselecteerde WordPress-contenttypen en, optioneel, gebruikersprofielen. Reacties zijn altijd accountgebonden en slaan geen IP-adres, fingerprint, browser-, apparaat- of locatiegegevens op."
+
+msgid "Reaction"
+msgstr "Reactie"
+
+msgid "Reaction visibility"
+msgstr "Zichtbaarheid van reacties"
+
+msgid "Reactions"
+msgstr "Reacties"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Remove dislike from this item"
+msgstr "Verwijder dislike van dit item"
+
+msgid "Remove like from this item"
+msgstr "Verwijder like van dit item."
+
+msgid "requires PHP 8.0 or higher. This server runs PHP %s."
+msgstr "vereist PHP 8.0 of hoger. Deze server gebruikt PHP %s."
+
+msgid "Save settings"
+msgstr "Instellingen opslaan"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "Show reactions only for logged-in users"
+msgstr "Toon reacties alleen voor ingelogde gebruikers"
+
+msgid "Show to everyone with login notice"
+msgstr "Toon aan iedereen met inlogmelding"
+
+msgid "Shown when a logged-out visitor clicks a visible Like or Dislike button."
+msgstr "Wordt getoond wanneer een uitgelogde bezoeker op een zichtbare Like- of Dislike-knop klikt."
+
+msgid "Target ID"
+msgstr "Doel-ID"
+
+msgid "Target type"
+msgstr "Doeltype"
+
+msgid "The reaction could not be saved."
+msgstr "De reactie kon niet worden opgeslagen."
+
+msgid "These settings are used everywhere unless a post type overrides them. Leave a label or message empty to use its translated default, and choose where each reaction icon comes from."
+msgstr "Deze instellingen worden overal gebruikt, tenzij een posttype ze overschrijft. Laat een label of melding leeg om de vertaalde standaardwaarde te gebruiken en kies waar ieder reactie-icoon vandaan komt."
+
+msgid "This reaction is not supported."
+msgstr "Deze reactie wordt niet ondersteund."
+
+msgid "Toggle post type settings"
+msgstr "Instellingen voor berichttype in- of uitklappen"
+
+msgid "True"
+msgstr "Waar"
+
+msgid "Updated at (UTC)"
+msgstr "Bijgewerkt op (UTC)"
+
+msgid "Usage"
+msgstr "Gebruik"
+
+msgid "Use this icon"
+msgstr "Gebruik dit icoon"
+
+msgid "User profiles"
+msgstr "Gebruikersprofielen"
+
+msgid "User targets"
+msgstr "Gebruikersdoelen"
+
+msgid "users who reacted"
+msgstr "gebruikers die reageerden"
+
+msgid "When enabled, logged-out visitors do not see reaction buttons or counts. When disabled, they can see reactions but must log in before reacting."
+msgstr "Wanneer ingeschakeld zien uitgelogde bezoekers geen reactieknoppen of aantallen. Wanneer uitgeschakeld zien ze de reacties wel, maar moeten ze inloggen voordat ze kunnen reageren."
+
+msgid "You are not allowed to manage Likes."
+msgstr "Je hebt geen toestemming om Likes te beheren."
+
+msgid "You cannot react to this item."
+msgstr "Je kunt niet op dit item reageren."
+
+msgid "You must be logged in to react to items."
+msgstr "Je moet ingelogd zijn om op items te reageren."
+
+
+msgid "Heart"
+msgstr "Hart"
+
+msgid "Heart Crack"
+msgstr "Gebroken hart"
+
+msgid "Thumbs Up"
+msgstr "Duim omhoog"
+
+msgid "Thumbs Down"
+msgstr "Duim omlaag"
+
+msgid "Lightbulb"
+msgstr "Lampje"
+
+msgid "Circle Slash"
+msgstr "Cirkel met streep"
+
+msgid "Star"
+msgstr "Ster"
+
+msgid "Sparkles"
+msgstr "Sprankels"
+
+msgid "Choose from the small bundled Lucide icon set. No external icon library is loaded."
+msgstr "Kies uit de kleine meegeleverde Lucide-iconenset. Er wordt geen externe iconenbibliotheek geladen."
+
+msgid "Copy"
+msgstr "Kopiëren"
+
+msgid "Copy shortcode"
+msgstr "Shortcode kopiëren"
+
+msgid "Shortcode copied."
+msgstr "Shortcode gekopieerd."
+
+msgid "Settings saved."
+msgstr "Instellingen opgeslagen."
+
+msgid "Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration."
+msgstr "Lichtgewicht, privacygerichte likes en optionele dislikes voor WordPress-berichten en gebruikers, met optionele Bricks-integratie."
+
+msgid "Likes: settings changed"
+msgstr "Likes: instellingen gewijzigd"

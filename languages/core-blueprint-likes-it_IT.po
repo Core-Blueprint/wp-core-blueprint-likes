@@ -1,0 +1,374 @@
+
+msgid ""
+msgstr ""
+"Project-Id-Version: Core Blueprint Likes 1.0.0-rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-27 18:55+0200\n"
+"PO-Revision-Date: 2026-08-27 19:00+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: it_IT\n"
+"Language-Team: it_IT <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+msgid "Active label"
+msgstr "Etichetta attiva"
+
+msgid ""
+"Allow logged-in users to like other WordPress users. This is useful for public member/profile pages, for example with"
+" Core Blueprint Profiles. Users cannot like themselves. Dislikes are not available for user profiles."
+msgstr ""
+"Consenti agli utenti autenticati di mettere Mi piace ad altri utenti WordPress. Questa opzione è utile per le pagine "
+"pubbliche di membri/profili, ad esempio con Core Blueprint Profiles. Gli utenti non possono mettere Mi piace a se "
+"stessi. I Non mi piace non sono disponibili per i profili utente."
+
+msgid "Built-in icon"
+msgstr "Icona integrata"
+
+msgid "Choose an image or SVG stored in your WordPress Media Library."
+msgstr "Scegli un’immagine o un SVG memorizzato nella Libreria media di WordPress."
+
+msgid "Choose from Media Library"
+msgstr "Scegli dalla Libreria media"
+
+msgid "Choose reaction icon"
+msgstr "Scegli icona di reazione"
+
+msgid ""
+"Choose which public post types may receive reactions. Optional overrides let each post type use its own wording, "
+"icons, dislike setting and logged-out visibility."
+msgstr ""
+"Scegli quali tipi di contenuto pubblici possono ricevere reazioni. Le sostituzioni opzionali consentono a ogni tipo "
+"di contenuto di usare testi, icone, impostazione Non mi piace e visibilità per i visitatori non autenticati propri."
+
+msgid "Core Blueprint"
+msgstr "Core Blueprint"
+
+msgid "Core Blueprint Likes"
+msgstr "Core Blueprint Likes"
+
+msgid "Created at (UTC)"
+msgstr "Creato il (UTC)"
+
+msgid "Current user has disliked"
+msgstr "L’utente corrente ha messo Non mi piace"
+
+msgid "Current user has disliked target"
+msgstr "L’utente corrente ha messo Non mi piace al target"
+
+msgid "Current user has liked"
+msgstr "L’utente corrente ha messo Mi piace"
+
+msgid "Current user has liked target"
+msgstr "L’utente corrente ha messo Mi piace al target"
+
+msgid "Disabled"
+msgstr "Disattivato"
+
+msgid "Dislike"
+msgstr "Non mi piace"
+
+msgid "dislike button when dislikes are enabled for the current post type."
+msgstr "pulsante Non mi piace quando i Non mi piace sono abilitati per il tipo di contenuto corrente."
+
+msgid "Dislike count"
+msgstr "Conteggio Non mi piace"
+
+msgid "dislike count when dislikes are enabled for the current post type."
+msgstr "conteggio Non mi piace quando i Non mi piace sono abilitati per il tipo di contenuto corrente."
+
+msgid "Dislike overrides"
+msgstr "Sostituzioni Non mi piace"
+
+msgid "Dislike this item"
+msgstr "Non mi piace questo elemento"
+
+msgid "Disliked"
+msgstr "Non mi piace"
+
+msgid "dislikes"
+msgstr "non mi piace"
+
+msgid "Dislikes"
+msgstr "Non mi piace"
+
+msgid "Dislikes are not enabled for this item."
+msgstr "I Non mi piace non sono abilitati per questo elemento."
+
+msgid "Each post type can inherit, enable or disable dislikes independently."
+msgstr "Ogni tipo di contenuto può ereditare, abilitare o disabilitare i Non mi piace in modo indipendente."
+
+msgid "Enable dislikes by default for enabled post types"
+msgstr "Abilita Non mi piace per impostazione predefinita per i tipi di contenuto abilitati"
+
+msgid "Enable likes for user profiles"
+msgstr "Abilita Mi piace per i profili utente"
+
+msgid "Enable reactions for this post type"
+msgstr "Abilita reazioni per questo tipo di contenuto"
+
+msgid "Enabled"
+msgstr "Abilitato"
+
+msgid "explicit user target when user likes are enabled."
+msgstr "target utente esplicito quando i Mi piace per gli utenti sono abilitati."
+
+msgid "False"
+msgstr "Falso"
+
+msgid "Frontend usage"
+msgstr "Utilizzo sul sito"
+
+msgid "General"
+msgstr "Generale"
+
+msgid "Global defaults"
+msgstr "Valori predefiniti globali"
+
+msgid "Icon source"
+msgstr "Origine icona"
+
+msgid "Inherit global active label"
+msgstr "Eredita etichetta attiva globale"
+
+msgid "Inherit global icon"
+msgstr "Eredita icona globale"
+
+msgid "Inherit global label"
+msgstr "Eredita etichetta globale"
+
+msgid "Inherit global logged-out message"
+msgstr "Eredita messaggio globale per utenti non autenticati"
+
+msgid "Inherit global setting"
+msgstr "Eredita impostazione globale"
+
+msgid "Inline SVG"
+msgstr "SVG incorporato"
+
+msgid "is"
+msgstr "è"
+
+msgid "Label"
+msgstr "Etichetta"
+
+msgid "Leave empty to inherit the global message."
+msgstr "Lascia vuoto per ereditare il messaggio globale."
+
+msgid "Like"
+msgstr "Mi piace"
+
+msgid "like button for the current target."
+msgstr "pulsante Mi piace per il target corrente."
+
+msgid "Like count"
+msgstr "Conteggio Mi piace"
+
+msgid "like count for the current target."
+msgstr "conteggio Mi piace per il target corrente."
+
+msgid "Like overrides"
+msgstr "Sostituzioni Mi piace"
+
+msgid "Like this item"
+msgstr "Mi piace questo elemento"
+
+msgid "Liked"
+msgstr "Mi piace"
+
+msgid "likes"
+msgstr "mi piace"
+
+msgid "Likes"
+msgstr "Mi piace"
+
+msgid "Likes settings"
+msgstr "Impostazioni Likes"
+
+msgid "Likes: Most liked posts"
+msgstr "Likes: articoli con più Mi piace"
+
+msgid "Likes: Posts liked by current user"
+msgstr "Likes: articoli a cui l’utente corrente ha messo Mi piace"
+
+msgid "Logged-in users only"
+msgstr "Solo utenti autenticati"
+
+msgid "Logged-out message"
+msgstr "Messaggio per utenti non autenticati"
+
+msgid "Logged-out visitor overrides"
+msgstr "Sostituzioni per visitatori non autenticati"
+
+msgid "Logged-out visitors"
+msgstr "Visitatori non autenticati"
+
+msgid "Manage Likes"
+msgstr "Gestisci Likes"
+
+msgid "Media Library"
+msgstr "Libreria media"
+
+msgid "Paste safe inline SVG markup. External URL references are not stored."
+msgstr "Incolla markup SVG incorporato sicuro. I riferimenti a URL esterni non vengono memorizzati."
+
+msgid "Please log in to react to this content."
+msgstr "Accedi per reagire a questo contenuto."
+
+msgid "Post types"
+msgstr "Tipi di contenuto"
+
+msgid ""
+"Privacy-first likes and optional dislikes for selected WordPress content types and, optionally, user profiles. "
+"Reactions are always account-based and store no IP address, fingerprint, browser, device or location data."
+msgstr ""
+"Mi piace orientati alla privacy e Non mi piace opzionali per tipi di contenuto WordPress selezionati e, "
+"facoltativamente, profili utente. Le reazioni sono sempre associate a un account e non memorizzano indirizzo IP, "
+"impronta digitale, browser, dispositivo o dati sulla posizione."
+
+msgid "Reaction"
+msgstr "Reazione"
+
+msgid "Reaction visibility"
+msgstr "Visibilità delle reazioni"
+
+msgid "Reactions"
+msgstr "Reazioni"
+
+msgid "Remove"
+msgstr "Rimuovi"
+
+msgid "Remove dislike from this item"
+msgstr "Rimuovi Non mi piace da questo elemento"
+
+msgid "Remove like from this item"
+msgstr "Rimuovi Mi piace da questo elemento"
+
+#, python-format
+msgid "requires PHP 8.0 or higher. This server runs PHP %s."
+msgstr "richiede PHP 8.0 o versione successiva. Questo server utilizza PHP %s."
+
+msgid "Save settings"
+msgstr "Salva impostazioni"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "Show reactions only for logged-in users"
+msgstr "Mostra le reazioni solo agli utenti autenticati"
+
+msgid "Show to everyone with login notice"
+msgstr "Mostra a tutti con avviso di accesso"
+
+msgid "Shown when a logged-out visitor clicks a visible Like or Dislike button."
+msgstr "Mostrato quando un visitatore non autenticato fa clic su un pulsante Mi piace o Non mi piace visibile."
+
+msgid "Target ID"
+msgstr "ID target"
+
+msgid "Target type"
+msgstr "Tipo di target"
+
+msgid "The reaction could not be saved."
+msgstr "Impossibile salvare la reazione."
+
+msgid ""
+"These settings are used everywhere unless a post type overrides them. Leave a label or message empty to use its "
+"translated default, and choose where each reaction icon comes from."
+msgstr ""
+"Queste impostazioni vengono usate ovunque, a meno che un tipo di contenuto non le sostituisca. Lascia vuota "
+"un’etichetta o un messaggio per usare il relativo valore predefinito tradotto e scegli l’origine di ogni icona di "
+"reazione."
+
+msgid "This reaction is not supported."
+msgstr "Questa reazione non è supportata."
+
+msgid "Toggle post type settings"
+msgstr "Mostra/nascondi impostazioni del tipo di contenuto"
+
+msgid "True"
+msgstr "Vero"
+
+msgid "Updated at (UTC)"
+msgstr "Aggiornato il (UTC)"
+
+msgid "Usage"
+msgstr "Utilizzo"
+
+msgid "Use this icon"
+msgstr "Usa questa icona"
+
+msgid "User profiles"
+msgstr "Profili utente"
+
+msgid "User targets"
+msgstr "Target utente"
+
+msgid "users who reacted"
+msgstr "utenti che hanno reagito"
+
+msgid ""
+"When enabled, logged-out visitors do not see reaction buttons or counts. When disabled, they can see reactions but "
+"must log in before reacting."
+msgstr ""
+"Quando è abilitato, i visitatori non autenticati non vedono i pulsanti di reazione né i conteggi. Quando è "
+"disabilitato, possono vedere le reazioni, ma devono accedere prima di reagire."
+
+msgid "You are not allowed to manage Likes."
+msgstr "Non hai il permesso di gestire Likes."
+
+msgid "You cannot react to this item."
+msgstr "Non puoi reagire a questo elemento."
+
+msgid "You must be logged in to react to items."
+msgstr "Devi accedere per reagire agli elementi."
+
+msgid "Heart"
+msgstr "Cuore"
+
+msgid "Heart Crack"
+msgstr "Cuore spezzato"
+
+msgid "Thumbs Up"
+msgstr "Pollice su"
+
+msgid "Thumbs Down"
+msgstr "Pollice giù"
+
+msgid "Lightbulb"
+msgstr "Lampadina"
+
+msgid "Circle Slash"
+msgstr "Cerchio barrato"
+
+msgid "Star"
+msgstr "Stella"
+
+msgid "Sparkles"
+msgstr "scintille"
+
+msgid "Choose from the small bundled Lucide icon set. No external icon library is loaded."
+msgstr "Scegli dal piccolo set di icone Lucide incluso. Non viene caricata alcuna libreria di icone esterna."
+
+msgid "Copy"
+msgstr "Copia"
+
+msgid "Copy shortcode"
+msgstr "Copia shortcode"
+
+msgid "Shortcode copied."
+msgstr "Shortcode copiato."
+
+msgid "Settings saved."
+msgstr "Impostazioni salvate."
+
+msgid "Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration."
+msgstr ""
+"Sistema leggero e orientato alla privacy per Mi piace e Non mi piace opzionali su articoli e utenti WordPress, con "
+"integrazione Bricks opzionale."
+
+msgid "Likes: settings changed"
+msgstr "Likes: impostazioni modificate"

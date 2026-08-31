@@ -1,0 +1,93 @@
+<?php
+/**
+ * Plugin Name:       Core Blueprint Likes
+ * Plugin URI:        https://coreblueprint.io
+ * Description:       Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration.
+ * Version:           1.0.0-rc1
+ * Author:            Core Blueprint
+ * Author URI:        https://coreblueprint.io
+ * License:           GPL-2.0+
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       core-blueprint-likes
+ * Domain Path:       /languages
+ * Requires at least: 7.0
+ * Requires PHP:      8.0
+ *
+ * @package CB_Likes
+ */
+
+declare(strict_types=1);
+
+defined( 'ABSPATH' ) || exit;
+
+define( 'CB_LIKES_VERSION', '1.0.0-rc1' );
+define( 'CB_LIKES_FILE', __FILE__ );
+define( 'CB_LIKES_DIR', plugin_dir_path( __FILE__ ) );
+define( 'CB_LIKES_URL', plugin_dir_url( __FILE__ ) );
+define( 'CB_LIKES_BASENAME', plugin_basename( __FILE__ ) );
+
+if ( version_compare( PHP_VERSION, '8.0', '<' ) ) {
+	add_action( 'admin_notices', static function (): void {
+		echo '<div class="notice notice-error"><p><strong>Core Blueprint Likes:</strong> ';
+		printf(
+			/* translators: %s: current PHP version */
+			esc_html__( 'requires PHP 8.0 or higher. This server runs PHP %s.', 'core-blueprint-likes' ),
+			esc_html( PHP_VERSION )
+		);
+		echo '</p></div>';
+	} );
+	return;
+}
+
+spl_autoload_register( static function ( string $class ): void {
+	$prefix = 'CB\\Likes\\';
+	if ( 0 !== strncmp( $class, $prefix, strlen( $prefix ) ) ) {
+		return;
+	}
+	$relative = substr( $class, strlen( $prefix ) );
+	$file     = CB_LIKES_DIR . 'src/' . str_replace( '\\', '/', $relative ) . '.php';
+	if ( is_readable( $file ) ) {
+		require_once $file;
+	}
+} );
+
+register_activation_hook( __FILE__, [ '\\CB\\Likes\\Install', 'activate' ] );
+add_action( 'plugins_loaded', [ '\\CB\\Likes\\Plugin', 'boot' ], 20 );
+
+/** Public API: return the number of likes for a target. */
+function cb_likes_count( string $target_type, int $target_id ): int {
+	return \CB\Likes\Repository::count( $target_type, $target_id );
+}
+
+/** Public API: determine whether a user likes a target. */
+function cb_likes_user_has_liked( int $user_id, string $target_type, int $target_id ): bool {
+	return \CB\Likes\Repository::user_has_liked( $user_id, $target_type, $target_id );
+}
+
+/** Public API: set a user's like state for a valid target. */
+function cb_likes_set_liked( int $user_id, string $target_type, int $target_id, bool $liked ): bool {
+	$result = \CB\Likes\Service::set_liked( $user_id, $target_type, $target_id, $liked );
+	return ! is_wp_error( $result ) && (bool) $result['liked'];
+}
+
+/** Public API: return the number of dislikes for a target. */
+function cb_likes_dislike_count( string $target_type, int $target_id ): int {
+	return \CB\Likes\Repository::dislike_count( $target_type, $target_id );
+}
+
+/** Public API: determine whether a user dislikes a target. */
+function cb_likes_user_has_disliked( int $user_id, string $target_type, int $target_id ): bool {
+	return \CB\Likes\Repository::user_has_disliked( $user_id, $target_type, $target_id );
+}
+
+/** Public API: set a user's dislike state for a valid target. */
+function cb_likes_set_disliked( int $user_id, string $target_type, int $target_id, bool $disliked ): bool {
+	$result = \CB\Likes\Service::set_disliked( $user_id, $target_type, $target_id, $disliked );
+	return ! is_wp_error( $result ) && (bool) $result['disliked'];
+}
+
+/** Public API: set one mutually exclusive reaction (`like`, `dislike` or null). */
+function cb_likes_set_reaction( int $user_id, string $target_type, int $target_id, ?string $reaction ): array|\WP_Error {
+	return \CB\Likes\Service::set_reaction( $user_id, $target_type, $target_id, $reaction );
+}
+
