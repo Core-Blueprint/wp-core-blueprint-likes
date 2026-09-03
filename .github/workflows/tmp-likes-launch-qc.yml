@@ -1,0 +1,64 @@
+name: Temporary Likes launch QC
+
+on:
+  push:
+    branches:
+      - qc/likes-launch-readiness
+    paths:
+      - '.github/workflows/tmp-likes-launch-qc.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  qc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply reviewed design and Base alignment
+        run: python3 tools/tmp-likes-launch-qc.py
+      - name: Syntax and contract checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -type f -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 php -l >/tmp/likes-php-lint.log
+          grep -q 'CB_LIKES_REQUIRED_API' core-blueprint-likes.php
+          grep -q 'ExtensionRegistry::register' src/Integration/CoreBlueprint.php
+          grep -q 'PageRegistry::register' src/Integration/CoreBlueprint.php
+          test ! -e src/Admin/FallbackPage.php
+          grep -q "core-blueprint_page_core-blueprint-likes" src/Admin/Assets.php
+      - name: Commit technical alignment
+        shell: bash
+        run: |
+          git config user.name 'Core Blueprint CI'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A core-blueprint-likes.php src/
+          git diff --cached --check
+          git commit -m 'Align Likes with launch Base and UI contracts'
+          git push origin HEAD:qc/likes-launch-readiness
+      - name: Install gettext
+        run: sudo apt-get update -qq && sudo apt-get install -y gettext
+      - name: Refresh and validate launch catalogs
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -type f -name '*.php' -not -path './vendor/*' -not -path './languages/*' -not -path './.github/*' -print0 | xargs -0 xgettext --language=PHP --from-code=UTF-8 --keyword=__ --keyword=_e --keyword=esc_html__ --keyword=esc_html_e --keyword=esc_attr__ --keyword=esc_attr_e --keyword=_x:1,2c --keyword=_ex:1,2c --keyword=_n:1,2 --keyword=_nx:1,2,4c --sort-output --package-name='Core Blueprint Likes' --package-version='1.0.0-rc1' -o languages/core-blueprint-likes.pot
+          for locale in nl_NL de_DE fr_FR es_ES it_IT pt_PT; do
+            po="languages/core-blueprint-likes-${locale}.po"
+            test -s "$po"
+            msgmerge --quiet --update --backup=none "$po" languages/core-blueprint-likes.pot
+            msgattrib --no-obsolete -o "$po" "$po"
+            msgfmt --check --check-format -o "languages/core-blueprint-likes-${locale}.mo" "$po"
+            missing=$(msgattrib --untranslated "$po" | grep -c '^msgid ' || true)
+            echo "${locale}_UNTRANSLATED=${missing}"
+            test "$missing" -eq 0
+          done
+      - name: Commit catalogs
+        shell: bash
+        run: |
+          git add languages/
+          git diff --cached --check
+          git commit -m 'Refresh Likes launch translation catalogs'
+          git push origin HEAD:qc/likes-launch-readiness
