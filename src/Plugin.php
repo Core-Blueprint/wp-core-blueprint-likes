@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace CB\Likes;
 
 use CB\Likes\Admin\Assets as AdminAssets;
-use CB\Likes\Admin\FallbackPage;
 use CB\Likes\Bricks\Integration as BricksIntegration;
 use CB\Likes\Frontend\Renderer;
 use CB\Likes\Governance\Audit as GovernanceAudit;
@@ -23,7 +22,6 @@ final class Plugin {
 		}
 		self::$booted = true;
 
-		load_plugin_textdomain( 'core-blueprint-likes', false, dirname( CB_LIKES_BASENAME ) . '/languages' );
 		Install::maybe_upgrade();
 
 		add_action( 'admin_init', [ __CLASS__, 'register_settings' ] );
@@ -36,7 +34,6 @@ final class Plugin {
 		Controller::init();
 		Renderer::init();
 		CoreBlueprint::init();
-		FallbackPage::init();
 		PrivacyIntegration::init();
 		BricksIntegration::init();
 		GovernanceAudit::init();
