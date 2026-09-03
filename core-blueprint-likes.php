@@ -21,6 +21,7 @@ declare(strict_types=1);
 defined( 'ABSPATH' ) || exit;
 
 define( 'CB_LIKES_VERSION', '1.0.0-rc1' );
+define( 'CB_LIKES_REQUIRED_API', '1.0' );
 define( 'CB_LIKES_FILE', __FILE__ );
 define( 'CB_LIKES_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CB_LIKES_URL', plugin_dir_url( __FILE__ ) );
@@ -51,8 +52,88 @@ spl_autoload_register( static function ( string $class ): void {
 	}
 } );
 
-register_activation_hook( __FILE__, [ '\\CB\\Likes\\Install', 'activate' ] );
-add_action( 'plugins_loaded', [ '\\CB\\Likes\\Plugin', 'boot' ], 20 );
+function cb_likes_api_compatible( string $available, string $required ): bool {
+	if ( 1 !== preg_match( '/^(\d+)\.(\d+)$/', $available, $available_match ) ) {
+		return false;
+	}
+	if ( 1 !== preg_match( '/^(\d+)\.(\d+)$/', $required, $required_match ) ) {
+		return false;
+	}
+
+	return (int) $available_match[1] === (int) $required_match[1]
+		&& (int) $available_match[2] >= (int) $required_match[2];
+}
+
+function cb_likes_base_ready(): bool {
+	if ( ! defined( 'CB_CORE_API_VERSION' ) ) {
+		return false;
+	}
+	if ( ! cb_likes_api_compatible( (string) CB_CORE_API_VERSION, CB_LIKES_REQUIRED_API ) ) {
+		return false;
+	}
+
+	return class_exists( '\\CB\\Core\\ExtensionRegistry' )
+		&& class_exists( '\\CB\\Core\\Admin\\PageRegistry' )
+		&& interface_exists( '\\CB\\Core\\Admin\\Page' );
+}
+
+function cb_likes_dependency_message(): string {
+	if ( ! defined( 'CB_CORE_API_VERSION' ) ) {
+		return __( 'Core Blueprint Likes requires an active Core Blueprint Base plugin.', 'core-blueprint-likes' );
+	}
+
+	if ( ! cb_likes_api_compatible( (string) CB_CORE_API_VERSION, CB_LIKES_REQUIRED_API ) ) {
+		return sprintf(
+			/* translators: 1: required Core API version, 2: available Core API version. */
+			__( 'Core Blueprint Likes requires Core API %1$s or a newer compatible minor version. This site provides %2$s.', 'core-blueprint-likes' ),
+			CB_LIKES_REQUIRED_API,
+			(string) CB_CORE_API_VERSION
+		);
+	}
+
+	return __( 'Core Blueprint Likes cannot access the required public Base contracts.', 'core-blueprint-likes' );
+}
+
+function cb_likes_activate(): void {
+	if ( ! cb_likes_base_ready() ) {
+		if ( ! function_exists( 'deactivate_plugins' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		deactivate_plugins( CB_LIKES_BASENAME );
+		wp_die(
+			esc_html( 'Core Blueprint Likes requires an active, Core API 1.x compatible Core Blueprint Base installation.' ),
+			esc_html( 'Core Blueprint dependency required' ),
+			[ 'back_link' => true ]
+		);
+	}
+
+	\CB\Likes\Install::activate();
+}
+register_activation_hook( __FILE__, 'cb_likes_activate' );
+
+add_action( 'init', static function (): void {
+	load_plugin_textdomain( 'core-blueprint-likes', false, dirname( CB_LIKES_BASENAME ) . '/languages' );
+}, 1 );
+
+add_action( 'plugins_loaded', static function (): void {
+	if ( ! cb_likes_base_ready() ) {
+		if ( is_admin() ) {
+			add_action( 'admin_notices', static function (): void {
+				if ( ! current_user_can( 'activate_plugins' ) ) {
+					return;
+				}
+				printf(
+					'<div class="notice notice-error"><p><strong>%s</strong> %s</p></div>',
+					esc_html__( 'Core Blueprint Likes:', 'core-blueprint-likes' ),
+					esc_html( cb_likes_dependency_message() )
+				);
+			} );
+		}
+		return;
+	}
+
+	\CB\Likes\Plugin::boot();
+}, 30 );
 
 /** Public API: return the number of likes for a target. */
 function cb_likes_count( string $target_type, int $target_id ): int {
@@ -90,4 +171,3 @@ function cb_likes_set_disliked( int $user_id, string $target_type, int $target_i
 function cb_likes_set_reaction( int $user_id, string $target_type, int $target_id, ?string $reaction ): array|\WP_Error {
 	return \CB\Likes\Service::set_reaction( $user_id, $target_type, $target_id, $reaction );
 }
-
