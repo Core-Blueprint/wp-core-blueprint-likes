@@ -524,8 +524,8 @@ msgstr "likes"
 
 #: core-blueprint-likes.php:35
 #, php-format
-msgid "requires PHP 8.0 or higher. This server runs PHP %s."
-msgstr "vereist PHP 8.0 of hoger. Deze server gebruikt PHP %s."
+msgid "requires PHP 8.4 or higher. This server runs PHP %s."
+msgstr "vereist PHP 8.4 of hoger. Deze server gebruikt PHP %s."
 
 #: src/Admin/PageContent.php:29
 msgid "users who reacted"

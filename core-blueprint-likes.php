@@ -11,7 +11,7 @@
  * Text Domain:       core-blueprint-likes
  * Domain Path:       /languages
  * Requires at least: 7.0
- * Requires PHP:      8.0
+ * Requires PHP:      8.4
  *
  * @package CB_Likes
  */
@@ -27,12 +27,12 @@ define( 'CB_LIKES_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CB_LIKES_URL', plugin_dir_url( __FILE__ ) );
 define( 'CB_LIKES_BASENAME', plugin_basename( __FILE__ ) );
 
-if ( version_compare( PHP_VERSION, '8.0', '<' ) ) {
+if ( version_compare( PHP_VERSION, '8.4', '<' ) ) {
 	add_action( 'admin_notices', static function (): void {
 		echo '<div class="notice notice-error"><p><strong>Core Blueprint Likes:</strong> ';
 		printf(
 			/* translators: %s: current PHP version */
-			esc_html__( 'requires PHP 8.0 or higher. This server runs PHP %s.', 'core-blueprint-likes' ),
+			esc_html__( 'requires PHP 8.4 or higher. This server runs PHP %s.', 'core-blueprint-likes' ),
 			esc_html( PHP_VERSION )
 		);
 		echo '</p></div>';
