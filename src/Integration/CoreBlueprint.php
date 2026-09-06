@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace CB\Likes\Integration;
 
-use CB\Core\Admin\PageRegistry;
+use CB\Core\Admin\SettingsRegistry;
 use CB\Core\Dashboard\CardRegistry;
 use CB\Core\ExtensionRegistry;
-use CB\Likes\Admin\CoreBlueprintPage;
+use CB\Likes\Admin\PageContent;
 use CB\Likes\Capabilities;
 use CB\Likes\Repository;
 use CB\Likes\Settings;
@@ -17,7 +17,7 @@ final class CoreBlueprint {
 	public const ID = 'core-blueprint-likes';
 
 	public static function init(): void {
-		add_action( 'cb_core_register_pages', [ __CLASS__, 'register_page' ] );
+		add_action( 'cb_core_register_settings', [ __CLASS__, 'register_settings_provider' ] );
 		add_action( 'cb_core_register_extensions', [ __CLASS__, 'register_extension' ] );
 		add_filter( 'cb_core_module_status_definitions', [ __CLASS__, 'register_status_definition' ] );
 		add_filter( 'plugin_action_links_' . CB_LIKES_BASENAME, [ __CLASS__, 'plugin_links' ] );
@@ -28,18 +28,25 @@ final class CoreBlueprint {
 		CardRegistry::register_shortcut( self::ID, [
 			'id'         => 'settings',
 			'label'      => __( 'Settings', 'core-blueprint-likes' ),
-			'url'        => admin_url( 'admin.php?page=' . self::ID ),
+			'url'        => SettingsRegistry::url( self::ID ),
 			'capability' => Capabilities::MANAGE,
 			'order'      => 10,
 		] );
 	}
 
-	public static function register_page(): void {
-		PageRegistry::register(
-			new CoreBlueprintPage(),
+	public static function register_settings_provider(): void {
+		SettingsRegistry::register(
+			self::ID,
 			[
-				'foundations' => [ 'clipboard' ],
-				'components'  => [ 'actions', 'cards', 'metric-tiles', 'nav-tabs', 'fields', 'disclosure', 'form-controls', 'integration-grid', 'status' ],
+				'label'       => __( 'Likes', 'core-blueprint-likes' ),
+				'description' => __( 'Privacy-first likes and optional dislikes for selected WordPress content types and, optionally, user profiles. Reactions are account-based and store no IP address, fingerprint, browser, device or location data.', 'core-blueprint-likes' ),
+				'group'       => SettingsRegistry::GROUP_COMMUNITY,
+				'capability'  => Capabilities::MANAGE,
+				'renderer'    => [ PageContent::class, 'render' ],
+				'requirements' => [
+					'foundations' => [ 'clipboard' ],
+					'components'  => [ 'actions', 'cards', 'metric-tiles', 'nav-tabs', 'fields', 'disclosure', 'form-controls', 'integration-grid', 'status' ],
+				],
 			]
 		);
 	}
@@ -49,7 +56,7 @@ final class CoreBlueprint {
 			'id'           => self::ID,
 			'plugin_file'  => CB_LIKES_BASENAME,
 			'requires_api' => '1.0',
-			'menu_url'     => admin_url( 'admin.php?page=' . self::ID ),
+			'menu_url'     => SettingsRegistry::url( self::ID ),
 			'status_id'    => self::ID,
 		] );
 	}
@@ -61,7 +68,7 @@ final class CoreBlueprint {
 		$definitions[ self::ID ] = [
 			'provider' => [ __CLASS__, 'status' ],
 			'label'    => __( 'Likes', 'core-blueprint-likes' ),
-			'url'      => admin_url( 'admin.php?page=' . self::ID ),
+			'url'      => SettingsRegistry::url( self::ID ),
 		];
 		return $definitions;
 	}
@@ -81,7 +88,7 @@ final class CoreBlueprint {
 				__( 'User profiles', 'core-blueprint-likes' ),
 				$settings['users_enabled'] ? __( 'Enabled', 'core-blueprint-likes' ) : __( 'Disabled', 'core-blueprint-likes' )
 			),
-			'url'    => admin_url( 'admin.php?page=' . self::ID ),
+			'url'    => SettingsRegistry::url( self::ID ),
 		];
 	}
 
@@ -89,7 +96,7 @@ final class CoreBlueprint {
 	 *  @return string[]
 	 */
 	public static function plugin_links( array $links ): array {
-		$url = admin_url( 'admin.php?page=' . self::ID );
+		$url = SettingsRegistry::url( self::ID );
 		array_unshift( $links, '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'core-blueprint-likes' ) . '</a>' );
 		return $links;
 	}

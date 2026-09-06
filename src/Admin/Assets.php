@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace CB\Likes\Admin;
 
 use CB\Likes\Icons;
+use CB\Likes\Integration\CoreBlueprint;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -13,7 +14,10 @@ final class Assets {
 	}
 
 	public static function enqueue( string $hook ): void {
-		if ( 'core-blueprint_page_core-blueprint-likes' !== $hook ) {
+		$extension_id = isset( $_GET['extension'] )
+			? sanitize_key( (string) wp_unslash( $_GET['extension'] ) )
+			: '';
+		if ( CoreBlueprint::ID !== $extension_id ) {
 			return;
 		}
 

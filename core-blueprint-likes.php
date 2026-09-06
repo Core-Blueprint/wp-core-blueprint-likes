@@ -73,8 +73,7 @@ function cb_likes_base_ready(): bool {
 	}
 
 	return class_exists( '\\CB\\Core\\ExtensionRegistry' )
-		&& class_exists( '\\CB\\Core\\Admin\\PageRegistry' )
-		&& interface_exists( '\\CB\\Core\\Admin\\Page' )
+		&& class_exists( '\\CB\\Core\\Admin\\SettingsRegistry' )
 		&& class_exists( '\\CB\\Core\\UI\\IntegrationGrid' )
 		&& method_exists( '\\CB\\Core\\UI\\IntegrationGrid', 'render' )
 		&& class_exists( '\\CB\\Core\\UI\\Icon' )
