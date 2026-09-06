@@ -2,31 +2,67 @@
 
 Lightweight privacy-first likes and optional dislikes for WordPress posts and users.
 
-## 1.0.0-rc1 scope
+## 1.0.0-rc1 launch scope
 
 - Reactions are always account-based; guest reactions are never stored and no guest fingerprinting is used.
 - Logged-out reaction UI can be hidden globally or per post type. When visible, a customizable login notice is shown instead of storing a guest reaction.
 - Select eligible public WordPress post types.
-- Optional WordPress-user like targets for future profile integrations.
+- Optional WordPress-user Like targets. User targets are Like-only and self-likes are blocked by default.
 - One normalized database row per user/target pair with a mutually exclusive `like` or `dislike` reaction.
-- Existing rc1-rc3 like rows migrate automatically to `reaction=like`.
 - Global Like/Dislike labels with a curated built-in icon set, Media Library or safe inline SVG icon sources.
 - Per-post-type label/icon overrides, including inheriting or changing the icon source.
-- Core Blueprint nav tabs split General, Post types, User profiles and Usage into focused admin views without reloading the page.
+- Core Blueprint admin sections: Overview, General, Post types, User profiles and Integrations.
 - Dislikes can inherit the global default or be enabled/disabled per post type.
 - Idempotent REST reaction API; switching Like → Dislike updates the existing row instead of creating a second reaction.
-- Like/dislike counts and state helpers.
+- Like/Dislike counts and state helpers.
 - Liked-post and most-liked queries remain Like-specific.
 - WordPress privacy exporter/eraser integration.
-- Optional Bricks dynamic tags and conditions for Like and Dislike state/counts.
+- Builder-neutral frontend contracts for data, conditions, queries, target context and interactive components.
+- Optional Bricks integration with Dynamic Data, Conditions, Query Loops and dedicated **Like** and **Dislike** elements.
 - Standalone shortcodes: `[cb_like_button]`, `[cb_like_count]`, `[cb_dislike_button]`, `[cb_dislike_count]`.
-- Usage examples expose Foundation-powered Copy actions when Core Blueprint Base provides the public Clipboard API.
 - English source strings with bundled Dutch (`nl_NL`), German (`de_DE`), French (`fr_FR`), Spanish (`es_ES`), Italian (`it_IT`) and European Portuguese (`pt_PT`) translations.
 - When Core Blueprint Base is active, administrative Likes setting changes are written to the central Audit Log with changed setting paths only; normal member reaction activity is deliberately not audit-logged.
 - No telemetry or external requests.
 - No dependency on Profiles, Communities, Access, LMS, Paid Content, Subscriptions, WooCommerce or Bricks.
 
-### User target example
+## Bricks Builder
+
+Bricks is optional and is treated as a thin adapter over Likes-owned builder-neutral contracts. Likes does not move reaction persistence, authorization or security rules into Bricks.
+
+### Dedicated elements
+
+- **Like** — renders the established Like component for the current target by default. Supports post and enabled user-profile targets.
+- **Dislike** — renders the established Dislike component for the current post target when dislikes are enabled.
+
+Both elements support an advanced specific-target override with human-readable target choices. Current template and Query Loop context remains the default workflow.
+
+### Dynamic Data
+
+- Like count
+- Dislike count
+- Current user has liked
+- Current user has disliked
+
+### Conditions
+
+- Current user has liked target
+- Current user has disliked target
+
+### Query Loops
+
+- Likes: Posts liked by current user
+- Likes: Most liked posts
+
+Counts remain Dynamic Data, visibility predicates remain Conditions and collections remain Query Loops rather than being duplicated as dedicated elements.
+
+## Shortcodes
+
+- `[cb_like_button]`
+- `[cb_like_count]`
+- `[cb_dislike_button]`
+- `[cb_dislike_count]`
+
+Specific user-target example:
 
 `[cb_like_button target_type="user" target_id="123"]`
 
@@ -43,6 +79,18 @@ If it is disabled, reaction buttons/counts remain visible to logged-out visitors
 Global labels/icons are fallback defaults. Each enabled public post type can override the Like label, active Like label, Like icon, Dislike label, active Dislike label and Dislike icon independently.
 
 Icons can use one of eight bundled Lucide presets, an image/SVG selected from the WordPress Media Library, or safe inline SVG markup. Media Library choices are stored by attachment ID. Empty custom label fields use the translated built-in label. Custom inline SVG is sanitized and external references are not allowed.
+
+## Core Blueprint Base
+
+Likes requires Core API `1.0` and the concrete public Base contracts it consumes. Runtime compatibility does not depend on the visible Base product version and Likes does not use a WordPress `Requires Plugins` header.
+
+The Core Admin page consumes Base Foundations semantically through `PageRegistry`. Base owns generic components and presentation; Likes owns only Likes-specific layout, content and domain behavior.
+
+## Release QC
+
+Repository-owned release tooling lives in `tools/` and is exercised by GitHub Actions on PHP 8.4 and PHP 8.5. The release builder validates the visible `1.0.0-rc1` identity, translation freshness/completeness, PHP syntax, architecture/security regressions, package contents and the canonical `core-blueprint-likes/` root before producing a ZIP and SHA256 checksum.
+
+See `tools/README.md` for the reproducible release workflow.
 
 ## Extension points
 
