@@ -58,10 +58,16 @@ final class Targets {
 			return self::$post_options;
 		}
 
+		$post_types = Settings::enabled_post_types();
+		if ( [] === $post_types ) {
+			self::$post_options = [];
+			return self::$post_options;
+		}
+
 		$limit = (int) apply_filters( 'cb_likes_builder_target_limit', 200, DomainTargets::POST );
 		$limit = max( 20, min( 500, $limit ) );
 		$posts = get_posts( [
-			'post_type'        => Settings::enabled_post_types(),
+			'post_type'        => $post_types,
 			'post_status'      => 'publish',
 			'posts_per_page'   => $limit,
 			'orderby'          => [ 'modified' => 'DESC', 'ID' => 'DESC' ],
@@ -101,7 +107,7 @@ final class Targets {
 			'number'  => $limit,
 			'orderby' => 'display_name',
 			'order'   => 'ASC',
-			'fields'  => [ 'ID', 'display_name' ],
+			'fields'  => 'all',
 		] );
 
 		$options = [];
