@@ -14,6 +14,8 @@ $read = static function ( string $relative ) use ( $root ): string {
 $page          = $read( 'src/Admin/PageContent.php' );
 $integration   = $read( 'src/Integration/CoreBlueprint.php' );
 $page_contract = $read( 'src/Admin/CoreBlueprintPage.php' );
+$post_types    = $read( 'src/Admin/PostTypeSettings.php' );
+$fields        = $read( 'src/Admin/Fields.php' );
 $assets        = $read( 'src/Admin/Assets.php' );
 $js            = $read( 'assets/js/admin.js' );
 $css           = $read( 'assets/css/admin.css' );
@@ -55,6 +57,16 @@ $checks += [
 	'Clipboard requested semantically' => str_contains( $integration, "'foundations' => [ 'clipboard' ]" ),
 	'Integration Grid requested semantically' => str_contains( $integration, "'integration-grid'" ),
 	'Metric tiles requested semantically' => str_contains( $integration, "'metric-tiles'" ),
+	'Actions requested semantically' => str_contains( $integration, "'actions'" ),
+	'Status requested semantically' => str_contains( $integration, "'status'" ),
+	'Foundation interactive rows used' => str_contains( $post_types, '<details class="cb-core-interactive-row cb-likes-post-type' ) && str_contains( $post_types, '<summary class="cb-core-interactive-row__summary cb-likes-post-type__summary">' ),
+	'Foundation status indicators used' => str_contains( $post_types, 'cb-core-status cb-likes-post-type__state-enabled' ) && str_contains( $post_types, 'cb-core-status__dot cb-core-status__dot--muted' ),
+	'Foundation native checkbox retained' => str_contains( $post_types, 'type="checkbox"' ) && str_contains( $post_types, 'data-cb-likes-post-type-toggle' ),
+	'Foundation action row used' => str_contains( $post_types, 'class="cb-core-actions"' ) && str_contains( $post_types, 'cb-core-button cb-core-button--primary' ),
+	'Foundation disclosure icon semantics used' => str_contains( $fields, "Icon::render( 'expand'" ) && str_contains( $fields, 'cb-core-interactive-row__icon' ),
+	'no pseudo Foundation rack toggle' => ! str_contains( $post_types, 'cb-core-rack-toggle' ) && ! str_contains( $css, 'cb-core-rack-toggle' ),
+	'no pseudo Foundation module collapse' => ! str_contains( $post_types, 'cb-core-module-collapse' ) && ! str_contains( $css, 'cb-core-module-collapse' ),
+	'native details owns disclosure state' => ! str_contains( $js, 'setExpanded' ) && ! str_contains( $js, 'data-cb-likes-post-type-collapse' ),
 	'no private Clipboard handle' => ! str_contains( $assets, '@cb-core/clipboard' ) && ! str_contains( $assets, 'wp_enqueue_script_module' ),
 	'no standalone admin fallback CSS' => ! str_contains( $css, 'cb-likes-native' ),
 	'no DetailRows misuse' => ! str_contains( $page, 'DetailRows' ),
