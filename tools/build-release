@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+VERSION="1.0.0-rc1"
+SLUG="core-blueprint-likes"
+DIST="$ROOT/dist"
+ZIP="$DIST/${SLUG}-${VERSION}.zip"
+CHECKSUM="$ZIP.sha256"
+
+actual_version="$(php -r '$s=file_get_contents("core-blueprint-likes.php"); if(!preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m)){exit(2);} echo trim($m[1]);')"
+if [[ "$actual_version" != "$VERSION" ]]; then
+  echo "Unexpected public version: $actual_version (expected $VERSION)" >&2
+  exit 1
+fi
+
+python3 tools/sync-i18n.py
+if ! git diff --quiet -- languages; then
+  echo "Translations are stale. Run tools/sync-i18n.py and commit the generated catalogs." >&2
+  git diff -- languages
+  exit 1
+fi
+
+echo "PHP lint"
+while IFS= read -r -d '' file; do
+  php -l "$file" >/dev/null
+done < <(find . -type f -name '*.php' -not -path './dist/*' -not -path './vendor/*' -print0)
+
+php tools/conformance.php
+
+rm -rf "$DIST"
+mkdir -p "$DIST"
+STAGE="$(mktemp -d)"
+trap 'rm -rf "$STAGE"' EXIT
+mkdir -p "$STAGE/$SLUG"
+
+cp -a . "$STAGE/$SLUG/"
+rm -rf \
+  "$STAGE/$SLUG/.git" \
+  "$STAGE/$SLUG/.github" \
+  "$STAGE/$SLUG/tests" \
+  "$STAGE/$SLUG/tools" \
+  "$STAGE/$SLUG/dist"
+
+find "$STAGE/$SLUG" -name '.DS_Store' -delete
+(
+  cd "$STAGE"
+  zip -q -r "$ZIP" "$SLUG"
+)
+
+unzip -tq "$ZIP" >/dev/null
+if ! unzip -l "$ZIP" | grep -q "${SLUG}/core-blueprint-likes.php"; then
+  echo "Release package is missing the canonical plugin main file." >&2
+  exit 1
+fi
+if unzip -l "$ZIP" | grep -Eq "${SLUG}/(tests|tools|\.github|dist)/"; then
+  echo "Developer-only files leaked into the release package." >&2
+  exit 1
+fi
+
+sha256sum "$ZIP" > "$CHECKSUM"
+echo "Artifact: ${ZIP#$ROOT/}"
+echo "Checksum: ${CHECKSUM#$ROOT/}"
+cat "$CHECKSUM"
+echo "Likes release package: PASS"
