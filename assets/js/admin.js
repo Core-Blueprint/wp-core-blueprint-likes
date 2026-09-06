@@ -30,7 +30,7 @@
 		};
 
 		const storedTab = window.sessionStorage?.getItem('cb-likes-active-tab');
-		const initialTab = tabs.some((tab) => tab.dataset.cbLikesTab === storedTab) ? storedTab : 'general';
+		const initialTab = tabs.some((tab) => tab.dataset.cbLikesTab === storedTab) ? storedTab : 'overview';
 		activateTab(initialTab);
 
 		tabs.forEach((tab, index) => {
@@ -49,7 +49,6 @@
 			});
 		});
 	}
-
 
 	document.querySelectorAll('[data-cb-likes-icon-field]').forEach((field) => {
 		const source = field.querySelector('[data-cb-likes-icon-source]');
@@ -155,8 +154,6 @@
 			}
 		};
 
-		// Post-type override sections always start collapsed. Enabling or
-		// disabling a target never changes disclosure state.
 		setExpanded(false);
 		syncEnabled();
 
