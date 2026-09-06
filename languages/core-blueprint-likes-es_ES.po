@@ -9,93 +9,53 @@ msgstr ""
 "Language-Team: es_ES\n"
 "Language: es_ES\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: src/Admin/PageContent.php:53 src/Admin/PageContent.php:64
-#: src/Admin/PageContent.php:135 src/Admin/PageContent.php:151
+#: src/Admin/GeneralSettings.php:22 src/Admin/GeneralSettings.php:29
+#: src/Admin/PostTypeOverrides.php:19 src/Admin/PostTypeOverrides.php:34
 msgid "Active label"
 msgstr "Etiqueta activa"
 
-#: src/Admin/PageContent.php:190
-msgid ""
-"Allow logged-in users to like other WordPress users. This is useful for "
-"public member/profile pages, for example with Core Blueprint Profiles. Users"
-" cannot like themselves. Dislikes are not available for user profiles."
-msgstr ""
-"Permite que los usuarios conectados den Me gusta a otros usuarios de "
-"WordPress. Esta opción es útil para páginas públicas de miembros/perfiles, "
-"por ejemplo con Core Blueprint Profiles. Los usuarios no pueden darse Me "
-"gusta a sí mismos. Los No me gusta no están disponibles para los perfiles de"
-" usuario."
-
-#: src/Admin/PageContent.php:264 src/Admin/PageContent.php:271
+#: src/Admin/IconField.php:19 src/Admin/IconField.php:25
 msgid "Built-in icon"
 msgstr "Icono integrado"
 
-#: src/Admin/PageContent.php:294
-msgid "Choose an image or SVG stored in your WordPress Media Library."
-msgstr ""
-"Elige una imagen o un SVG almacenado en tu biblioteca de medios de "
-"WordPress."
-
-#: src/Admin/PageContent.php:290
+#: src/Admin/IconField.php:39
 msgid "Choose from Media Library"
 msgstr "Elegir de la biblioteca de medios"
 
-#: src/Admin/PageContent.php:280
-msgid ""
-"Choose from the small bundled Lucide icon set. No external icon library is "
-"loaded."
-msgstr ""
-"Elige entre el pequeño conjunto de iconos Lucide incluido. No se carga "
-"ninguna biblioteca de iconos externa."
-
-#: src/Admin/Assets.php:50
+#: src/Admin/Assets.php:29
 msgid "Choose reaction icon"
 msgstr "Elegir icono de reacción"
-
-#: src/Admin/PageContent.php:96
-msgid ""
-"Choose which public post types may receive reactions. Optional overrides let"
-" each post type use its own wording, icons, dislike setting and logged-out "
-"visibility."
-msgstr ""
-"Elige qué tipos de contenido públicos pueden recibir reacciones. Las "
-"sobrescrituras opcionales permiten que cada tipo de contenido use sus "
-"propios textos, iconos, ajuste de No me gusta y visibilidad para visitantes "
-"no conectados."
 
 #: src/Icons.php:23
 msgid "Circle Slash"
 msgstr "Círculo tachado"
 
-#: src/Integration/CoreBlueprint.php:71
-msgid "Connected through the Core Blueprint public extension contracts."
-msgstr "Connected through the Core Blueprint public extension contracts."
-
-#: src/Admin/PageContent.php:226
+#: src/Admin/FrontendSetup.php:46
 msgid "Copy"
 msgstr "Copiar"
 
-#: src/Admin/PageContent.php:223 src/Admin/PageContent.php:225
+#: src/Admin/FrontendSetup.php:46
 msgid "Copy shortcode"
 msgstr "Copiar shortcode"
 
-#: src/Capabilities.php:17 src/Privacy/Integration.php:21
-#: src/Privacy/Integration.php:32 src/Bricks/Integration.php:68
+#: src/Capabilities.php:17 src/Integration/Bricks/Integration.php:17
+#: src/Privacy/Integration.php:21 src/Privacy/Integration.php:32
 msgid "Core Blueprint Likes"
 msgstr "Core Blueprint Likes"
 
-#: core-blueprint-likes.php:94
+#: core-blueprint-likes.php:98
 msgid "Core Blueprint Likes cannot access the required public Base contracts."
 msgstr ""
 "Los Me gusta de Core Blueprint no pueden acceder a los contratos básicos "
 "públicos requeridos."
 
-#: core-blueprint-likes.php:88
+#. translators: 1: required Core API version, 2: available Core API version.
+#: core-blueprint-likes.php:92
 #, php-format
 msgid ""
 "Core Blueprint Likes requires Core API %1$s or a newer compatible minor "
@@ -104,11 +64,11 @@ msgstr ""
 "Los Me gusta de Core Blueprint requieren Core API%1$s or a newer compatible "
 "minor version. This site provides %2$s."
 
-#: core-blueprint-likes.php:82
+#: core-blueprint-likes.php:86
 msgid "Core Blueprint Likes requires an active Core Blueprint Base plugin."
 msgstr "Core Blueprint Likes requires an active Core Blueprint Base plugin."
 
-#: core-blueprint-likes.php:127
+#: core-blueprint-likes.php:131
 #, fuzzy
 msgid "Core Blueprint Likes:"
 msgstr "Core Blueprint Likes"
@@ -117,48 +77,49 @@ msgstr "Core Blueprint Likes"
 msgid "Created at (UTC)"
 msgstr "Creado el (UTC)"
 
-#: src/Bricks/Integration.php:35
+#: src/Integration/Bricks/Integration.php:52
 msgid "Current user has disliked"
 msgstr "El usuario actual ha marcado No me gusta"
 
-#: src/Bricks/Integration.php:78
+#: src/Integration/Bricks/Integration.php:110
 msgid "Current user has disliked target"
 msgstr "El usuario actual ha marcado No me gusta en el objetivo"
 
-#: src/Bricks/Integration.php:34
+#: src/Integration/Bricks/Integration.php:51
 msgid "Current user has liked"
 msgstr "El usuario actual ha marcado Me gusta"
 
-#: src/Bricks/Integration.php:77
+#: src/Integration/Bricks/Integration.php:109
 msgid "Current user has liked target"
 msgstr "El usuario actual ha marcado Me gusta en el objetivo"
 
-#: src/Admin/PageContent.php:117 src/Admin/PageContent.php:146
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr "Desactivado"
 
-#: src/Admin/PageContent.php:58 src/Admin/PageContent.php:63
-#: src/Settings.php:72
+#: src/Admin/GeneralSettings.php:26 src/Admin/GeneralSettings.php:28
+#: src/Integration/Bricks/Elements/Dislike.php:15 src/Settings.php:72
 msgid "Dislike"
 msgstr "No me gusta"
 
-#: src/Bricks/Integration.php:33
+#: src/Integration/Bricks/Integration.php:50
 msgid "Dislike count"
 msgstr "Recuento de No me gusta"
 
-#: src/Admin/PageContent.php:139
+#: src/Admin/PostTypeOverrides.php:24
 msgid "Dislike overrides"
 msgstr "Sobrescrituras de No me gusta"
 
-#: src/Frontend/Renderer.php:97
+#: src/Frontend/Renderer.php:101
 msgid "Dislike this item"
 msgstr "No me gusta este elemento"
 
-#: src/Admin/PageContent.php:64 src/Settings.php:73
+#: src/Admin/GeneralSettings.php:29 src/Settings.php:73
 msgid "Disliked"
 msgstr "No me gusta"
 
-#: src/Admin/PageContent.php:141
+#: src/Admin/Overview.php:21 src/Admin/PostTypeOverrides.php:26
 msgid "Dislikes"
 msgstr "No me gusta"
 
@@ -166,43 +127,40 @@ msgstr "No me gusta"
 msgid "Dislikes are not enabled for this item."
 msgstr "Los No me gusta no están activados para este elemento."
 
-#: src/Admin/PageContent.php:61
+#: src/Admin/GeneralSettings.php:27
 msgid "Each post type can inherit, enable or disable dislikes independently."
 msgstr ""
 "Cada tipo de contenido puede heredar, activar o desactivar los No me gusta "
 "de forma independiente."
 
-#: src/Admin/PageContent.php:60
+#: src/Admin/GeneralSettings.php:27
 msgid "Enable dislikes by default for enabled post types"
 msgstr ""
 "Activar No me gusta de forma predeterminada para los tipos de contenido "
 "activados"
 
-#: src/Admin/PageContent.php:189
+#: src/Admin/UserProfileSettings.php:19
 msgid "Enable likes for user profiles"
 msgstr "Activar Me gusta para perfiles de usuario"
 
-#: src/Admin/PageContent.php:122
+#: src/Admin/PostTypeSettings.php:36
 msgid "Enable reactions for this post type"
 msgstr "Activar reacciones para este tipo de contenido"
 
-#: src/Admin/PageContent.php:116 src/Admin/PageContent.php:145
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr "Activado"
 
-#: src/Bricks/Integration.php:85
+#: src/Integration/Bricks/Integration.php:117
 msgid "False"
 msgstr "Falso"
 
-#: src/Admin/PageContent.php:197
-msgid "Frontend usage"
-msgstr "Uso en el sitio"
-
-#: src/Admin/PageContent.php:33
+#: src/Admin/PageContent.php:23
 msgid "General"
 msgstr "General"
 
-#: src/Admin/PageContent.php:45
+#: src/Admin/GeneralSettings.php:15
 msgid "Global defaults"
 msgstr "Valores predeterminados globales"
 
@@ -214,40 +172,40 @@ msgstr "Corazón"
 msgid "Heart Crack"
 msgstr "Corazón roto"
 
-#: src/Admin/PageContent.php:260
+#: src/Admin/IconField.php:16
 msgid "Icon source"
 msgstr "Fuente del icono"
 
-#: src/Admin/PageContent.php:135 src/Admin/PageContent.php:151
+#: src/Admin/PostTypeOverrides.php:19 src/Admin/PostTypeOverrides.php:34
 msgid "Inherit global active label"
 msgstr "Heredar etiqueta activa global"
 
-#: src/Admin/PageContent.php:263
+#: src/Admin/IconField.php:18
 msgid "Inherit global icon"
 msgstr "Heredar icono global"
 
-#: src/Admin/PageContent.php:134 src/Admin/PageContent.php:150
+#: src/Admin/PostTypeOverrides.php:18 src/Admin/PostTypeOverrides.php:33
 msgid "Inherit global label"
 msgstr "Heredar etiqueta global"
 
-#: src/Admin/PageContent.php:171
+#: src/Admin/PostTypeOverrides.php:48
 msgid "Inherit global logged-out message"
 msgstr "Heredar mensaje global para usuarios no conectados"
 
-#: src/Admin/PageContent.php:144 src/Admin/PageContent.php:160
+#: src/Admin/PostTypeOverrides.php:28 src/Admin/PostTypeOverrides.php:43
 msgid "Inherit global setting"
 msgstr "Heredar ajuste global"
 
-#: src/Admin/PageContent.php:266 src/Admin/PageContent.php:298
+#: src/Admin/IconField.php:21 src/Admin/IconField.php:44
 msgid "Inline SVG"
 msgstr "SVG en línea"
 
-#: src/Admin/PageContent.php:52 src/Admin/PageContent.php:63
-#: src/Admin/PageContent.php:134 src/Admin/PageContent.php:150
+#: src/Admin/GeneralSettings.php:21 src/Admin/GeneralSettings.php:28
+#: src/Admin/PostTypeOverrides.php:18 src/Admin/PostTypeOverrides.php:33
 msgid "Label"
 msgstr "Etiqueta"
 
-#: src/Admin/PageContent.php:172
+#: src/Admin/PostTypeOverrides.php:48
 msgid "Leave empty to inherit the global message."
 msgstr "Déjalo vacío para heredar el mensaje global."
 
@@ -255,41 +213,38 @@ msgstr "Déjalo vacío para heredar el mensaje global."
 msgid "Lightbulb"
 msgstr "Bombilla"
 
-#: src/Admin/PageContent.php:51 src/Admin/PageContent.php:52
-#: src/Settings.php:68
+#: src/Admin/GeneralSettings.php:20 src/Admin/GeneralSettings.php:21
+#: src/Integration/Bricks/Elements/Like.php:15 src/Settings.php:68
 msgid "Like"
 msgstr "Me gusta"
 
-#: src/Bricks/Integration.php:32
+#: src/Integration/Bricks/Integration.php:49
 msgid "Like count"
 msgstr "Recuento de Me gusta"
 
-#: src/Admin/PageContent.php:133
+#: src/Admin/PostTypeOverrides.php:17
 msgid "Like overrides"
 msgstr "Sobrescrituras de Me gusta"
 
-#: src/Frontend/Renderer.php:97
+#: src/Frontend/Renderer.php:101
 msgid "Like this item"
 msgstr "Me gusta este elemento"
 
-#: src/Admin/PageContent.php:53 src/Settings.php:69
+#: src/Admin/GeneralSettings.php:22 src/Settings.php:69
 msgid "Liked"
 msgstr "Me gusta"
 
 #: src/Admin/CoreBlueprintPage.php:13 src/Admin/CoreBlueprintPage.php:14
-#: src/Admin/PageContent.php:21 src/Integration/CoreBlueprint.php:61
+#: src/Admin/Overview.php:17 src/Admin/PageContent.php:18
+#: src/Integration/CoreBlueprint.php:63
 msgid "Likes"
 msgstr "Me gusta"
 
-#: src/Admin/PageContent.php:32
-msgid "Likes settings"
-msgstr "Ajustes de Likes"
-
-#: src/Bricks/Integration.php:114
+#: src/Integration/Bricks/Integration.php:143
 msgid "Likes: Most liked posts"
 msgstr "Likes: entradas con más Me gusta"
 
-#: src/Bricks/Integration.php:113
+#: src/Integration/Bricks/Integration.php:142
 msgid "Likes: Posts liked by current user"
 msgstr "Likes: entradas que le gustan al usuario actual"
 
@@ -297,19 +252,19 @@ msgstr "Likes: entradas que le gustan al usuario actual"
 msgid "Likes: settings changed"
 msgstr "Likes: ajustes modificados"
 
-#: src/Admin/PageContent.php:161
+#: src/Admin/PostTypeOverrides.php:44
 msgid "Logged-in users only"
 msgstr "Solo usuarios conectados"
 
-#: src/Admin/PageContent.php:78 src/Admin/PageContent.php:168
+#: src/Admin/GeneralSettings.php:37 src/Admin/PostTypeOverrides.php:48
 msgid "Logged-out message"
 msgstr "Mensaje para usuarios no conectados"
 
-#: src/Admin/PageContent.php:155
+#: src/Admin/PostTypeOverrides.php:39
 msgid "Logged-out visitor overrides"
 msgstr "Sobrescrituras para visitantes no conectados"
 
-#: src/Admin/PageContent.php:71
+#: src/Admin/GeneralSettings.php:35
 msgid "Logged-out visitors"
 msgstr "Visitantes no conectados"
 
@@ -317,90 +272,73 @@ msgstr "Visitantes no conectados"
 msgid "Manage Likes"
 msgstr "Gestionar Likes"
 
-#: src/Admin/PageContent.php:265
+#: src/Admin/IconField.php:20
 msgid "Media Library"
 msgstr "Biblioteca de medios"
 
-#: src/Admin/PageContent.php:300
+#: src/Admin/IconField.php:46
 msgid "Paste safe inline SVG markup. External URL references are not stored."
 msgstr ""
 "Pega marcado SVG en línea seguro. No se almacenan referencias a URL "
 "externas."
 
-#: src/Admin/PageContent.php:81 src/Settings.php:76
+#: src/Admin/GeneralSettings.php:37 src/Settings.php:76
 msgid "Please log in to react to this content."
 msgstr "Inicia sesión para reaccionar a este contenido."
 
-#: src/Admin/PageContent.php:34 src/Admin/PageContent.php:93
+#: src/Admin/PageContent.php:24 src/Admin/PostTypeSettings.php:18
+#: src/Integration/CoreBlueprint.php:79
 msgid "Post types"
 msgstr "Tipos de contenido"
-
-#: src/Admin/PageContent.php:25
-msgid ""
-"Privacy-first likes and optional dislikes for selected WordPress content "
-"types and, optionally, user profiles. Reactions are always account-based and"
-" store no IP address, fingerprint, browser, device or location data."
-msgstr ""
-"Me gusta centrados en la privacidad y No me gusta opcionales para "
-"determinados tipos de contenido de WordPress y, opcionalmente, perfiles de "
-"usuario. Las reacciones siempre están vinculadas a una cuenta y no almacenan"
-" dirección IP, huella digital, navegador, dispositivo ni datos de ubicación."
 
 #: src/Privacy/Integration.php:55
 msgid "Reaction"
 msgstr "Reacción"
 
-#: src/Admin/PageContent.php:157
+#: src/Admin/PostTypeOverrides.php:41
 msgid "Reaction visibility"
 msgstr "Visibilidad de las reacciones"
 
-#: src/Privacy/Integration.php:50
+#: src/Integration/CoreBlueprint.php:77 src/Privacy/Integration.php:50
 msgid "Reactions"
 msgstr "Reacciones"
 
-#: src/Admin/PageContent.php:291
+#: src/Admin/IconField.php:39
 msgid "Remove"
 msgstr "Quitar"
 
-#: src/Frontend/Renderer.php:98
+#: src/Frontend/Renderer.php:102
 msgid "Remove dislike from this item"
 msgstr "Quitar No me gusta de este elemento"
 
-#: src/Frontend/Renderer.php:98
+#: src/Frontend/Renderer.php:102
 msgid "Remove like from this item"
 msgstr "Quitar Me gusta de este elemento"
 
-#: src/Admin/PageContent.php:87 src/Admin/PageContent.php:183
-#: src/Admin/PageContent.php:192
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr "Guardar ajustes"
 
-#: src/Integration/CoreBlueprint.php:28 src/Integration/CoreBlueprint.php:81
+#: src/Integration/CoreBlueprint.php:30 src/Integration/CoreBlueprint.php:93
 msgid "Settings"
 msgstr "Ajustes"
 
-#: src/Admin/Assets.php:55
+#: src/Admin/Assets.php:34
 msgid "Settings saved."
 msgstr "Ajustes guardados."
 
-#: src/Admin/PageContent.php:224
+#: src/Admin/FrontendSetup.php:46
 msgid "Shortcode copied."
 msgstr "Shortcode copiado."
 
-#: src/Admin/PageContent.php:73
+#: src/Admin/GeneralSettings.php:36
 msgid "Show reactions only for logged-in users"
 msgstr "Mostrar reacciones solo a usuarios conectados"
 
-#: src/Admin/PageContent.php:162
+#: src/Admin/PostTypeOverrides.php:45
 msgid "Show to everyone with login notice"
 msgstr "Mostrar a todo el mundo con aviso de inicio de sesión"
-
-#: src/Admin/PageContent.php:82
-msgid ""
-"Shown when a logged-out visitor clicks a visible Like or Dislike button."
-msgstr ""
-"Se muestra cuando un visitante no conectado hace clic en un botón visible de"
-" Me gusta o No me gusta."
 
 #: src/Icons.php:25
 msgid "Sparkles"
@@ -418,19 +356,9 @@ msgstr "ID del objetivo"
 msgid "Target type"
 msgstr "Tipo de objetivo"
 
-#: src/Frontend/Renderer.php:191 src/Service.php:35
+#: src/Frontend/Renderer.php:211 src/Service.php:35
 msgid "The reaction could not be saved."
 msgstr "No se pudo guardar la reacción."
-
-#: src/Admin/PageContent.php:48
-msgid ""
-"These settings are used everywhere unless a post type overrides them. Leave "
-"a label or message empty to use its translated default, and choose where "
-"each reaction icon comes from."
-msgstr ""
-"Estos ajustes se usan en todas partes salvo que un tipo de contenido los "
-"sobrescriba. Deja una etiqueta o un mensaje vacío para usar su valor "
-"predeterminado traducido y elige de dónde procede cada icono de reacción."
 
 #: src/Service.php:14
 msgid "This reaction is not supported."
@@ -444,11 +372,11 @@ msgstr "Pulgar abajo"
 msgid "Thumbs Up"
 msgstr "Pulgar arriba"
 
-#: src/Admin/PageContent.php:124
+#: src/Admin/PostTypeSettings.php:38
 msgid "Toggle post type settings"
 msgstr "Mostrar/ocultar ajustes del tipo de contenido"
 
-#: src/Bricks/Integration.php:85
+#: src/Integration/Bricks/Integration.php:117
 msgid "True"
 msgstr "Verdadero"
 
@@ -456,30 +384,14 @@ msgstr "Verdadero"
 msgid "Updated at (UTC)"
 msgstr "Actualizado el (UTC)"
 
-#: src/Admin/PageContent.php:36
-msgid "Usage"
-msgstr "Uso"
-
-#: src/Admin/Assets.php:51
+#: src/Admin/Assets.php:30
 msgid "Use this icon"
 msgstr "Usar este icono"
 
-#: src/Admin/PageContent.php:35
+#: src/Admin/PageContent.php:25 src/Admin/UserProfileSettings.php:15
+#: src/Integration/CoreBlueprint.php:81
 msgid "User profiles"
 msgstr "Perfiles de usuario"
-
-#: src/Admin/PageContent.php:187
-msgid "User targets"
-msgstr "Objetivos de usuario"
-
-#: src/Admin/PageContent.php:74
-msgid ""
-"When enabled, logged-out visitors do not see reaction buttons or counts. "
-"When disabled, they can see reactions but must log in before reacting."
-msgstr ""
-"Cuando está activado, los visitantes no conectados no ven los botones de "
-"reacción ni los recuentos. Cuando está desactivado, pueden ver las "
-"reacciones, pero deben iniciar sesión antes de reaccionar."
 
 #: src/Admin/CoreBlueprintPage.php:20
 msgid "You are not allowed to manage Likes."
@@ -493,49 +405,434 @@ msgstr "No puedes reaccionar a este elemento."
 msgid "You must be logged in to react to items."
 msgstr "Debes iniciar sesión para reaccionar a los elementos."
 
-#: src/Admin/PageContent.php:201
-msgid "dislike button when dislikes are enabled for the current post type."
-msgstr ""
-"botón No me gusta cuando los No me gusta están activados para el tipo de "
-"contenido actual."
-
-#: src/Admin/PageContent.php:202
-msgid "dislike count when dislikes are enabled for the current post type."
-msgstr ""
-"recuento de No me gusta cuando los No me gusta están activados para el tipo "
-"de contenido actual."
-
-#: src/Admin/PageContent.php:28
-msgid "dislikes"
-msgstr "no me gusta"
-
-#: src/Admin/PageContent.php:203
-msgid "explicit user target when user likes are enabled."
-msgstr ""
-"objetivo de usuario explícito cuando los Me gusta de usuarios están "
-"activados."
-
-#: src/Bricks/Integration.php:84
+#: src/Integration/Bricks/Integration.php:116
 msgid "is"
 msgstr "es"
 
-#: src/Admin/PageContent.php:199
-msgid "like button for the current target."
-msgstr "botón Me gusta para el objetivo actual."
-
-#: src/Admin/PageContent.php:200
-msgid "like count for the current target."
-msgstr "recuento de Me gusta para el objetivo actual."
-
-#: src/Admin/PageContent.php:27
-msgid "likes"
-msgstr "me gusta"
-
+#. translators: %s: current PHP version
 #: core-blueprint-likes.php:35
 #, php-format
 msgid "requires PHP 8.4 or higher. This server runs PHP %s."
 msgstr "requiere PHP 8.4 o superior. Este servidor utiliza PHP %s."
 
-#: src/Admin/PageContent.php:29
-msgid "users who reacted"
-msgstr "usuarios que han reaccionado"
+#. translators: 1: content type label, 2: content title.
+#: src/Builder/Targets.php:96
+#, php-format
+msgid "%1$s — %2$s"
+msgstr "%1$s — %2$s"
+
+#: src/Builder/Targets.php:98
+msgid "(Untitled)"
+msgstr "(Sin título)"
+
+#: src/Integration/Bricks/Elements/Element.php:43
+msgid ""
+"Advanced override. Targets remain subject to the Likes configuration and "
+"access rules."
+msgstr ""
+"Anulación avanzada. Los objetivos siguen sujetos a la configuración de Likes"
+" y a las reglas de acceso."
+
+#: src/Admin/FrontendSetup.php:12 src/Admin/IntegrationReadiness.php:18
+msgid "Bricks Builder"
+msgstr "Bricks Builder"
+
+#: src/Admin/IntegrationReadiness.php:21
+msgid ""
+"Bricks integration is optional. Likes works without a page builder and "
+"enables its Bricks adapter automatically when Bricks is active."
+msgstr ""
+"La integración con Bricks es opcional. Likes funciona sin constructor de "
+"páginas y activa automáticamente su adaptador de Bricks cuando Bricks está "
+"activo."
+
+#: src/Admin/FrontendSetup.php:14
+msgid ""
+"Bricks is optional. When active, Likes exposes builder-native data and "
+"interaction contracts without moving reaction logic into the builder."
+msgstr ""
+"Bricks es opcional. Cuando está activo, Likes expone contratos de datos e "
+"interacción nativos del builder sin trasladar la lógica de reacciones al "
+"builder."
+
+#: src/Admin/IconField.php:32
+msgid "Choose from the bundled icon set. No external icon library is loaded."
+msgstr ""
+"Elige entre el conjunto de iconos incluido. No se carga ninguna biblioteca "
+"de iconos externa."
+
+#: src/Admin/PostTypeSettings.php:20
+msgid ""
+"Choose which public post types may receive reactions. Expand a row only when"
+" that post type needs its own presentation or visibility rules."
+msgstr ""
+"Elige qué tipos de contenido públicos pueden recibir reacciones. Expande una"
+" fila solo cuando ese tipo necesite sus propias reglas de presentación o "
+"visibilidad."
+
+#: src/Admin/FrontendSetup.php:18
+msgid "Conditions:"
+msgstr "Condiciones:"
+
+#: src/Admin/PageContent.php:17
+msgid "Core Blueprint"
+msgstr "Core Blueprint"
+
+#: src/Builder/Targets.php:49
+msgid "Current target"
+msgstr "Objetivo actual"
+
+#: src/Admin/FrontendSetup.php:18
+msgid "Current user has liked or disliked the current target."
+msgstr "El usuario actual ha marcado Like o Dislike en el objetivo actual."
+
+#: src/Admin/FrontendSetup.php:21
+msgid ""
+"Dedicated elements use the current template or Query Loop target by default."
+" A specific content or user target is available only as an advanced "
+"override."
+msgstr ""
+"Los elementos dedicados usan de forma predeterminada el objetivo de la "
+"plantilla o Query Loop actual. Un objetivo específico de contenido o usuario"
+" solo está disponible como anulación avanzada."
+
+#: src/Admin/FrontendSetup.php:32
+msgid "Dislike button when dislikes are enabled for the current post type."
+msgstr ""
+"Botón Dislike cuando los dislikes están habilitados para el tipo de "
+"contenido actual."
+
+#: src/Admin/FrontendSetup.php:33
+msgid "Dislike count when dislikes are enabled for the current post type."
+msgstr ""
+"Recuento de Dislikes cuando los dislikes están habilitados para el tipo de "
+"contenido actual."
+
+#: src/Admin/FrontendSetup.php:17
+msgid "Dynamic data:"
+msgstr "Datos dinámicos:"
+
+#: src/Admin/FrontendSetup.php:16
+msgid "Elements:"
+msgstr "Elementos:"
+
+#: src/Admin/Overview.php:29
+msgid "Enabled target types"
+msgstr "Tipos de objetivo habilitados"
+
+#: src/Admin/PageContent.php:26
+msgid "Integrations"
+msgstr "Integraciones"
+
+#: src/Admin/FrontendSetup.php:16
+msgid "Like and Dislike."
+msgstr "Like y Dislike."
+
+#: src/Admin/FrontendSetup.php:30
+msgid "Like button for the current target."
+msgstr "Botón Like para el objetivo actual."
+
+#: src/Admin/FrontendSetup.php:31
+msgid "Like count for the current target."
+msgstr "Recuento de Likes para el objetivo actual."
+
+#: src/Admin/FrontendSetup.php:17
+msgid ""
+"Like count, Dislike count, current user has liked, and current user has "
+"disliked."
+msgstr ""
+"Recuento de Likes, recuento de Dislikes, el usuario actual ha marcado Like y"
+" el usuario actual ha marcado Dislike."
+
+#: src/Admin/Overview.php:15
+msgid "Likes at a glance"
+msgstr "Likes de un vistazo"
+
+#: src/Admin/IntegrationReadiness.php:20
+msgid ""
+"Likes is available in Bricks through dynamic data, conditions, Query Loops "
+"and dedicated Like and Dislike elements. Bricks remains optional."
+msgstr ""
+"Likes está disponible en Bricks mediante datos dinámicos, condiciones, Query"
+" Loops y elementos dedicados de Like y Dislike. Bricks sigue siendo "
+"opcional."
+
+#: src/Admin/PageContent.php:21
+msgid "Likes sections"
+msgstr "Secciones de Likes"
+
+#: src/Admin/Overview.php:36
+msgid ""
+"Likes stores account-based reactions only. No IP address, fingerprint, "
+"browser, device or location data is stored."
+msgstr ""
+"Likes solo almacena reacciones asociadas a la cuenta. No se guardan "
+"direcciones IP, huellas, datos del navegador, del dispositivo ni de "
+"ubicación."
+
+#: src/Admin/UserProfileSettings.php:20
+msgid ""
+"Logged-in users may like other WordPress users. Users cannot like "
+"themselves, and dislikes are never available for user profiles."
+msgstr ""
+"Los usuarios conectados pueden dar Like a otros usuarios de WordPress. No "
+"pueden darse Like a sí mismos y los Dislikes nunca están disponibles para "
+"perfiles de usuario."
+
+#: src/Integration/Bricks/Elements/Like.php:26
+msgid ""
+"No enabled Likes target detected. Use this element in a supported template "
+"or Query Loop, or choose a specific target."
+msgstr ""
+"No se ha detectado ningún objetivo de Likes habilitado. Usa este elemento en"
+" una plantilla o Query Loop compatible, o elige un objetivo específico."
+
+#: src/Integration/Bricks/Elements/Dislike.php:26
+msgid ""
+"No enabled dislike target detected. Use this element in a supported post "
+"template or Query Loop, or choose a specific target with dislikes enabled."
+msgstr ""
+"No se ha detectado ningún objetivo de Dislike habilitado. Usa este elemento "
+"en una plantilla de entrada o Query Loop compatible, o elige un objetivo "
+"específico con los dislikes habilitados."
+
+#: src/Admin/IntegrationReadiness.php:25
+msgid "Not active"
+msgstr "No activo"
+
+#: src/Admin/UserProfileSettings.php:17
+msgid "Optionally allow Likes to target public WordPress user profiles."
+msgstr ""
+"Permite opcionalmente que Likes use como objetivo perfiles públicos de "
+"usuarios de WordPress."
+
+#: src/Admin/PageContent.php:22
+msgid "Overview"
+msgstr "Resumen"
+
+#: src/Admin/FrontendSetup.php:19
+msgid "Posts liked by the current user and most liked posts."
+msgstr ""
+"Entradas marcadas con Like por el usuario actual y entradas con más Likes."
+
+#: src/Admin/PageContent.php:19
+msgid ""
+"Privacy-first likes and optional dislikes for selected WordPress content "
+"types and, optionally, user profiles. Reactions are account-based and store "
+"no IP address, fingerprint, browser, device or location data."
+msgstr ""
+"Likes con prioridad a la privacidad y Dislikes opcionales para tipos de "
+"contenido de WordPress seleccionados y, opcionalmente, perfiles de usuario. "
+"Las reacciones se asocian a la cuenta y no almacenan dirección IP, huella, "
+"navegador, dispositivo ni ubicación."
+
+#: src/Admin/FrontendSetup.php:19
+msgid "Query Loops:"
+msgstr "Query Loops:"
+
+#: src/Admin/Overview.php:34
+msgid "Reaction model"
+msgstr "Modelo de reacciones"
+
+#: src/Admin/IntegrationReadiness.php:24
+msgid "Ready"
+msgstr "Listo"
+
+#: src/Builder/Targets.php:59
+msgid "Select content"
+msgstr "Seleccionar contenido"
+
+#: src/Builder/Targets.php:58
+msgid "Select content or user"
+msgstr "Seleccionar contenido o usuario"
+
+#: src/Admin/FrontendSetup.php:26
+msgid "Shortcodes"
+msgstr "Shortcodes"
+
+#: src/Admin/FrontendSetup.php:28
+msgid "Shortcodes remain available for builder-neutral templates and content."
+msgstr ""
+"Los shortcodes siguen disponibles para plantillas y contenido neutrales "
+"respecto al builder."
+
+#: src/Integration/Bricks/Elements/Element.php:49
+msgid "Show count"
+msgstr "Mostrar recuento"
+
+#: src/Admin/GeneralSettings.php:37
+msgid "Shown when a logged-out visitor clicks a visible reaction button."
+msgstr ""
+"Se muestra cuando un visitante sin sesión iniciada hace clic en un botón de "
+"reacción visible."
+
+#: src/Builder/Targets.php:53
+msgid "Specific target"
+msgstr "Objetivo específico"
+
+#: src/Admin/FrontendSetup.php:34
+msgid "Specific user target when user profile likes are enabled."
+msgstr ""
+"Objetivo de usuario específico cuando los Likes de perfiles de usuario están"
+" habilitados."
+
+#: src/Integration/Bricks/Elements/Element.php:36
+msgid "Target"
+msgstr "Objetivo"
+
+#: src/Integration/Bricks/Elements/Element.php:22
+msgid "Target source"
+msgstr "Origen del objetivo"
+
+#: src/Admin/GeneralSettings.php:17
+msgid "These settings are used everywhere unless a post type overrides them."
+msgstr ""
+"Estos ajustes se usan en todas partes salvo que un tipo de contenido los "
+"anule."
+
+#: src/Admin/Overview.php:37
+msgid ""
+"Use General for global behavior, Post types for target-specific overrides, "
+"User profiles for member reactions, and Integrations for builder and "
+"shortcode usage."
+msgstr ""
+"Usa General para el comportamiento global, Tipos de contenido para "
+"anulaciones específicas del objetivo, Perfiles de usuario para reacciones de"
+" miembros e Integraciones para el uso del builder y shortcodes."
+
+#: src/Integration/Bricks/Elements/Element.php:31
+msgid ""
+"Use the current template or Query Loop target by default. Choose a specific "
+"target only for layouts outside normal context."
+msgstr ""
+"Usa de forma predeterminada el objetivo de la plantilla o Query Loop actual."
+" Elige un objetivo específico solo para diseños fuera del contexto normal."
+
+#. translators: %s: user display name.
+#: src/Builder/Targets.php:128
+#, php-format
+msgid "User — %s"
+msgstr "Usuario — %s"
+
+#: src/Admin/Overview.php:25
+msgid "Users who reacted"
+msgstr "Usuarios que reaccionaron"
+
+#: src/Admin/GeneralSettings.php:36
+msgid ""
+"When disabled, logged-out visitors may see reactions but must log in before "
+"reacting."
+msgstr ""
+"Cuando está desactivado, los visitantes sin sesión iniciada pueden ver las "
+"reacciones, pero deben iniciar sesión antes de reaccionar."
+
+#~ msgid ""
+#~ "Allow logged-in users to like other WordPress users. This is useful for "
+#~ "public member/profile pages, for example with Core Blueprint Profiles. Users"
+#~ " cannot like themselves. Dislikes are not available for user profiles."
+#~ msgstr ""
+#~ "Permite que los usuarios conectados den Me gusta a otros usuarios de "
+#~ "WordPress. Esta opción es útil para páginas públicas de miembros/perfiles, "
+#~ "por ejemplo con Core Blueprint Profiles. Los usuarios no pueden darse Me "
+#~ "gusta a sí mismos. Los No me gusta no están disponibles para los perfiles de"
+#~ " usuario."
+
+#~ msgid "Choose an image or SVG stored in your WordPress Media Library."
+#~ msgstr ""
+#~ "Elige una imagen o un SVG almacenado en tu biblioteca de medios de "
+#~ "WordPress."
+
+#~ msgid ""
+#~ "Choose from the small bundled Lucide icon set. No external icon library is "
+#~ "loaded."
+#~ msgstr ""
+#~ "Elige entre el pequeño conjunto de iconos Lucide incluido. No se carga "
+#~ "ninguna biblioteca de iconos externa."
+
+#~ msgid ""
+#~ "Choose which public post types may receive reactions. Optional overrides let"
+#~ " each post type use its own wording, icons, dislike setting and logged-out "
+#~ "visibility."
+#~ msgstr ""
+#~ "Elige qué tipos de contenido públicos pueden recibir reacciones. Las "
+#~ "sobrescrituras opcionales permiten que cada tipo de contenido use sus "
+#~ "propios textos, iconos, ajuste de No me gusta y visibilidad para visitantes "
+#~ "no conectados."
+
+#~ msgid "Connected through the Core Blueprint public extension contracts."
+#~ msgstr "Connected through the Core Blueprint public extension contracts."
+
+#~ msgid "Frontend usage"
+#~ msgstr "Uso en el sitio"
+
+#~ msgid "Likes settings"
+#~ msgstr "Ajustes de Likes"
+
+#~ msgid ""
+#~ "Privacy-first likes and optional dislikes for selected WordPress content "
+#~ "types and, optionally, user profiles. Reactions are always account-based and"
+#~ " store no IP address, fingerprint, browser, device or location data."
+#~ msgstr ""
+#~ "Me gusta centrados en la privacidad y No me gusta opcionales para "
+#~ "determinados tipos de contenido de WordPress y, opcionalmente, perfiles de "
+#~ "usuario. Las reacciones siempre están vinculadas a una cuenta y no almacenan"
+#~ " dirección IP, huella digital, navegador, dispositivo ni datos de ubicación."
+
+#~ msgid ""
+#~ "Shown when a logged-out visitor clicks a visible Like or Dislike button."
+#~ msgstr ""
+#~ "Se muestra cuando un visitante no conectado hace clic en un botón visible de"
+#~ " Me gusta o No me gusta."
+
+#~ msgid ""
+#~ "These settings are used everywhere unless a post type overrides them. Leave "
+#~ "a label or message empty to use its translated default, and choose where "
+#~ "each reaction icon comes from."
+#~ msgstr ""
+#~ "Estos ajustes se usan en todas partes salvo que un tipo de contenido los "
+#~ "sobrescriba. Deja una etiqueta o un mensaje vacío para usar su valor "
+#~ "predeterminado traducido y elige de dónde procede cada icono de reacción."
+
+#~ msgid "Usage"
+#~ msgstr "Uso"
+
+#~ msgid "User targets"
+#~ msgstr "Objetivos de usuario"
+
+#~ msgid ""
+#~ "When enabled, logged-out visitors do not see reaction buttons or counts. "
+#~ "When disabled, they can see reactions but must log in before reacting."
+#~ msgstr ""
+#~ "Cuando está activado, los visitantes no conectados no ven los botones de "
+#~ "reacción ni los recuentos. Cuando está desactivado, pueden ver las "
+#~ "reacciones, pero deben iniciar sesión antes de reaccionar."
+
+#~ msgid "dislike button when dislikes are enabled for the current post type."
+#~ msgstr ""
+#~ "botón No me gusta cuando los No me gusta están activados para el tipo de "
+#~ "contenido actual."
+
+#~ msgid "dislike count when dislikes are enabled for the current post type."
+#~ msgstr ""
+#~ "recuento de No me gusta cuando los No me gusta están activados para el tipo "
+#~ "de contenido actual."
+
+#~ msgid "dislikes"
+#~ msgstr "no me gusta"
+
+#~ msgid "explicit user target when user likes are enabled."
+#~ msgstr ""
+#~ "objetivo de usuario explícito cuando los Me gusta de usuarios están "
+#~ "activados."
+
+#~ msgid "like button for the current target."
+#~ msgstr "botón Me gusta para el objetivo actual."
+
+#~ msgid "like count for the current target."
+#~ msgstr "recuento de Me gusta para el objetivo actual."
+
+#~ msgid "likes"
+#~ msgstr "me gusta"
+
+#~ msgid "users who reacted"
+#~ msgstr "usuarios que han reaccionado"
