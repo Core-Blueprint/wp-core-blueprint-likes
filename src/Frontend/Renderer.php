@@ -91,10 +91,9 @@ final class Renderer {
 		$setting_label = $is_dislike ? $config['dislike_label'] : $config['like_label'];
 		$setting_active_label = $is_dislike ? $config['disliked_label'] : $config['liked_label'];
 		$label = '' !== trim( (string) $atts['label'] ) ? (string) $atts['label'] : $setting_label;
-		$legacy_active = ! $is_dislike ? trim( (string) $atts['liked_label'] ) : '';
 		$active_label = '' !== trim( (string) $atts['active_label'] )
 			? (string) $atts['active_label']
-			: ( '' !== $legacy_active ? (string) $atts['liked_label'] : $setting_active_label );
+			: $setting_active_label;
 		$visible_label = $active ? $active_label : $label;
 		$icon = $is_dislike ? $config['dislike_icon'] : $config['like_icon'];
 		$show_count = filter_var( $atts['show_count'], FILTER_VALIDATE_BOOLEAN );
@@ -181,7 +180,6 @@ final class Renderer {
 			'show_count'   => 'true',
 			'label'        => '',
 			'active_label' => '',
-			'liked_label'  => '', // Retained public shortcode compatibility.
 			'class'        => '',
 		], $atts, $shortcode );
 	}
