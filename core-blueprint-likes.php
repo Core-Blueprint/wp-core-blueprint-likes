@@ -2,6 +2,7 @@
 /**
  * Plugin Name:       Core Blueprint Likes
  * Plugin URI:        https://coreblueprint.io
+ * Update URI:        https://coreblueprint.io/
  * Description:       Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration.
  * Version:           1.0.0-rc1
  * Author:            Core Blueprint
@@ -51,6 +52,9 @@ spl_autoload_register( static function ( string $class ): void {
 		require_once $file;
 	}
 } );
+
+// Update identity remains available even when Likes feature runtime is dormant.
+\CB\Likes\Integration\Updates::init();
 
 function cb_likes_api_compatible( string $available, string $required ): bool {
 	if ( 1 !== preg_match( '/^(\d+)\.(\d+)$/', $available, $available_match ) ) {
