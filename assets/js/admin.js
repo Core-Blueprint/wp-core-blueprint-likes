@@ -7,49 +7,6 @@
 		}, { once: true });
 	}
 
-	const tabs = Array.from(document.querySelectorAll('[data-cb-likes-tab]'));
-	const panels = Array.from(document.querySelectorAll('[data-cb-likes-tab-panel]'));
-
-	if (tabs.length && panels.length) {
-		const activateTab = (name, focus = false) => {
-			tabs.forEach((tab) => {
-				const active = tab.dataset.cbLikesTab === name;
-				tab.classList.toggle('nav-tab-active', active);
-				tab.setAttribute('aria-selected', active ? 'true' : 'false');
-				tab.tabIndex = active ? 0 : -1;
-				if (active && focus) {
-					tab.focus();
-				}
-			});
-
-			panels.forEach((panel) => {
-				panel.hidden = panel.dataset.cbLikesTabPanel !== name;
-			});
-
-			window.sessionStorage?.setItem('cb-likes-active-tab', name);
-		};
-
-		const storedTab = window.sessionStorage?.getItem('cb-likes-active-tab');
-		const initialTab = tabs.some((tab) => tab.dataset.cbLikesTab === storedTab) ? storedTab : 'overview';
-		activateTab(initialTab);
-
-		tabs.forEach((tab, index) => {
-			tab.addEventListener('click', () => activateTab(tab.dataset.cbLikesTab));
-			tab.addEventListener('keydown', (event) => {
-				if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-					return;
-				}
-				event.preventDefault();
-				let nextIndex = index;
-				if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-				if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-				if (event.key === 'Home') nextIndex = 0;
-				if (event.key === 'End') nextIndex = tabs.length - 1;
-				activateTab(tabs[nextIndex].dataset.cbLikesTab, true);
-			});
-		});
-	}
-
 	document.querySelectorAll('[data-cb-likes-icon-field]').forEach((field) => {
 		const source = field.querySelector('[data-cb-likes-icon-source]');
 		const builtInPanel = field.querySelector('[data-cb-likes-icon-panel="built_in"]');
