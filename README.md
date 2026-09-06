@@ -13,7 +13,7 @@ Lightweight privacy-first likes and optional dislikes for WordPress posts and us
 - Global Like/Dislike labels with a curated built-in icon set, Media Library or safe inline SVG icon sources.
 - Per-post-type label/icon overrides, including inheriting or changing the icon source.
 - Golden Core Admin information architecture: Overview, General, Post types, User profiles and Integrations.
-- Core Admin tabs use canonical server-side `admin.php?page=...&tab=...` navigation, so each tab reloads as its own deep-linkable admin request.
+- Likes configuration lives under **Core Blueprint → Extensions → Community → Likes**; tabs use canonical Settings Hub `extension=core-blueprint-likes&tab=...` deep links.
 - Dislikes can inherit the global default or be enabled/disabled per post type.
 - Idempotent REST reaction API; switching Like → Dislike updates the existing row instead of creating a second reaction.
 - Like/dislike counts and state helpers.
