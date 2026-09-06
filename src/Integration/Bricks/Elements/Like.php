@@ -23,7 +23,7 @@ final class Like extends Element {
 		$this->render_component(
 			Components::like_button( $this->target( true ), $this->show_count() ),
 			'like',
-			esc_html__( 'No enabled Like target detected. Use this element in a supported template or Query Loop, or choose a specific target.', 'core-blueprint-likes' )
+			esc_html__( 'No enabled Likes target detected. Use this element in a supported template or Query Loop, or choose a specific target.', 'core-blueprint-likes' )
 		);
 	}
 }
