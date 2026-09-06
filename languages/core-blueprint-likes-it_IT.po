@@ -93,7 +93,7 @@ msgstr "L’utente corrente ha messo Mi piace"
 msgid "Current user has liked target"
 msgstr "L’utente corrente ha messo Mi piace al target"
 
-#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:37
 #: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr "Disattivato"
@@ -143,11 +143,11 @@ msgstr ""
 msgid "Enable likes for user profiles"
 msgstr "Abilita Mi piace per i profili utente"
 
-#: src/Admin/PostTypeSettings.php:36
+#: src/Admin/PostTypeSettings.php:39
 msgid "Enable reactions for this post type"
 msgstr "Abilita reazioni per questo tipo di contenuto"
 
-#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:33
 #: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr "Abilitato"
@@ -315,7 +315,7 @@ msgstr "Rimuovi Non mi piace da questo elemento"
 msgid "Remove like from this item"
 msgstr "Rimuovi Mi piace da questo elemento"
 
-#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:50
 #: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr "Salva impostazioni"
@@ -371,10 +371,6 @@ msgstr "Pollice giù"
 #: src/Icons.php:20
 msgid "Thumbs Up"
 msgstr "Pollice su"
-
-#: src/Admin/PostTypeSettings.php:38
-msgid "Toggle post type settings"
-msgstr "Mostra/nascondi impostazioni del tipo di contenuto"
 
 #: src/Integration/Bricks/Integration.php:117
 msgid "True"
@@ -724,6 +720,9 @@ msgid ""
 msgstr ""
 "Quando è disabilitata, i visitatori non connessi possono vedere le reazioni "
 "ma devono accedere prima di reagire."
+
+#~ msgid "Toggle post type settings"
+#~ msgstr "Mostra/nascondi impostazioni del tipo di contenuto"
 
 #~ msgid ""
 #~ "Allow logged-in users to like other WordPress users. This is useful for "

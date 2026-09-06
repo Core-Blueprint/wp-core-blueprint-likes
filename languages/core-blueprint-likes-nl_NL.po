@@ -92,7 +92,7 @@ msgstr "Huidige gebruiker heeft geliket"
 msgid "Current user has liked target"
 msgstr "Huidige gebruiker heeft dit doel geliket"
 
-#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:37
 #: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr "Uitgeschakeld"
@@ -140,11 +140,11 @@ msgstr "Dislikes standaard inschakelen voor geactiveerde posttypen"
 msgid "Enable likes for user profiles"
 msgstr "Likes voor gebruikersprofielen inschakelen"
 
-#: src/Admin/PostTypeSettings.php:36
+#: src/Admin/PostTypeSettings.php:39
 msgid "Enable reactions for this post type"
 msgstr "Reacties inschakelen voor dit berichttype"
 
-#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:33
 #: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr "Ingeschakeld"
@@ -312,7 +312,7 @@ msgstr "Verwijder dislike van dit item"
 msgid "Remove like from this item"
 msgstr "Verwijder like van dit item."
 
-#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:50
 #: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr "Instellingen opslaan"
@@ -368,10 +368,6 @@ msgstr "Duim omlaag"
 #: src/Icons.php:20
 msgid "Thumbs Up"
 msgstr "Duim omhoog"
-
-#: src/Admin/PostTypeSettings.php:38
-msgid "Toggle post type settings"
-msgstr "Instellingen voor berichttype in- of uitklappen"
 
 #: src/Integration/Bricks/Integration.php:117
 msgid "True"
@@ -719,6 +715,9 @@ msgid ""
 msgstr ""
 "Wanneer dit is uitgeschakeld, kunnen uitgelogde bezoekers reacties zien maar"
 " moeten ze inloggen voordat ze kunnen reageren."
+
+#~ msgid "Toggle post type settings"
+#~ msgstr "Instellingen voor berichttype in- of uitklappen"
 
 #~ msgid ""
 #~ "Allow logged-in users to like other WordPress users. This is useful for "

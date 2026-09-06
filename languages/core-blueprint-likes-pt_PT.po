@@ -93,7 +93,7 @@ msgstr "O utilizador atual indicou Gosto"
 msgid "Current user has liked target"
 msgstr "O utilizador atual indicou Gosto no alvo"
 
-#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:37
 #: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr "Desativado"
@@ -141,11 +141,11 @@ msgstr "Ativar Não gosto por predefinição para os tipos de conteúdo ativados
 msgid "Enable likes for user profiles"
 msgstr "Ativar Gostos para perfis de utilizador"
 
-#: src/Admin/PostTypeSettings.php:36
+#: src/Admin/PostTypeSettings.php:39
 msgid "Enable reactions for this post type"
 msgstr "Ativar reações para este tipo de conteúdo"
 
-#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:33
 #: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr "Ativado"
@@ -313,7 +313,7 @@ msgstr "Remover Não gosto deste item"
 msgid "Remove like from this item"
 msgstr "Remover Gosto deste item"
 
-#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:50
 #: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr "Guardar definições"
@@ -369,10 +369,6 @@ msgstr "Polegar para baixo"
 #: src/Icons.php:20
 msgid "Thumbs Up"
 msgstr "Polegar para cima"
-
-#: src/Admin/PostTypeSettings.php:38
-msgid "Toggle post type settings"
-msgstr "Mostrar/ocultar definições do tipo de conteúdo"
 
 #: src/Integration/Bricks/Integration.php:117
 msgid "True"
@@ -720,6 +716,9 @@ msgid ""
 msgstr ""
 "Quando desativado, os visitantes sem sessão iniciada podem ver as reações, "
 "mas têm de iniciar sessão antes de reagir."
+
+#~ msgid "Toggle post type settings"
+#~ msgstr "Mostrar/ocultar definições do tipo de conteúdo"
 
 #~ msgid ""
 #~ "Allow logged-in users to like other WordPress users. This is useful for "

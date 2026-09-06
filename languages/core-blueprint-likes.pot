@@ -155,7 +155,7 @@ msgid ""
 "override."
 msgstr ""
 
-#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:37
 #: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr ""
@@ -217,11 +217,11 @@ msgstr ""
 msgid "Enable likes for user profiles"
 msgstr ""
 
-#: src/Admin/PostTypeSettings.php:36
+#: src/Admin/PostTypeSettings.php:39
 msgid "Enable reactions for this post type"
 msgstr ""
 
-#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:33
 #: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr ""
@@ -486,7 +486,7 @@ msgstr ""
 msgid "Remove like from this item"
 msgstr ""
 
-#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:50
 #: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr ""
@@ -585,10 +585,6 @@ msgstr ""
 
 #: src/Icons.php:20
 msgid "Thumbs Up"
-msgstr ""
-
-#: src/Admin/PostTypeSettings.php:38
-msgid "Toggle post type settings"
 msgstr ""
 
 #: src/Integration/Bricks/Integration.php:117

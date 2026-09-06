@@ -93,7 +93,7 @@ msgstr "L’utilisateur actuel a indiqué « J’aime »"
 msgid "Current user has liked target"
 msgstr "L’utilisateur actuel a indiqué « J’aime » pour la cible"
 
-#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:37
 #: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr "Désactivé"
@@ -142,11 +142,11 @@ msgstr ""
 msgid "Enable likes for user profiles"
 msgstr "Activer les « J’aime » pour les profils utilisateur"
 
-#: src/Admin/PostTypeSettings.php:36
+#: src/Admin/PostTypeSettings.php:39
 msgid "Enable reactions for this post type"
 msgstr "Activer les réactions pour ce type de publication"
 
-#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:33
 #: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr "Activé"
@@ -314,7 +314,7 @@ msgstr "Retirer « Je n’aime pas » de cet élément"
 msgid "Remove like from this item"
 msgstr "Retirer « J’aime » de cet élément"
 
-#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:50
 #: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr "Enregistrer les réglages"
@@ -370,10 +370,6 @@ msgstr "Pouce baissé"
 #: src/Icons.php:20
 msgid "Thumbs Up"
 msgstr "Pouce levé"
-
-#: src/Admin/PostTypeSettings.php:38
-msgid "Toggle post type settings"
-msgstr "Afficher/masquer les réglages du type de publication"
 
 #: src/Integration/Bricks/Integration.php:117
 msgid "True"
@@ -728,6 +724,9 @@ msgid ""
 msgstr ""
 "Lorsque cette option est désactivée, les visiteurs déconnectés peuvent voir "
 "les réactions mais doivent se connecter avant de réagir."
+
+#~ msgid "Toggle post type settings"
+#~ msgstr "Afficher/masquer les réglages du type de publication"
 
 #~ msgid ""
 #~ "Allow logged-in users to like other WordPress users. This is useful for "

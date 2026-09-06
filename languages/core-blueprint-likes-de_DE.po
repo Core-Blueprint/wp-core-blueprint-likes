@@ -94,7 +94,7 @@ msgstr "Aktueller Benutzer hat mit „Gefällt mir“ reagiert"
 msgid "Current user has liked target"
 msgstr "Aktueller Benutzer hat dieses Ziel mit „Gefällt mir“ markiert"
 
-#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:30 src/Admin/PostTypeSettings.php:37
 #: src/Integration/CoreBlueprint.php:82
 msgid "Disabled"
 msgstr "Deaktiviert"
@@ -142,11 +142,11 @@ msgstr "Dislikes standardmäßig für aktivierte Inhaltstypen einschalten"
 msgid "Enable likes for user profiles"
 msgstr "Likes für Benutzerprofile aktivieren"
 
-#: src/Admin/PostTypeSettings.php:36
+#: src/Admin/PostTypeSettings.php:39
 msgid "Enable reactions for this post type"
 msgstr "Reaktionen für diesen Inhaltstyp aktivieren"
 
-#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:32
+#: src/Admin/PostTypeOverrides.php:29 src/Admin/PostTypeSettings.php:33
 #: src/Integration/CoreBlueprint.php:82
 msgid "Enabled"
 msgstr "Aktiviert"
@@ -314,7 +314,7 @@ msgstr "„Gefällt mir nicht“ von diesem Inhalt entfernen"
 msgid "Remove like from this item"
 msgstr "„Gefällt mir“ von diesem Inhalt entfernen"
 
-#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:47
+#: src/Admin/GeneralSettings.php:41 src/Admin/PostTypeSettings.php:50
 #: src/Admin/UserProfileSettings.php:24
 msgid "Save settings"
 msgstr "Einstellungen speichern"
@@ -370,10 +370,6 @@ msgstr "Daumen runter"
 #: src/Icons.php:20
 msgid "Thumbs Up"
 msgstr "Daumen hoch"
-
-#: src/Admin/PostTypeSettings.php:38
-msgid "Toggle post type settings"
-msgstr "Einstellungen für den Inhaltstyp ein- oder ausklappen"
 
 #: src/Integration/Bricks/Integration.php:117
 msgid "True"
@@ -717,6 +713,9 @@ msgid ""
 msgstr ""
 "Wenn deaktiviert, können abgemeldete Besucher Reaktionen sehen, müssen sich "
 "aber vor dem Reagieren anmelden."
+
+#~ msgid "Toggle post type settings"
+#~ msgstr "Einstellungen für den Inhaltstyp ein- oder ausklappen"
 
 #~ msgid ""
 #~ "Allow logged-in users to like other WordPress users. This is useful for "
