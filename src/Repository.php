@@ -67,16 +67,6 @@ final class Repository {
 		return false !== $result;
 	}
 
-	/** Backwards-compatible like writer. */
-	public static function add( int $user_id, string $target_type, int $target_id ): bool {
-		return self::set_reaction( $user_id, $target_type, $target_id, self::LIKE );
-	}
-
-	/** Backwards-compatible like remover. */
-	public static function remove( int $user_id, string $target_type, int $target_id ): bool {
-		return self::clear_reaction( $user_id, $target_type, $target_id );
-	}
-
 	public static function count( string $target_type, int $target_id ): int {
 		return self::count_reaction( $target_type, $target_id, self::LIKE );
 	}
