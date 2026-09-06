@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace CB\Likes\Admin;
 
+use CB\Core\Admin\SettingsRegistry;
 use CB\Core\UI\IntegrationGrid;
+use CB\Likes\Integration\CoreBlueprint;
 use CB\Likes\Settings;
 
 defined( 'ABSPATH' ) || exit;
@@ -18,11 +20,7 @@ final class PageContent {
 	public static function render(): void {
 		$tab = self::current_tab();
 		?>
-		<div class="wrap cb-core-wrap cb-core-page cb-likes-settings-page">
-			<p class="cb-core-eyebrow"><?php esc_html_e( 'Core Blueprint', 'core-blueprint-likes' ); ?></p>
-			<h1 class="cb-core-title"><?php esc_html_e( 'Likes', 'core-blueprint-likes' ); ?></h1>
-			<p class="cb-core-intro"><?php esc_html_e( 'Privacy-first likes and optional dislikes for selected WordPress content types and, optionally, user profiles. Reactions are account-based and store no IP address, fingerprint, browser, device or location data.', 'core-blueprint-likes' ); ?></p>
-
+		<div class="cb-likes-settings-page">
 			<?php self::render_tabs( $tab ); ?>
 
 			<?php
@@ -67,13 +65,7 @@ final class PageContent {
 			$tab = self::TAB_OVERVIEW;
 		}
 
-		return add_query_arg(
-			[
-				'page' => CoreBlueprintPage::SLUG,
-				'tab'  => $tab,
-			],
-			admin_url( 'admin.php' )
-		);
+		return SettingsRegistry::url( CoreBlueprint::ID, [ 'tab' => $tab ] );
 	}
 
 	private static function render_tabs( string $active_tab ): void {
