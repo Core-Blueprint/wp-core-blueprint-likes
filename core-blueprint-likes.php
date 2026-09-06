@@ -74,7 +74,11 @@ function cb_likes_base_ready(): bool {
 
 	return class_exists( '\\CB\\Core\\ExtensionRegistry' )
 		&& class_exists( '\\CB\\Core\\Admin\\PageRegistry' )
-		&& interface_exists( '\\CB\\Core\\Admin\\Page' );
+		&& interface_exists( '\\CB\\Core\\Admin\\Page' )
+		&& class_exists( '\\CB\\Core\\UI\\IntegrationGrid' )
+		&& method_exists( '\\CB\\Core\\UI\\IntegrationGrid', 'render' )
+		&& class_exists( '\\CB\\Core\\UI\\Icon' )
+		&& method_exists( '\\CB\\Core\\UI\\Icon', 'render' );
 }
 
 function cb_likes_dependency_message(): string {
