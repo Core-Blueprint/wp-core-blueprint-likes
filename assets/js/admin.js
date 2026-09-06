@@ -80,30 +80,8 @@
 		});
 	});
 
-	const sections = document.querySelectorAll('[data-cb-likes-post-type]');
-	if (!sections.length) {
-		return;
-	}
-
-	sections.forEach((section) => {
-		const collapse = section.querySelector('[data-cb-likes-post-type-collapse]');
-		const body = section.querySelector('[data-cb-likes-post-type-body]');
+	document.querySelectorAll('[data-cb-likes-post-type]').forEach((section) => {
 		const toggle = section.querySelector('[data-cb-likes-post-type-toggle]');
-
-		const setExpanded = (expanded) => {
-			section.classList.toggle('is-expanded', expanded);
-			if (collapse) {
-				collapse.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-			}
-			if (body) {
-				body.setAttribute('aria-hidden', expanded ? 'false' : 'true');
-				if (expanded) {
-					body.removeAttribute('inert');
-				} else {
-					body.setAttribute('inert', '');
-				}
-			}
-		};
 
 		const syncEnabled = () => {
 			if (toggle) {
@@ -111,13 +89,11 @@
 			}
 		};
 
-		setExpanded(false);
 		syncEnabled();
 
-		collapse?.addEventListener('click', () => {
-			setExpanded(!section.classList.contains('is-expanded'));
-		});
-
+		// The checkbox is an independent control inside the native <summary>.
+		// Do not let its click also toggle the disclosure row.
+		toggle?.addEventListener('click', (event) => event.stopPropagation());
 		toggle?.addEventListener('change', syncEnabled);
 	});
 })();
