@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 namespace CB\Likes\Admin;
-
 defined( 'ABSPATH' ) || exit;
 
 final class Fields {
@@ -17,9 +16,9 @@ final class Fields {
 	}
 
 	public static function disclosure_icon(): string {
-		return \CB\Core\UI\Icon::render( 'collapse', [
+		return \CB\Core\UI\Icon::render( 'expand', [
 			'size'  => \CB\Core\UI\Icon::SIZE_COMPACT,
-			'class' => 'cb-core-chevron cb-likes-disclosure-icon',
+			'class' => 'cb-core-interactive-row__icon cb-core-chevron cb-likes-disclosure-icon',
 		] );
 	}
 }
