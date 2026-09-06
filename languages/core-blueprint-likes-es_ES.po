@@ -156,7 +156,7 @@ msgstr "Activado"
 msgid "False"
 msgstr "Falso"
 
-#: src/Admin/PageContent.php:23
+#: src/Admin/PageContent.php:53
 msgid "General"
 msgstr "General"
 
@@ -234,8 +234,8 @@ msgstr "Me gusta este elemento"
 msgid "Liked"
 msgstr "Me gusta"
 
-#: src/Admin/CoreBlueprintPage.php:13 src/Admin/CoreBlueprintPage.php:14
-#: src/Admin/Overview.php:17 src/Admin/PageContent.php:18
+#: src/Admin/CoreBlueprintPage.php:15 src/Admin/CoreBlueprintPage.php:16
+#: src/Admin/Overview.php:17 src/Admin/PageContent.php:23
 #: src/Integration/CoreBlueprint.php:63
 msgid "Likes"
 msgstr "Me gusta"
@@ -286,7 +286,7 @@ msgstr ""
 msgid "Please log in to react to this content."
 msgstr "Inicia sesión para reaccionar a este contenido."
 
-#: src/Admin/PageContent.php:24 src/Admin/PostTypeSettings.php:18
+#: src/Admin/PageContent.php:54 src/Admin/PostTypeSettings.php:18
 #: src/Integration/CoreBlueprint.php:79
 msgid "Post types"
 msgstr "Tipos de contenido"
@@ -388,12 +388,12 @@ msgstr "Actualizado el (UTC)"
 msgid "Use this icon"
 msgstr "Usar este icono"
 
-#: src/Admin/PageContent.php:25 src/Admin/UserProfileSettings.php:15
+#: src/Admin/PageContent.php:55 src/Admin/UserProfileSettings.php:15
 #: src/Integration/CoreBlueprint.php:81
 msgid "User profiles"
 msgstr "Perfiles de usuario"
 
-#: src/Admin/CoreBlueprintPage.php:20
+#: src/Admin/CoreBlueprintPage.php:22
 msgid "You are not allowed to manage Likes."
 msgstr "No tienes permisos para gestionar Likes."
 
@@ -474,7 +474,7 @@ msgstr ""
 msgid "Conditions:"
 msgstr "Condiciones:"
 
-#: src/Admin/PageContent.php:17
+#: src/Admin/PageContent.php:22
 msgid "Core Blueprint"
 msgstr "Core Blueprint"
 
@@ -520,7 +520,7 @@ msgstr "Elementos:"
 msgid "Enabled target types"
 msgstr "Tipos de objetivo habilitados"
 
-#: src/Admin/PageContent.php:26
+#: src/Admin/PageContent.php:56
 msgid "Integrations"
 msgstr "Integraciones"
 
@@ -557,7 +557,7 @@ msgstr ""
 " Loops y elementos dedicados de Like y Dislike. Bricks sigue siendo "
 "opcional."
 
-#: src/Admin/PageContent.php:21
+#: src/Admin/PageContent.php:81
 msgid "Likes sections"
 msgstr "Secciones de Likes"
 
@@ -606,7 +606,7 @@ msgstr ""
 "Permite opcionalmente que Likes use como objetivo perfiles públicos de "
 "usuarios de WordPress."
 
-#: src/Admin/PageContent.php:22
+#: src/Admin/PageContent.php:52
 msgid "Overview"
 msgstr "Resumen"
 
@@ -615,7 +615,7 @@ msgid "Posts liked by the current user and most liked posts."
 msgstr ""
 "Entradas marcadas con Like por el usuario actual y entradas con más Likes."
 
-#: src/Admin/PageContent.php:19
+#: src/Admin/PageContent.php:24
 msgid ""
 "Privacy-first likes and optional dislikes for selected WordPress content "
 "types and, optionally, user profiles. Reactions are account-based and store "

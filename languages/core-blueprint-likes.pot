@@ -91,7 +91,7 @@ msgstr ""
 msgid "Copy shortcode"
 msgstr ""
 
-#: src/Admin/PageContent.php:17
+#: src/Admin/PageContent.php:22
 msgid "Core Blueprint"
 msgstr ""
 
@@ -234,7 +234,7 @@ msgstr ""
 msgid "False"
 msgstr ""
 
-#: src/Admin/PageContent.php:23
+#: src/Admin/PageContent.php:53
 msgid "General"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Inline SVG"
 msgstr ""
 
-#: src/Admin/PageContent.php:26
+#: src/Admin/PageContent.php:56
 msgid "Integrations"
 msgstr ""
 
@@ -334,8 +334,8 @@ msgstr ""
 msgid "Liked"
 msgstr ""
 
-#: src/Admin/CoreBlueprintPage.php:13 src/Admin/CoreBlueprintPage.php:14
-#: src/Admin/Overview.php:17 src/Admin/PageContent.php:18
+#: src/Admin/CoreBlueprintPage.php:15 src/Admin/CoreBlueprintPage.php:16
+#: src/Admin/Overview.php:17 src/Admin/PageContent.php:23
 #: src/Integration/CoreBlueprint.php:63
 msgid "Likes"
 msgstr ""
@@ -350,7 +350,7 @@ msgid ""
 "and dedicated Like and Dislike elements. Bricks remains optional."
 msgstr ""
 
-#: src/Admin/PageContent.php:21
+#: src/Admin/PageContent.php:81
 msgid "Likes sections"
 msgstr ""
 
@@ -422,7 +422,7 @@ msgstr ""
 msgid "Optionally allow Likes to target public WordPress user profiles."
 msgstr ""
 
-#: src/Admin/PageContent.php:22
+#: src/Admin/PageContent.php:52
 msgid "Overview"
 msgstr ""
 
@@ -434,7 +434,7 @@ msgstr ""
 msgid "Please log in to react to this content."
 msgstr ""
 
-#: src/Admin/PageContent.php:24 src/Admin/PostTypeSettings.php:18
+#: src/Admin/PageContent.php:54 src/Admin/PostTypeSettings.php:18
 #: src/Integration/CoreBlueprint.php:79
 msgid "Post types"
 msgstr ""
@@ -443,7 +443,7 @@ msgstr ""
 msgid "Posts liked by the current user and most liked posts."
 msgstr ""
 
-#: src/Admin/PageContent.php:19
+#: src/Admin/PageContent.php:24
 msgid ""
 "Privacy-first likes and optional dislikes for selected WordPress content "
 "types and, optionally, user profiles. Reactions are account-based and store "
@@ -616,7 +616,7 @@ msgstr ""
 msgid "Use this icon"
 msgstr ""
 
-#: src/Admin/PageContent.php:25 src/Admin/UserProfileSettings.php:15
+#: src/Admin/PageContent.php:55 src/Admin/UserProfileSettings.php:15
 #: src/Integration/CoreBlueprint.php:81
 msgid "User profiles"
 msgstr ""
@@ -637,7 +637,7 @@ msgid ""
 "reacting."
 msgstr ""
 
-#: src/Admin/CoreBlueprintPage.php:20
+#: src/Admin/CoreBlueprintPage.php:22
 msgid "You are not allowed to manage Likes."
 msgstr ""
 
