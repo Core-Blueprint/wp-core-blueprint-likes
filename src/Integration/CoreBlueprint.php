@@ -39,7 +39,7 @@ final class CoreBlueprint {
 			new CoreBlueprintPage(),
 			[
 				'foundations' => [ 'clipboard' ],
-				'components'  => [ 'cards', 'nav-tabs', 'fields', 'disclosure', 'form-controls' ],
+				'components'  => [ 'cards', 'metric-tiles', 'nav-tabs', 'fields', 'disclosure', 'form-controls', 'integration-grid' ],
 			]
 		);
 	}
