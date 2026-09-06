@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace CB\Likes;
 
 use CB\Likes\Admin\Assets as AdminAssets;
-use CB\Likes\Bricks\Integration as BricksIntegration;
 use CB\Likes\Frontend\Renderer;
 use CB\Likes\Governance\Audit as GovernanceAudit;
+use CB\Likes\Integration\Bricks\Integration as BricksIntegration;
 use CB\Likes\Integration\CoreBlueprint;
 use CB\Likes\Privacy\Integration as PrivacyIntegration;
 use CB\Likes\Rest\Controller;

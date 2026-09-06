@@ -1,0 +1,51 @@
+name: Likes i18n refresh
+
+on:
+  push:
+    branches:
+      - likes-v1-golden-release-readiness-clean
+    paths:
+      - '**/*.php'
+      - 'tools/sync-i18n.py'
+      - 'tools/i18n-translations*.json'
+      - '.github/workflows/i18n-refresh.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: likes-i18n-refresh-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install i18n dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq gettext
+          python3 -m pip install -q --disable-pip-version-check polib==1.2.0
+
+      - name: Refresh catalogs
+        run: python3 tools/sync-i18n.py
+
+      - name: Commit refreshed catalogs
+        run: |
+          if git diff --quiet -- languages; then
+            echo 'Catalogs already current.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add languages
+          git commit -m 'Refresh Likes launch translations'
+          git fetch origin "${GITHUB_REF_NAME}"
+          git rebase "origin/${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

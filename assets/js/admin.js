@@ -7,50 +7,6 @@
 		}, { once: true });
 	}
 
-	const tabs = Array.from(document.querySelectorAll('[data-cb-likes-tab]'));
-	const panels = Array.from(document.querySelectorAll('[data-cb-likes-tab-panel]'));
-
-	if (tabs.length && panels.length) {
-		const activateTab = (name, focus = false) => {
-			tabs.forEach((tab) => {
-				const active = tab.dataset.cbLikesTab === name;
-				tab.classList.toggle('nav-tab-active', active);
-				tab.setAttribute('aria-selected', active ? 'true' : 'false');
-				tab.tabIndex = active ? 0 : -1;
-				if (active && focus) {
-					tab.focus();
-				}
-			});
-
-			panels.forEach((panel) => {
-				panel.hidden = panel.dataset.cbLikesTabPanel !== name;
-			});
-
-			window.sessionStorage?.setItem('cb-likes-active-tab', name);
-		};
-
-		const storedTab = window.sessionStorage?.getItem('cb-likes-active-tab');
-		const initialTab = tabs.some((tab) => tab.dataset.cbLikesTab === storedTab) ? storedTab : 'general';
-		activateTab(initialTab);
-
-		tabs.forEach((tab, index) => {
-			tab.addEventListener('click', () => activateTab(tab.dataset.cbLikesTab));
-			tab.addEventListener('keydown', (event) => {
-				if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-					return;
-				}
-				event.preventDefault();
-				let nextIndex = index;
-				if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-				if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-				if (event.key === 'Home') nextIndex = 0;
-				if (event.key === 'End') nextIndex = tabs.length - 1;
-				activateTab(tabs[nextIndex].dataset.cbLikesTab, true);
-			});
-		});
-	}
-
-
 	document.querySelectorAll('[data-cb-likes-icon-field]').forEach((field) => {
 		const source = field.querySelector('[data-cb-likes-icon-source]');
 		const builtInPanel = field.querySelector('[data-cb-likes-icon-panel="built_in"]');
@@ -124,30 +80,8 @@
 		});
 	});
 
-	const sections = document.querySelectorAll('[data-cb-likes-post-type]');
-	if (!sections.length) {
-		return;
-	}
-
-	sections.forEach((section) => {
-		const collapse = section.querySelector('[data-cb-likes-post-type-collapse]');
-		const body = section.querySelector('[data-cb-likes-post-type-body]');
+	document.querySelectorAll('[data-cb-likes-post-type]').forEach((section) => {
 		const toggle = section.querySelector('[data-cb-likes-post-type-toggle]');
-
-		const setExpanded = (expanded) => {
-			section.classList.toggle('is-expanded', expanded);
-			if (collapse) {
-				collapse.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-			}
-			if (body) {
-				body.setAttribute('aria-hidden', expanded ? 'false' : 'true');
-				if (expanded) {
-					body.removeAttribute('inert');
-				} else {
-					body.setAttribute('inert', '');
-				}
-			}
-		};
 
 		const syncEnabled = () => {
 			if (toggle) {
@@ -155,15 +89,11 @@
 			}
 		};
 
-		// Post-type override sections always start collapsed. Enabling or
-		// disabling a target never changes disclosure state.
-		setExpanded(false);
 		syncEnabled();
 
-		collapse?.addEventListener('click', () => {
-			setExpanded(!section.classList.contains('is-expanded'));
-		});
-
+		// The checkbox is an independent control inside the native <summary>.
+		// Do not let its click also toggle the disclosure row.
+		toggle?.addEventListener('click', (event) => event.stopPropagation());
 		toggle?.addEventListener('change', syncEnabled);
 	});
 })();

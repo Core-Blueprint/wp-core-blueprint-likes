@@ -21,12 +21,28 @@ final class Renderer {
 
 	/** @param array<string,mixed>|string $atts */
 	public static function button_shortcode( array|string $atts = [] ): string {
-		return self::reaction_button_shortcode( Repository::LIKE, $atts );
+		return self::like_button( is_array( $atts ) ? $atts : [] );
 	}
 
 	/** @param array<string,mixed>|string $atts */
 	public static function dislike_button_shortcode( array|string $atts = [] ): string {
-		return self::reaction_button_shortcode( Repository::DISLIKE, $atts );
+		return self::dislike_button( is_array( $atts ) ? $atts : [] );
+	}
+
+	/** @param array<string,mixed> $atts */
+	public static function like_button( array $atts = [] ): string {
+		return self::reaction_button(
+			Repository::LIKE,
+			self::button_atts( $atts, 'cb_like_button' )
+		);
+	}
+
+	/** @param array<string,mixed> $atts */
+	public static function dislike_button( array $atts = [] ): string {
+		return self::reaction_button(
+			Repository::DISLIKE,
+			self::button_atts( $atts, 'cb_dislike_button' )
+		);
 	}
 
 	/** @param array<string,mixed>|string $atts */
@@ -39,19 +55,8 @@ final class Renderer {
 		return self::reaction_count_shortcode( Repository::DISLIKE, $atts );
 	}
 
-	/** @param array<string,mixed>|string $atts */
-	private static function reaction_button_shortcode( string $reaction, array|string $atts ): string {
-		$shortcode = Repository::DISLIKE === $reaction ? 'cb_dislike_button' : 'cb_like_button';
-		$atts = shortcode_atts( [
-			'target_type'  => '',
-			'target_id'    => 0,
-			'show_count'   => 'true',
-			'label'        => '',
-			'active_label' => '',
-			'liked_label'  => '', // rc1-rc3 compatibility for the like shortcode.
-			'class'        => '',
-		], is_array( $atts ) ? $atts : [], $shortcode );
-
+	/** @param array<string,mixed> $atts */
+	private static function reaction_button( string $reaction, array $atts ): string {
 		$target = self::target_from_atts( $atts );
 		if ( ! $target || ! Targets::is_enabled( $target['type'], $target['id'] ) ) {
 			return '';
@@ -86,10 +91,9 @@ final class Renderer {
 		$setting_label = $is_dislike ? $config['dislike_label'] : $config['like_label'];
 		$setting_active_label = $is_dislike ? $config['disliked_label'] : $config['liked_label'];
 		$label = '' !== trim( (string) $atts['label'] ) ? (string) $atts['label'] : $setting_label;
-		$legacy_active = ! $is_dislike ? trim( (string) $atts['liked_label'] ) : '';
 		$active_label = '' !== trim( (string) $atts['active_label'] )
 			? (string) $atts['active_label']
-			: ( '' !== $legacy_active ? (string) $atts['liked_label'] : $setting_active_label );
+			: $setting_active_label;
 		$visible_label = $active ? $active_label : $label;
 		$icon = $is_dislike ? $config['dislike_icon'] : $config['like_icon'];
 		$show_count = filter_var( $atts['show_count'], FILTER_VALIDATE_BOOLEAN );
@@ -165,8 +169,24 @@ final class Renderer {
 		);
 	}
 
-	/** @param array<string,mixed> $atts
-	 *  @return array{type:string,id:int}|null
+	/**
+	 * @param array<string,mixed> $atts
+	 * @return array<string,mixed>
+	 */
+	private static function button_atts( array $atts, string $shortcode ): array {
+		return shortcode_atts( [
+			'target_type'  => '',
+			'target_id'    => 0,
+			'show_count'   => 'true',
+			'label'        => '',
+			'active_label' => '',
+			'class'        => '',
+		], $atts, $shortcode );
+	}
+
+	/**
+	 * @param array<string,mixed> $atts
+	 * @return array{type:string,id:int}|null
 	 */
 	private static function target_from_atts( array $atts ): ?array {
 		$id = absint( $atts['target_id'] ?? 0 );

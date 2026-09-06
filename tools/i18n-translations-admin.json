@@ -1,0 +1,104 @@
+{
+  "Core Blueprint": {
+    "nl_NL": "Core Blueprint", "de_DE": "Core Blueprint", "fr_FR": "Core Blueprint", "es_ES": "Core Blueprint", "it_IT": "Core Blueprint", "pt_PT": "Core Blueprint"
+  },
+  "Enabled target types": {
+    "nl_NL": "Ingeschakelde doeltypen", "de_DE": "Aktivierte Zieltypen", "fr_FR": "Types de cibles activés", "es_ES": "Tipos de objetivo habilitados", "it_IT": "Tipi di target abilitati", "pt_PT": "Tipos de alvo ativados"
+  },
+  "Integrations": {
+    "nl_NL": "Integraties", "de_DE": "Integrationen", "fr_FR": "Intégrations", "es_ES": "Integraciones", "it_IT": "Integrazioni", "pt_PT": "Integrações"
+  },
+  "Likes at a glance": {
+    "nl_NL": "Likes in één oogopslag", "de_DE": "Likes auf einen Blick", "fr_FR": "Likes en un coup d’œil", "es_ES": "Likes de un vistazo", "it_IT": "Likes a colpo d’occhio", "pt_PT": "Likes em resumo"
+  },
+  "Likes sections": {
+    "nl_NL": "Likes-secties", "de_DE": "Likes-Bereiche", "fr_FR": "Sections de Likes", "es_ES": "Secciones de Likes", "it_IT": "Sezioni di Likes", "pt_PT": "Secções do Likes"
+  },
+  "Likes stores account-based reactions only. No IP address, fingerprint, browser, device or location data is stored.": {
+    "nl_NL": "Likes slaat alleen accountgebonden reacties op. Er worden geen IP-adres, fingerprint, browser-, apparaat- of locatiegegevens opgeslagen.",
+    "de_DE": "Likes speichert ausschließlich kontobasierte Reaktionen. Es werden keine IP-Adresse, kein Fingerabdruck sowie keine Browser-, Geräte- oder Standortdaten gespeichert.",
+    "fr_FR": "Likes stocke uniquement des réactions liées au compte. Aucune adresse IP, empreinte, donnée de navigateur, d’appareil ou de localisation n’est stockée.",
+    "es_ES": "Likes solo almacena reacciones asociadas a la cuenta. No se guardan direcciones IP, huellas, datos del navegador, del dispositivo ni de ubicación.",
+    "it_IT": "Likes memorizza solo reazioni associate all’account. Non vengono memorizzati indirizzi IP, fingerprint, dati del browser, del dispositivo o della posizione.",
+    "pt_PT": "O Likes armazena apenas reações associadas à conta. Não são armazenados endereço IP, fingerprint, dados do browser, do dispositivo ou de localização."
+  },
+  "Logged-in users may like other WordPress users. Users cannot like themselves, and dislikes are never available for user profiles.": {
+    "nl_NL": "Ingelogde gebruikers kunnen andere WordPress-gebruikers liken. Gebruikers kunnen zichzelf niet liken en dislikes zijn nooit beschikbaar voor gebruikersprofielen.",
+    "de_DE": "Angemeldete Benutzer können andere WordPress-Benutzer liken. Benutzer können sich nicht selbst liken und Dislikes sind für Benutzerprofile nie verfügbar.",
+    "fr_FR": "Les utilisateurs connectés peuvent aimer d’autres utilisateurs WordPress. Ils ne peuvent pas s’aimer eux-mêmes et les dislikes ne sont jamais disponibles pour les profils utilisateurs.",
+    "es_ES": "Los usuarios conectados pueden dar Like a otros usuarios de WordPress. No pueden darse Like a sí mismos y los Dislikes nunca están disponibles para perfiles de usuario.",
+    "it_IT": "Gli utenti connessi possono mettere Like ad altri utenti WordPress. Non possono mettere Like a se stessi e i Dislike non sono mai disponibili per i profili utente.",
+    "pt_PT": "Os utilizadores autenticados podem colocar Like noutros utilizadores do WordPress. Não podem colocar Like em si próprios e os Dislikes nunca estão disponíveis para perfis de utilizador."
+  },
+  "Not active": {
+    "nl_NL": "Niet actief", "de_DE": "Nicht aktiv", "fr_FR": "Inactif", "es_ES": "No activo", "it_IT": "Non attivo", "pt_PT": "Não ativo"
+  },
+  "Optionally allow Likes to target public WordPress user profiles.": {
+    "nl_NL": "Sta optioneel toe dat Likes publieke WordPress-gebruikersprofielen als doel gebruikt.",
+    "de_DE": "Erlaube Likes optional, öffentliche WordPress-Benutzerprofile als Ziel zu verwenden.",
+    "fr_FR": "Autorisez facultativement Likes à cibler les profils utilisateurs WordPress publics.",
+    "es_ES": "Permite opcionalmente que Likes use como objetivo perfiles públicos de usuarios de WordPress.",
+    "it_IT": "Consenti facoltativamente a Likes di usare come target i profili utente pubblici di WordPress.",
+    "pt_PT": "Permita opcionalmente que o Likes utilize perfis públicos de utilizador do WordPress como alvo."
+  },
+  "Overview": {
+    "nl_NL": "Overzicht", "de_DE": "Übersicht", "fr_FR": "Vue d’ensemble", "es_ES": "Resumen", "it_IT": "Panoramica", "pt_PT": "Visão geral"
+  },
+  "Privacy-first likes and optional dislikes for selected WordPress content types and, optionally, user profiles. Reactions are account-based and store no IP address, fingerprint, browser, device or location data.": {
+    "nl_NL": "Privacy-first likes en optionele dislikes voor geselecteerde WordPress-contenttypen en, optioneel, gebruikersprofielen. Reacties zijn accountgebonden en slaan geen IP-adres, fingerprint, browser-, apparaat- of locatiegegevens op.",
+    "de_DE": "Datenschutzorientierte Likes und optionale Dislikes für ausgewählte WordPress-Inhaltstypen und optional Benutzerprofile. Reaktionen sind kontobasiert und speichern keine IP-Adresse, keinen Fingerabdruck sowie keine Browser-, Geräte- oder Standortdaten.",
+    "fr_FR": "Likes axés sur la confidentialité et dislikes facultatifs pour certains types de contenu WordPress et, en option, les profils utilisateurs. Les réactions sont liées au compte et ne stockent aucune adresse IP, empreinte, donnée de navigateur, d’appareil ou de localisation.",
+    "es_ES": "Likes con prioridad a la privacidad y Dislikes opcionales para tipos de contenido de WordPress seleccionados y, opcionalmente, perfiles de usuario. Las reacciones se asocian a la cuenta y no almacenan dirección IP, huella, navegador, dispositivo ni ubicación.",
+    "it_IT": "Like orientati alla privacy e Dislike opzionali per tipi di contenuto WordPress selezionati e, facoltativamente, profili utente. Le reazioni sono associate all’account e non memorizzano indirizzo IP, fingerprint, browser, dispositivo o posizione.",
+    "pt_PT": "Likes orientados para a privacidade e Dislikes opcionais para tipos de conteúdo WordPress selecionados e, opcionalmente, perfis de utilizador. As reações são associadas à conta e não armazenam endereço IP, fingerprint, browser, dispositivo ou localização."
+  },
+  "Reaction model": {
+    "nl_NL": "Reactiemodel", "de_DE": "Reaktionsmodell", "fr_FR": "Modèle de réaction", "es_ES": "Modelo de reacciones", "it_IT": "Modello di reazione", "pt_PT": "Modelo de reações"
+  },
+  "Ready": {
+    "nl_NL": "Gereed", "de_DE": "Bereit", "fr_FR": "Prêt", "es_ES": "Listo", "it_IT": "Pronto", "pt_PT": "Pronto"
+  },
+  "Choose from the bundled icon set. No external icon library is loaded.": {
+    "nl_NL": "Kies uit de meegeleverde iconenset. Er wordt geen externe iconenbibliotheek geladen.",
+    "de_DE": "Wähle aus dem mitgelieferten Icon-Set. Es wird keine externe Icon-Bibliothek geladen.",
+    "fr_FR": "Choisissez dans le jeu d’icônes inclus. Aucune bibliothèque d’icônes externe n’est chargée.",
+    "es_ES": "Elige entre el conjunto de iconos incluido. No se carga ninguna biblioteca de iconos externa.",
+    "it_IT": "Scegli dal set di icone incluso. Non viene caricata alcuna libreria di icone esterna.",
+    "pt_PT": "Escolha entre o conjunto de ícones incluído. Não é carregada qualquer biblioteca de ícones externa."
+  },
+  "Choose which public post types may receive reactions. Expand a row only when that post type needs its own presentation or visibility rules.": {
+    "nl_NL": "Kies welke publieke berichttypen reacties mogen ontvangen. Klap een rij alleen uit wanneer dat berichttype eigen presentatie- of zichtbaarheidsregels nodig heeft.",
+    "de_DE": "Wähle, welche öffentlichen Beitragstypen Reaktionen erhalten dürfen. Klappe eine Zeile nur auf, wenn dieser Beitragstyp eigene Darstellungs- oder Sichtbarkeitsregeln benötigt.",
+    "fr_FR": "Choisissez quels types de publication publics peuvent recevoir des réactions. Développez une ligne uniquement si ce type nécessite ses propres règles de présentation ou de visibilité.",
+    "es_ES": "Elige qué tipos de contenido públicos pueden recibir reacciones. Expande una fila solo cuando ese tipo necesite sus propias reglas de presentación o visibilidad.",
+    "it_IT": "Scegli quali tipi di contenuto pubblici possono ricevere reazioni. Espandi una riga solo quando quel tipo necessita di regole proprie di presentazione o visibilità.",
+    "pt_PT": "Escolha os tipos de conteúdo públicos que podem receber reações. Expanda uma linha apenas quando esse tipo precisar das suas próprias regras de apresentação ou visibilidade."
+  },
+  "These settings are used everywhere unless a post type overrides them.": {
+    "nl_NL": "Deze instellingen worden overal gebruikt, tenzij een berichttype ze overschrijft.",
+    "de_DE": "Diese Einstellungen werden überall verwendet, sofern ein Beitragstyp sie nicht überschreibt.",
+    "fr_FR": "Ces réglages sont utilisés partout, sauf si un type de publication les remplace.",
+    "es_ES": "Estos ajustes se usan en todas partes salvo que un tipo de contenido los anule.",
+    "it_IT": "Queste impostazioni vengono usate ovunque, salvo override di un tipo di contenuto.",
+    "pt_PT": "Estas definições são utilizadas em todo o lado, exceto quando um tipo de conteúdo as substitui."
+  },
+  "Use General for global behavior, Post types for target-specific overrides, User profiles for member reactions, and Integrations for builder and shortcode usage.": {
+    "nl_NL": "Gebruik Algemeen voor globaal gedrag, Berichttypen voor doelspecifieke overschrijvingen, Gebruikersprofielen voor ledenreacties en Integraties voor builder- en shortcodegebruik.",
+    "de_DE": "Verwende Allgemein für globales Verhalten, Beitragstypen für zielspezifische Überschreibungen, Benutzerprofile für Mitgliederreaktionen und Integrationen für Builder- und Shortcode-Nutzung.",
+    "fr_FR": "Utilisez Général pour le comportement global, Types de publication pour les remplacements spécifiques aux cibles, Profils utilisateurs pour les réactions des membres et Intégrations pour l’utilisation du builder et des shortcodes.",
+    "es_ES": "Usa General para el comportamiento global, Tipos de contenido para anulaciones específicas del objetivo, Perfiles de usuario para reacciones de miembros e Integraciones para el uso del builder y shortcodes.",
+    "it_IT": "Usa Generale per il comportamento globale, Tipi di contenuto per override specifici del target, Profili utente per le reazioni dei membri e Integrazioni per l’uso del builder e degli shortcode.",
+    "pt_PT": "Utilize Geral para o comportamento global, Tipos de conteúdo para substituições específicas do alvo, Perfis de utilizador para reações de membros e Integrações para utilização do builder e de shortcodes."
+  },
+  "Users who reacted": {
+    "nl_NL": "Gebruikers die reageerden", "de_DE": "Benutzer mit Reaktion", "fr_FR": "Utilisateurs ayant réagi", "es_ES": "Usuarios que reaccionaron", "it_IT": "Utenti che hanno reagito", "pt_PT": "Utilizadores que reagiram"
+  },
+  "When disabled, logged-out visitors may see reactions but must log in before reacting.": {
+    "nl_NL": "Wanneer dit is uitgeschakeld, kunnen uitgelogde bezoekers reacties zien maar moeten ze inloggen voordat ze kunnen reageren.",
+    "de_DE": "Wenn deaktiviert, können abgemeldete Besucher Reaktionen sehen, müssen sich aber vor dem Reagieren anmelden.",
+    "fr_FR": "Lorsque cette option est désactivée, les visiteurs déconnectés peuvent voir les réactions mais doivent se connecter avant de réagir.",
+    "es_ES": "Cuando está desactivado, los visitantes sin sesión iniciada pueden ver las reacciones, pero deben iniciar sesión antes de reaccionar.",
+    "it_IT": "Quando è disabilitata, i visitatori non connessi possono vedere le reazioni ma devono accedere prima di reagire.",
+    "pt_PT": "Quando desativado, os visitantes sem sessão iniciada podem ver as reações, mas têm de iniciar sessão antes de reagir."
+  }
+}

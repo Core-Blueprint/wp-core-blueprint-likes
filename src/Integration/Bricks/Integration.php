@@ -1,18 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace CB\Likes\Bricks;
+namespace CB\Likes\Integration\Bricks;
 
-use CB\Likes\Repository;
-use CB\Likes\Settings;
-use CB\Likes\Targets;
+use CB\Likes\Builder\Conditions;
+use CB\Likes\Builder\Data;
+use CB\Likes\Builder\Queries;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Optional Bricks adapter over builder-neutral Likes contracts.
+ */
 final class Integration {
-	private const GROUP = 'Core Blueprint Likes';
+	private static function group(): string {
+		return __( 'Core Blueprint Likes', 'core-blueprint-likes' );
+	}
 
 	public static function init(): void {
+		add_filter( 'bricks/builder/i18n', [ __CLASS__, 'builder_i18n' ] );
 		add_filter( 'bricks/dynamic_tags_list', [ __CLASS__, 'dynamic_tags' ] );
 		add_filter( 'bricks/dynamic_data/render_tag', [ __CLASS__, 'render_tag' ], 20, 3 );
 		add_filter( 'bricks/dynamic_data/render_content', [ __CLASS__, 'render_content' ], 20, 3 );
@@ -22,10 +28,21 @@ final class Integration {
 		add_filter( 'bricks/conditions/result', [ __CLASS__, 'condition_result' ], 20, 3 );
 		add_filter( 'bricks/setup/control_options', [ __CLASS__, 'query_types' ] );
 		add_filter( 'bricks/query/run', [ __CLASS__, 'run_query' ], 20, 2 );
+		add_action( 'init', [ ElementRegistry::class, 'register' ], 11 );
 	}
 
-	/** @param array<int,array<string,mixed>> $tags
-	 *  @return array<int,array<string,mixed>>
+	/**
+	 * @param array<string,string> $i18n
+	 * @return array<string,string>
+	 */
+	public static function builder_i18n( array $i18n ): array {
+		$i18n['core-blueprint-likes'] = self::group();
+		return $i18n;
+	}
+
+	/**
+	 * @param array<int,array<string,mixed>> $tags
+	 * @return array<int,array<string,mixed>>
 	 */
 	public static function dynamic_tags( array $tags ): array {
 		foreach ( [
@@ -34,8 +51,9 @@ final class Integration {
 			'cb_likes_has_liked' => __( 'Current user has liked', 'core-blueprint-likes' ),
 			'cb_likes_has_disliked' => __( 'Current user has disliked', 'core-blueprint-likes' ),
 		] as $name => $label ) {
-			$tags[] = [ 'name' => '{' . $name . '}', 'label' => $label, 'group' => self::GROUP ];
+			$tags[] = [ 'name' => '{' . $name . '}', 'label' => $label, 'group' => self::group() ];
 		}
+
 		return $tags;
 	}
 
@@ -43,11 +61,14 @@ final class Integration {
 		if ( ! is_string( $tag ) ) {
 			return $tag;
 		}
-		$name = trim( $tag, '{}' );
-		if ( ! str_starts_with( $name, 'cb_likes_' ) ) {
+
+		$name  = trim( $tag, '{}' );
+		$field = self::data_field( $name );
+		if ( null === $field ) {
 			return $tag;
 		}
-		$value = self::value( $name, $post );
+
+		$value = Data::value( $field, $post );
 		return null === $value ? $tag : $value;
 	}
 
@@ -55,22 +76,33 @@ final class Integration {
 		if ( ! is_string( $content ) || ! str_contains( $content, '{cb_likes_' ) ) {
 			return $content;
 		}
-		return preg_replace_callback( '/\{(cb_likes_[a-z0-9_]+)\}/', static function ( array $matches ) use ( $post ): string {
-			$value = self::value( $matches[1], $post );
-			return null === $value ? $matches[0] : (string) $value;
-		}, $content ) ?? $content;
+
+		return preg_replace_callback(
+			'/\{(cb_likes_[a-z0-9_]+)\}/',
+			static function ( array $matches ) use ( $post ): string {
+				$field = self::data_field( $matches[1] );
+				if ( null === $field ) {
+					return $matches[0];
+				}
+				$value = Data::value( $field, $post );
+				return null === $value ? $matches[0] : (string) $value;
+			},
+			$content
+		) ?? $content;
 	}
 
-	/** @param array<int,array<string,string>> $groups
-	 *  @return array<int,array<string,string>>
+	/**
+	 * @param array<int,array<string,string>> $groups
+	 * @return array<int,array<string,string>>
 	 */
 	public static function condition_groups( array $groups ): array {
-		$groups[] = [ 'name' => 'cb_likes', 'label' => __( 'Core Blueprint Likes', 'core-blueprint-likes' ) ];
+		$groups[] = [ 'name' => 'cb_likes', 'label' => self::group() ];
 		return $groups;
 	}
 
-	/** @param array<int,array<string,mixed>> $options
-	 *  @return array<int,array<string,mixed>>
+	/**
+	 * @param array<int,array<string,mixed>> $options
+	 * @return array<int,array<string,mixed>>
 	 */
 	public static function condition_options( array $options ): array {
 		foreach ( [
@@ -85,29 +117,26 @@ final class Integration {
 				'value' => [ 'type' => 'select', 'options' => [ 'true' => __( 'True', 'core-blueprint-likes' ), 'false' => __( 'False', 'core-blueprint-likes' ) ] ],
 			];
 		}
+
 		return $options;
 	}
 
 	/** @param array<string,mixed> $condition */
 	public static function condition_result( bool $result, string $condition_key, array $condition ): bool {
-		if ( ! in_array( $condition_key, [ 'cb_likes_has_liked', 'cb_likes_has_disliked' ], true ) ) {
+		if ( 'cb_likes_has_liked' === $condition_key ) {
+			$actual = Conditions::current_user_has_liked();
+		} elseif ( 'cb_likes_has_disliked' === $condition_key ) {
+			$actual = Conditions::current_user_has_disliked();
+		} else {
 			return $result;
 		}
-		$target = Targets::current();
-		$actual = false;
-		if ( $target && get_current_user_id() > 0 && Targets::is_enabled( $target['type'], $target['id'] ) ) {
-			if ( 'cb_likes_has_disliked' === $condition_key ) {
-				$actual = Settings::dislike_enabled_for_target( $target['type'], $target['id'] )
-					&& Repository::user_has_disliked( get_current_user_id(), $target['type'], $target['id'] );
-			} else {
-				$actual = Repository::user_has_liked( get_current_user_id(), $target['type'], $target['id'] );
-			}
-		}
+
 		return 'false' === (string) ( $condition['value'] ?? 'true' ) ? ! $actual : $actual;
 	}
 
-	/** @param array<string,mixed> $options
-	 *  @return array<string,mixed>
+	/**
+	 * @param array<string,mixed> $options
+	 * @return array<string,mixed>
 	 */
 	public static function query_types( array $options ): array {
 		$options['queryTypes']['cb_likes_liked_posts'] = __( 'Likes: Posts liked by current user', 'core-blueprint-likes' );
@@ -119,28 +148,21 @@ final class Integration {
 	public static function run_query( array $results, object $query_obj ): array {
 		$type = (string) ( $query_obj->object_type ?? '' );
 		if ( 'cb_likes_liked_posts' === $type ) {
-			$ids = Repository::liked_post_ids( get_current_user_id() );
-		} elseif ( 'cb_likes_most_liked' === $type ) {
-			$ids = Repository::most_liked_post_ids( Settings::enabled_post_types() );
-		} else {
-			return $results;
+			return Queries::liked_posts( get_current_user_id() );
 		}
-		$allowed = array_flip( Settings::enabled_post_types() );
-		$posts = array_filter( array_map( 'get_post', $ids ), static fn( mixed $post ): bool => $post instanceof \WP_Post && isset( $allowed[ $post->post_type ] ) && Targets::user_can_view( get_current_user_id(), Targets::POST, (int) $post->ID ) );
-		return array_values( $posts );
+		if ( 'cb_likes_most_liked' === $type ) {
+			return Queries::most_liked_posts();
+		}
+
+		return $results;
 	}
 
-	private static function value( string $name, mixed $post ): string|int|null {
-		$target = Targets::current( $post );
-		if ( ! $target || ! Targets::is_enabled( $target['type'], $target['id'] ) ) {
-			return null;
-		}
-		$dislike_enabled = Settings::dislike_enabled_for_target( $target['type'], $target['id'] );
+	private static function data_field( string $name ): ?string {
 		return match ( $name ) {
-			'cb_likes_count' => Repository::count( $target['type'], $target['id'] ),
-			'cb_likes_dislike_count' => $dislike_enabled ? Repository::dislike_count( $target['type'], $target['id'] ) : 0,
-			'cb_likes_has_liked' => get_current_user_id() > 0 && Repository::user_has_liked( get_current_user_id(), $target['type'], $target['id'] ) ? '1' : '0',
-			'cb_likes_has_disliked' => $dislike_enabled && get_current_user_id() > 0 && Repository::user_has_disliked( get_current_user_id(), $target['type'], $target['id'] ) ? '1' : '0',
+			'cb_likes_count' => Data::LIKE_COUNT,
+			'cb_likes_dislike_count' => Data::DISLIKE_COUNT,
+			'cb_likes_has_liked' => Data::HAS_LIKED,
+			'cb_likes_has_disliked' => Data::HAS_DISLIKED,
 			default => null,
 		};
 	}

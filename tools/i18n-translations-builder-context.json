@@ -1,0 +1,64 @@
+{
+  "%1$s — %2$s": {
+    "nl_NL": "%1$s — %2$s", "de_DE": "%1$s — %2$s", "fr_FR": "%1$s — %2$s", "es_ES": "%1$s — %2$s", "it_IT": "%1$s — %2$s", "pt_PT": "%1$s — %2$s"
+  },
+  "(Untitled)": {
+    "nl_NL": "(Zonder titel)", "de_DE": "(Ohne Titel)", "fr_FR": "(Sans titre)", "es_ES": "(Sin título)", "it_IT": "(Senza titolo)", "pt_PT": "(Sem título)"
+  },
+  "Advanced override. Targets remain subject to the Likes configuration and access rules.": {
+    "nl_NL": "Geavanceerde overschrijving. Doelen blijven onderworpen aan de Likes-configuratie en toegangsregels.",
+    "de_DE": "Erweiterte Überschreibung. Ziele unterliegen weiterhin der Likes-Konfiguration und den Zugriffsregeln.",
+    "fr_FR": "Remplacement avancé. Les cibles restent soumises à la configuration de Likes et aux règles d’accès.",
+    "es_ES": "Anulación avanzada. Los objetivos siguen sujetos a la configuración de Likes y a las reglas de acceso.",
+    "it_IT": "Override avanzato. I target restano soggetti alla configurazione di Likes e alle regole di accesso.",
+    "pt_PT": "Substituição avançada. Os alvos continuam sujeitos à configuração do Likes e às regras de acesso."
+  },
+  "Current target": {
+    "nl_NL": "Huidig doel", "de_DE": "Aktuelles Ziel", "fr_FR": "Cible actuelle", "es_ES": "Objetivo actual", "it_IT": "Target corrente", "pt_PT": "Alvo atual"
+  },
+  "Specific target": {
+    "nl_NL": "Specifiek doel", "de_DE": "Bestimmtes Ziel", "fr_FR": "Cible spécifique", "es_ES": "Objetivo específico", "it_IT": "Target specifico", "pt_PT": "Alvo específico"
+  },
+  "Select content or user": {
+    "nl_NL": "Selecteer content of gebruiker", "de_DE": "Inhalt oder Benutzer auswählen", "fr_FR": "Sélectionner un contenu ou un utilisateur", "es_ES": "Seleccionar contenido o usuario", "it_IT": "Seleziona contenuto o utente", "pt_PT": "Selecionar conteúdo ou utilizador"
+  },
+  "Select content": {
+    "nl_NL": "Selecteer content", "de_DE": "Inhalt auswählen", "fr_FR": "Sélectionner un contenu", "es_ES": "Seleccionar contenido", "it_IT": "Seleziona contenuto", "pt_PT": "Selecionar conteúdo"
+  },
+  "Target": {
+    "nl_NL": "Doel", "de_DE": "Ziel", "fr_FR": "Cible", "es_ES": "Objetivo", "it_IT": "Target", "pt_PT": "Alvo"
+  },
+  "Target source": {
+    "nl_NL": "Doelbron", "de_DE": "Zielquelle", "fr_FR": "Source de la cible", "es_ES": "Origen del objetivo", "it_IT": "Origine del target", "pt_PT": "Origem do alvo"
+  },
+  "Show count": {
+    "nl_NL": "Aantal tonen", "de_DE": "Anzahl anzeigen", "fr_FR": "Afficher le nombre", "es_ES": "Mostrar recuento", "it_IT": "Mostra conteggio", "pt_PT": "Mostrar contagem"
+  },
+  "Use the current template or Query Loop target by default. Choose a specific target only for layouts outside normal context.": {
+    "nl_NL": "Gebruik standaard het doel van de huidige template of Query Loop. Kies alleen een specifiek doel voor layouts buiten de normale context.",
+    "de_DE": "Verwende standardmäßig das Ziel des aktuellen Templates oder Query Loops. Wähle ein bestimmtes Ziel nur für Layouts außerhalb des normalen Kontexts.",
+    "fr_FR": "Utilisez par défaut la cible du modèle ou de la Query Loop actuelle. Choisissez une cible spécifique uniquement pour les mises en page hors du contexte normal.",
+    "es_ES": "Usa de forma predeterminada el objetivo de la plantilla o Query Loop actual. Elige un objetivo específico solo para diseños fuera del contexto normal.",
+    "it_IT": "Usa per impostazione predefinita il target del template o della Query Loop corrente. Scegli un target specifico solo per layout fuori dal contesto normale.",
+    "pt_PT": "Utilize por predefinição o alvo do template ou da Query Loop atual. Escolha um alvo específico apenas para layouts fora do contexto normal."
+  },
+  "No enabled Likes target detected. Use this element in a supported template or Query Loop, or choose a specific target.": {
+    "nl_NL": "Geen ingeschakeld Likes-doel gevonden. Gebruik dit element in een ondersteunde template of Query Loop, of kies een specifiek doel.",
+    "de_DE": "Kein aktiviertes Likes-Ziel erkannt. Verwende dieses Element in einem unterstützten Template oder Query Loop oder wähle ein bestimmtes Ziel.",
+    "fr_FR": "Aucune cible Likes activée détectée. Utilisez cet élément dans un modèle ou une Query Loop pris en charge, ou choisissez une cible spécifique.",
+    "es_ES": "No se ha detectado ningún objetivo de Likes habilitado. Usa este elemento en una plantilla o Query Loop compatible, o elige un objetivo específico.",
+    "it_IT": "Nessun target Likes abilitato rilevato. Usa questo elemento in un template o una Query Loop supportati, oppure scegli un target specifico.",
+    "pt_PT": "Não foi detetado nenhum alvo de Likes ativado. Utilize este elemento num template ou numa Query Loop suportados, ou escolha um alvo específico."
+  },
+  "No enabled dislike target detected. Use this element in a supported post template or Query Loop, or choose a specific target with dislikes enabled.": {
+    "nl_NL": "Geen ingeschakeld Dislike-doel gevonden. Gebruik dit element in een ondersteunde berichttemplate of Query Loop, of kies een specifiek doel waarvoor dislikes zijn ingeschakeld.",
+    "de_DE": "Kein aktiviertes Dislike-Ziel erkannt. Verwende dieses Element in einem unterstützten Beitrags-Template oder Query Loop oder wähle ein bestimmtes Ziel mit aktivierten Dislikes.",
+    "fr_FR": "Aucune cible Dislike activée détectée. Utilisez cet élément dans un modèle de publication ou une Query Loop pris en charge, ou choisissez une cible spécifique avec les dislikes activés.",
+    "es_ES": "No se ha detectado ningún objetivo de Dislike habilitado. Usa este elemento en una plantilla de entrada o Query Loop compatible, o elige un objetivo específico con los dislikes habilitados.",
+    "it_IT": "Nessun target Dislike abilitato rilevato. Usa questo elemento in un template articolo o una Query Loop supportati, oppure scegli un target specifico con i dislike abilitati.",
+    "pt_PT": "Não foi detetado nenhum alvo de Dislike ativado. Utilize este elemento num template de artigo ou numa Query Loop suportados, ou escolha um alvo específico com os dislikes ativados."
+  },
+  "User — %s": {
+    "nl_NL": "Gebruiker — %s", "de_DE": "Benutzer — %s", "fr_FR": "Utilisateur — %s", "es_ES": "Usuario — %s", "it_IT": "Utente — %s", "pt_PT": "Utilizador — %s"
+  }
+}
