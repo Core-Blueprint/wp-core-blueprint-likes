@@ -26,31 +26,22 @@ final class CoreBlueprint {
 
 	public static function register_dashboard_shortcuts(): void {
 		CardRegistry::register_shortcut( self::ID, [
-			'id'         => 'settings',
-			'label'      => __( 'Settings', 'core-blueprint-likes' ),
-			'url'        => admin_url( 'admin.php?page=' . self::ID ),
-			'capability' => Capabilities::MANAGE,
-			'order'      => 10,
+			'id' => 'settings', 'label' => __( 'Settings', 'core-blueprint-likes' ),
+			'url' => admin_url( 'admin.php?page=' . self::ID ), 'capability' => Capabilities::MANAGE, 'order' => 10,
 		] );
 	}
 
 	public static function register_page(): void {
-		PageRegistry::register(
-			new CoreBlueprintPage(),
-			[
-				'foundations' => [ 'clipboard' ],
-				'components'  => [ 'cards', 'nav-tabs', 'fields', 'disclosure', 'form-controls' ],
-			]
-		);
+		PageRegistry::register( new CoreBlueprintPage(), [
+			'foundations' => [ 'clipboard' ],
+			'components' => [ 'cards', 'metric-tiles', 'nav-tabs', 'fields', 'disclosure', 'form-controls', 'integration-grid' ],
+		] );
 	}
 
 	public static function register_extension(): void {
 		ExtensionRegistry::register( [
-			'id'           => self::ID,
-			'plugin_file'  => CB_LIKES_BASENAME,
-			'requires_api' => '1.0',
-			'menu_url'     => admin_url( 'admin.php?page=' . self::ID ),
-			'status_id'    => self::ID,
+			'id' => self::ID, 'plugin_file' => CB_LIKES_BASENAME, 'requires_api' => '1.0',
+			'menu_url' => admin_url( 'admin.php?page=' . self::ID ), 'status_id' => self::ID,
 		] );
 	}
 
@@ -59,9 +50,8 @@ final class CoreBlueprint {
 	 */
 	public static function register_status_definition( array $definitions ): array {
 		$definitions[ self::ID ] = [
-			'provider' => [ __CLASS__, 'status' ],
-			'label'    => __( 'Likes', 'core-blueprint-likes' ),
-			'url'      => admin_url( 'admin.php?page=' . self::ID ),
+			'provider' => [ __CLASS__, 'status' ], 'label' => __( 'Likes', 'core-blueprint-likes' ),
+			'url' => admin_url( 'admin.php?page=' . self::ID ),
 		];
 		return $definitions;
 	}
@@ -69,19 +59,15 @@ final class CoreBlueprint {
 	/** @return array{state:string,detail:string,url:string} */
 	public static function status(): array {
 		$settings = Settings::all();
-
 		return [
-			'state'  => 'ok',
+			'state' => 'ok',
 			'detail' => sprintf(
 				'%1$s: %2$s · %3$s: %4$s · %5$s: %6$s',
-				__( 'Reactions', 'core-blueprint-likes' ),
-				number_format_i18n( Repository::total_count() ),
-				__( 'Post types', 'core-blueprint-likes' ),
-				number_format_i18n( count( $settings['post_types'] ) ),
-				__( 'User profiles', 'core-blueprint-likes' ),
-				$settings['users_enabled'] ? __( 'Enabled', 'core-blueprint-likes' ) : __( 'Disabled', 'core-blueprint-likes' )
+				__( 'Reactions', 'core-blueprint-likes' ), number_format_i18n( Repository::total_count() ),
+				__( 'Post types', 'core-blueprint-likes' ), number_format_i18n( count( $settings['post_types'] ) ),
+				__( 'User profiles', 'core-blueprint-likes' ), $settings['users_enabled'] ? __( 'Enabled', 'core-blueprint-likes' ) : __( 'Disabled', 'core-blueprint-likes' )
 			),
-			'url'    => admin_url( 'admin.php?page=' . self::ID ),
+			'url' => admin_url( 'admin.php?page=' . self::ID ),
 		];
 	}
 
