@@ -19,6 +19,6 @@ final class CoreBlueprintPage implements PageContract {
 		if ( ! current_user_can( $this->capability() ) ) {
 			wp_die( esc_html__( 'You are not allowed to manage Likes.', 'core-blueprint-likes' ) );
 		}
-		PageContent::render( true );
+		PageContent::render();
 	}
 }
