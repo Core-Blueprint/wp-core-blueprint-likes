@@ -4,63 +4,70 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
+fail() {
+  printf 'Release build failed: %s\n' "$*" >&2
+  exit 1
+}
+
+for command in php python3 xgettext zip unzip git sha256sum; do
+  command -v "$command" >/dev/null 2>&1 || fail "missing required command: $command"
+done
+
 VERSION="1.0.0-rc1"
 SLUG="core-blueprint-likes"
 DIST="$ROOT/dist"
+PACKAGE_ROOT="$DIST/$SLUG"
 ZIP="$DIST/${SLUG}-${VERSION}.zip"
 CHECKSUM="$ZIP.sha256"
 
 actual_version="$(php -r '$s=file_get_contents("core-blueprint-likes.php"); if(!preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m)){exit(2);} echo trim($m[1]);')"
-if [[ "$actual_version" != "$VERSION" ]]; then
-  echo "Unexpected public version: $actual_version (expected $VERSION)" >&2
-  exit 1
-fi
+[[ "$actual_version" == "$VERSION" ]] || fail "unexpected public version: $actual_version (expected $VERSION)"
 
 python3 tools/sync-i18n.py
 if ! git diff --quiet -- languages; then
-  echo "Translations are stale. Run tools/sync-i18n.py and commit the generated catalogs." >&2
-  git diff -- languages
-  exit 1
+  git diff --name-only -- languages >&2
+  fail "translations are stale; commit the generated languages/ changes and rebuild"
 fi
 
 echo "PHP lint"
 while IFS= read -r -d '' file; do
-  php -l "$file" >/dev/null
-done < <(find . -type f -name '*.php' -not -path './dist/*' -not -path './vendor/*' -print0)
+  php -l "$file" >/dev/null || fail "PHP lint failed: $file"
+done < <(find . -path './.git' -prune -o -path './dist' -prune -o -path './vendor' -prune -o -type f -name '*.php' -print0)
 
 php tools/conformance.php
 
-rm -rf "$DIST"
-mkdir -p "$DIST"
-STAGE="$(mktemp -d)"
-trap 'rm -rf "$STAGE"' EXIT
-mkdir -p "$STAGE/$SLUG"
+rm -rf "$PACKAGE_ROOT" "$ZIP" "$CHECKSUM"
+mkdir -p "$PACKAGE_ROOT"
 
-cp -a . "$STAGE/$SLUG/"
-rm -rf \
-  "$STAGE/$SLUG/.git" \
-  "$STAGE/$SLUG/.github" \
-  "$STAGE/$SLUG/tests" \
-  "$STAGE/$SLUG/tools" \
-  "$STAGE/$SLUG/dist"
+# Build from an explicit production allowlist rather than copying the repository
+# and trying to remove developer-only paths afterwards.
+cp core-blueprint-likes.php README.md "$PACKAGE_ROOT/"
+if [[ -f THIRD-PARTY-LICENSES.md ]]; then
+  cp THIRD-PARTY-LICENSES.md "$PACKAGE_ROOT/"
+fi
+cp -R assets languages src "$PACKAGE_ROOT/"
 
-find "$STAGE/$SLUG" -name '.DS_Store' -delete
+find "$PACKAGE_ROOT" -type f \( -name '.DS_Store' -o -name '*.map' \) -delete
+
 (
-  cd "$STAGE"
-  zip -q -r "$ZIP" "$SLUG"
+  cd "$DIST"
+  zip -X -q -r "$(basename "$ZIP")" "$SLUG"
+  sha256sum "$(basename "$ZIP")" > "$(basename "$CHECKSUM")"
 )
 
-unzip -tq "$ZIP" >/dev/null
-if ! unzip -l "$ZIP" | grep -q "${SLUG}/core-blueprint-likes.php"; then
-  echo "Release package is missing the canonical plugin main file." >&2
-  exit 1
-fi
-if unzip -l "$ZIP" | grep -Eq "${SLUG}/(tests|tools|\.github|dist)/"; then
-  echo "Developer-only files leaked into the release package." >&2
-  exit 1
+[[ -s "$ZIP" ]] || fail "release ZIP was not created"
+[[ -s "$CHECKSUM" ]] || fail "release checksum was not created"
+unzip -tq "$ZIP" >/dev/null || fail "release ZIP integrity check failed"
+
+leaks="$(unzip -Z1 "$ZIP" | grep -E "^${SLUG}/(tests|tools|\\.github|dist)(/|$)" || true)"
+if [[ -n "$leaks" ]]; then
+  printf '%s\n' "$leaks" >&2
+  fail "developer-only files leaked into the release package"
 fi
 
-sha256sum "$ZIP" > "$CHECKSUM"
+unzip -Z1 "$ZIP" | grep -qx "${SLUG}/core-blueprint-likes.php" \
+  || fail "release package does not preserve the canonical ${SLUG} root folder"
+
 echo "Artifact: ${ZIP#$ROOT/}"
 echo "Checksum: ${CHECKSUM#$ROOT/}"
 cat "$CHECKSUM"
