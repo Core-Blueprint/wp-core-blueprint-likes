@@ -9,7 +9,9 @@ use CB\Likes\Capabilities;
 defined( 'ABSPATH' ) || exit;
 
 final class CoreBlueprintPage implements PageContract {
-	public function slug(): string { return 'core-blueprint-likes'; }
+	public const SLUG = 'core-blueprint-likes';
+
+	public function slug(): string { return self::SLUG; }
 	public function title(): string { return __( 'Likes', 'core-blueprint-likes' ); }
 	public function menu_title(): string { return __( 'Likes', 'core-blueprint-likes' ); }
 	public function capability(): string { return Capabilities::MANAGE; }
