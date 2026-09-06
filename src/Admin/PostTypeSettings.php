@@ -23,28 +23,32 @@ final class PostTypeSettings {
 						$override = $settings['post_type_overrides'][ $slug ] ?? self::default_override();
 						$name     = (string) ( $object->labels->name ?? $slug );
 						$enabled  = in_array( $slug, $settings['post_types'] ?? [], true );
-						$body_id  = 'cb-likes-post-type-' . $slug . '-body';
 						?>
-						<section class="cb-likes-post-type<?php echo $enabled ? ' is-enabled' : ''; ?>" data-cb-likes-post-type>
-							<header class="cb-likes-post-type__header">
-								<div class="cb-likes-post-type__identity"><strong><?php echo esc_html( $name ); ?></strong><code><?php echo esc_html( $slug ); ?></code></div>
-								<div class="cb-likes-post-type__actions">
-									<span class="cb-likes-post-type__state" aria-live="polite"><span class="cb-likes-post-type__state-enabled"><?php esc_html_e( 'Enabled', 'core-blueprint-likes' ); ?></span><span class="cb-likes-post-type__state-disabled"><?php esc_html_e( 'Disabled', 'core-blueprint-likes' ); ?></span></span>
-									<label class="cb-core-rack-toggle cb-likes-post-type__toggle">
-										<input type="checkbox" name="<?php echo esc_attr( Settings::OPTION ); ?>[post_types][]" value="<?php echo esc_attr( $slug ); ?>" <?php checked( $enabled ); ?> data-cb-likes-post-type-toggle>
-										<span class="cb-core-rack-toggle-track" aria-hidden="true"><span class="cb-core-rack-toggle-thumb"></span></span>
-										<span class="screen-reader-text"><?php esc_html_e( 'Enable reactions for this post type', 'core-blueprint-likes' ); ?></span>
-									</label>
-									<button type="button" class="cb-core-module-collapse cb-likes-post-type__collapse" aria-expanded="false" aria-controls="<?php echo esc_attr( $body_id ); ?>" aria-label="<?php esc_attr_e( 'Toggle post type settings', 'core-blueprint-likes' ); ?>" data-cb-likes-post-type-collapse><?php echo Fields::disclosure_icon(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Base owns icon output. ?></button>
-								</div>
-							</header>
-							<div id="<?php echo esc_attr( $body_id ); ?>" class="cb-likes-post-type__body" aria-hidden="true" inert data-cb-likes-post-type-body><div class="cb-likes-post-type__body-inner"><?php PostTypeOverrides::render( $slug, $override ); ?></div></div>
-						</section>
+						<details class="cb-core-interactive-row cb-likes-post-type<?php echo $enabled ? ' is-enabled' : ''; ?>" data-cb-likes-post-type>
+							<summary class="cb-core-interactive-row__summary cb-likes-post-type__summary">
+								<span class="cb-likes-post-type__identity"><strong><?php echo esc_html( $name ); ?></strong><code><?php echo esc_html( $slug ); ?></code></span>
+								<span class="cb-likes-post-type__actions">
+									<span class="cb-core-status cb-likes-post-type__state-enabled" aria-live="polite">
+										<span class="cb-core-status__dot cb-core-status__dot--success" aria-hidden="true"></span>
+										<span class="cb-core-status__label"><?php esc_html_e( 'Enabled', 'core-blueprint-likes' ); ?></span>
+									</span>
+									<span class="cb-core-status cb-likes-post-type__state-disabled" aria-live="polite">
+										<span class="cb-core-status__dot cb-core-status__dot--muted" aria-hidden="true"></span>
+										<span class="cb-core-status__label"><?php esc_html_e( 'Disabled', 'core-blueprint-likes' ); ?></span>
+									</span>
+									<input type="checkbox" name="<?php echo esc_attr( Settings::OPTION ); ?>[post_types][]" value="<?php echo esc_attr( $slug ); ?>" <?php checked( $enabled ); ?> aria-label="<?php esc_attr_e( 'Enable reactions for this post type', 'core-blueprint-likes' ); ?>" data-cb-likes-post-type-toggle>
+									<?php echo Fields::disclosure_icon(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Base owns icon output. ?>
+								</span>
+							</summary>
+							<div class="cb-likes-post-type__body"><div class="cb-likes-post-type__body-inner"><?php PostTypeOverrides::render( $slug, $override ); ?></div></div>
+						</details>
 					<?php endforeach; ?>
 				</div>
 			</div>
 		</div>
-		<?php submit_button( __( 'Save settings', 'core-blueprint-likes' ) ); ?>
+		<div class="cb-core-actions">
+			<button type="submit" class="button cb-core-button cb-core-button--primary"><?php esc_html_e( 'Save settings', 'core-blueprint-likes' ); ?></button>
+		</div>
 		<?php
 	}
 
