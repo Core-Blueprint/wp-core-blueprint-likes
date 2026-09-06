@@ -19,11 +19,6 @@ final class Assets {
 
 		wp_enqueue_style( 'cb-likes-admin', CB_LIKES_URL . 'assets/css/admin.css', [], CB_LIKES_VERSION );
 		wp_enqueue_script( 'cb-likes-admin', CB_LIKES_URL . 'assets/js/admin.js', [], CB_LIKES_VERSION, true );
-		wp_add_inline_script(
-			'cb-likes-admin',
-			"try{const k='cb-likes-active-tab',v=window.sessionStorage?.getItem(k);if(!v||v==='usage')window.sessionStorage?.setItem(k,'overview');}catch(e){}",
-			'before'
-		);
 		wp_enqueue_script( 'cb-likes-clipboard', CB_LIKES_URL . 'assets/js/clipboard.js', [ 'cb-likes-admin' ], CB_LIKES_VERSION, true );
 		wp_enqueue_media();
 
