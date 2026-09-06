@@ -40,7 +40,7 @@ foreach ( $tabs as $tab ) {
 $checks += [
 	'canonical page slug exposed' => str_contains( $page_contract, "public const SLUG = 'core-blueprint-likes';" ) && str_contains( $page_contract, 'return self::SLUG;' ),
 	'server-side tab allowlist' => str_contains( $page, 'private static function current_tab()' ) && str_contains( $page, 'array_key_exists( $tab, self::tabs() )' ),
-	'canonical admin tab URLs' => str_contains( $page, "'page' => CoreBlueprintPage::SLUG" ) && str_contains( $page, "'tab'  => $tab" ) && str_contains( $page, "admin_url( 'admin.php' )" ),
+	'canonical admin tab URLs' => str_contains( $page, "'page' => CoreBlueprintPage::SLUG" ) && str_contains( $page, "'tab'  => \$tab" ) && str_contains( $page, "admin_url( 'admin.php' )" ),
 	'anchor tab navigation' => str_contains( $page, '<a class="nav-tab ' ) && str_contains( $page, 'aria-current="page"' ),
 	'active tab rendered server-side' => str_contains( $page, 'switch ( $tab )' ),
 	'no client-side tab router markup' => ! str_contains( $page, 'data-cb-likes-tab' ) && ! str_contains( $page, 'data-cb-likes-tab-panel' ),
