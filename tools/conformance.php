@@ -8,13 +8,13 @@ if ( [] === $tests ) {
 	exit( 1 );
 }
 
-try {
-	foreach ( $tests as $test ) {
-		require $test;
+foreach ( $tests as $test ) {
+	$command = escapeshellarg( PHP_BINARY ) . ' ' . escapeshellarg( $test );
+	passthru( $command, $status );
+	if ( 0 !== $status ) {
+		fwrite( STDERR, 'Regression failed: ' . basename( $test ) . "\n" );
+		exit( $status );
 	}
-} catch ( Throwable $error ) {
-	fwrite( STDERR, 'FAIL: ' . $error->getMessage() . "\n" );
-	exit( 1 );
 }
 
 echo "Likes conformance PASS\n";

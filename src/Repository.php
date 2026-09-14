@@ -10,7 +10,7 @@ final class Repository {
 	public const DISLIKE = 'dislike';
 
 	public static function reaction_for_user( int $user_id, string $target_type, int $target_id ): ?string {
-		if ( $user_id <= 0 || $target_id <= 0 ) {
+		if ( ! self::runtime_ready() || $user_id <= 0 || $target_id <= 0 ) {
 			return null;
 		}
 		global $wpdb;
@@ -25,14 +25,17 @@ final class Repository {
 	}
 
 	public static function user_has_liked( int $user_id, string $target_type, int $target_id ): bool {
-		return self::LIKE === self::reaction_for_user( $user_id, $target_type, $target_id );
+		return self::runtime_ready() && self::LIKE === self::reaction_for_user( $user_id, $target_type, $target_id );
 	}
 
 	public static function user_has_disliked( int $user_id, string $target_type, int $target_id ): bool {
-		return self::DISLIKE === self::reaction_for_user( $user_id, $target_type, $target_id );
+		return self::runtime_ready() && self::DISLIKE === self::reaction_for_user( $user_id, $target_type, $target_id );
 	}
 
 	public static function set_reaction( int $user_id, string $target_type, int $target_id, string $reaction ): bool {
+		if ( ! self::runtime_ready() ) {
+			return false;
+		}
 		$reaction = self::normalize_reaction( $reaction );
 		if ( null === $reaction ) {
 			return false;
@@ -58,6 +61,9 @@ final class Repository {
 	}
 
 	public static function clear_reaction( int $user_id, string $target_type, int $target_id ): bool {
+		if ( ! self::runtime_ready() ) {
+			return false;
+		}
 		global $wpdb;
 		$result = $wpdb->delete(
 			Install::table(),
@@ -68,14 +74,17 @@ final class Repository {
 	}
 
 	public static function count( string $target_type, int $target_id ): int {
-		return self::count_reaction( $target_type, $target_id, self::LIKE );
+		return self::runtime_ready() ? self::count_reaction( $target_type, $target_id, self::LIKE ) : 0;
 	}
 
 	public static function dislike_count( string $target_type, int $target_id ): int {
-		return self::count_reaction( $target_type, $target_id, self::DISLIKE );
+		return self::runtime_ready() ? self::count_reaction( $target_type, $target_id, self::DISLIKE ) : 0;
 	}
 
 	public static function count_reaction( string $target_type, int $target_id, string $reaction ): int {
+		if ( ! self::runtime_ready() ) {
+			return 0;
+		}
 		$reaction = self::normalize_reaction( $reaction );
 		if ( $target_id <= 0 || null === $reaction ) {
 			return 0;
@@ -92,7 +101,7 @@ final class Repository {
 
 	/** @return int[] */
 	public static function liked_post_ids( int $user_id, int $limit = 100 ): array {
-		if ( $user_id <= 0 ) {
+		if ( ! self::runtime_ready() || $user_id <= 0 ) {
 			return [];
 		}
 		global $wpdb;
@@ -109,6 +118,9 @@ final class Repository {
 	 *  @return int[]
 	 */
 	public static function most_liked_post_ids( array $post_types, int $limit = 100 ): array {
+		if ( ! self::runtime_ready() ) {
+			return [];
+		}
 		$post_types = array_values( array_filter( array_map( 'sanitize_key', $post_types ) ) );
 		if ( [] === $post_types ) {
 			return [];
@@ -124,6 +136,9 @@ final class Repository {
 	}
 
 	public static function total_count( ?string $reaction = null ): int {
+		if ( ! self::runtime_ready() ) {
+			return 0;
+		}
 		global $wpdb;
 		$table = Install::table();
 		if ( null === $reaction ) {
@@ -137,17 +152,26 @@ final class Repository {
 	}
 
 	public static function unique_user_count(): int {
+		if ( ! self::runtime_ready() ) {
+			return 0;
+		}
 		global $wpdb;
 		$table = Install::table();
 		return (int) $wpdb->get_var( "SELECT COUNT(DISTINCT user_id) FROM {$table}" );
 	}
 
 	public static function delete_target( string $target_type, int $target_id ): void {
+		if ( ! self::runtime_ready() ) {
+			return;
+		}
 		global $wpdb;
 		$wpdb->delete( Install::table(), [ 'target_type' => Targets::normalize_type( $target_type ), 'target_id' => $target_id ], [ '%s', '%d' ] );
 	}
 
 	public static function delete_by_user( int $user_id ): int {
+		if ( ! self::runtime_ready() ) {
+			return 0;
+		}
 		global $wpdb;
 		$result = $wpdb->delete( Install::table(), [ 'user_id' => $user_id ], [ '%d' ] );
 		return false === $result ? 0 : (int) $result;
@@ -155,6 +179,9 @@ final class Repository {
 
 	/** @return array<int,array<string,mixed>> */
 	public static function rows_for_user( int $user_id, int $offset = 0, int $limit = 100 ): array {
+		if ( ! self::runtime_ready() ) {
+			return [];
+		}
 		global $wpdb;
 		$table = Install::table();
 		$rows = $wpdb->get_results( $wpdb->prepare(
@@ -164,6 +191,10 @@ final class Repository {
 			$offset
 		), ARRAY_A );
 		return is_array( $rows ) ? $rows : [];
+	}
+
+	private static function runtime_ready(): bool {
+		return function_exists( 'cb_likes_runtime_ready' ) && \cb_likes_runtime_ready();
 	}
 
 	private static function normalize_reaction( string $reaction ): ?string {

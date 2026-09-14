@@ -8,6 +8,9 @@ defined( 'ABSPATH' ) || exit;
 final class Service {
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int}|\WP_Error */
 	public static function set_reaction( int $user_id, string $target_type, int $target_id, ?string $reaction ): array|\WP_Error {
+		if ( ! self::runtime_ready() ) {
+			return self::runtime_unavailable_error();
+		}
 		$type = Targets::normalize_type( $target_type );
 		$reaction = null === $reaction || '' === $reaction ? null : sanitize_key( $reaction );
 		if ( null !== $reaction && ! in_array( $reaction, [ Repository::LIKE, Repository::DISLIKE ], true ) ) {
@@ -43,6 +46,9 @@ final class Service {
 
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int}|\WP_Error */
 	public static function set_liked( int $user_id, string $target_type, int $target_id, bool $liked ): array|\WP_Error {
+		if ( ! self::runtime_ready() ) {
+			return self::runtime_unavailable_error();
+		}
 		$current = Repository::reaction_for_user( $user_id, $target_type, $target_id );
 		if ( $liked ) {
 			return self::set_reaction( $user_id, $target_type, $target_id, Repository::LIKE );
@@ -54,6 +60,9 @@ final class Service {
 
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int}|\WP_Error */
 	public static function set_disliked( int $user_id, string $target_type, int $target_id, bool $disliked ): array|\WP_Error {
+		if ( ! self::runtime_ready() ) {
+			return self::runtime_unavailable_error();
+		}
 		$current = Repository::reaction_for_user( $user_id, $target_type, $target_id );
 		if ( $disliked ) {
 			return self::set_reaction( $user_id, $target_type, $target_id, Repository::DISLIKE );
@@ -61,6 +70,18 @@ final class Service {
 		return Repository::DISLIKE === $current
 			? self::set_reaction( $user_id, $target_type, $target_id, null )
 			: self::state( $user_id, Targets::normalize_type( $target_type ), $target_id );
+	}
+
+	private static function runtime_ready(): bool {
+		return function_exists( 'cb_likes_runtime_ready' ) && \cb_likes_runtime_ready();
+	}
+
+	private static function runtime_unavailable_error(): \WP_Error {
+		return new \WP_Error(
+			'cb_likes_runtime_not_ready',
+			function_exists( 'cb_likes_dependency_message' ) ? \cb_likes_dependency_message() : 'Core Blueprint Likes runtime is unavailable.',
+			[ 'status' => 503 ]
+		);
 	}
 
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int} */

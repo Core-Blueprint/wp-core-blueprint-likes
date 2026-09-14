@@ -1,25 +1,30 @@
-# Release tooling
+# Core Blueprint Likes release tooling
 
-Core Blueprint Likes ships a repository-owned release path for the public `1.0.0-rc1` line.
+## Prerequisites
 
-## Requirements
+The release tooling expects PHP 8.4+, Python 3, WP-CLI with the i18n commands, GNU gettext (`msgmerge`, `msgattrib`, `msgfmt`), Node.js, `zip`, `unzip`, and `sha256sum`.
 
-- PHP 8.4 or 8.5
-- Python 3
-- `polib==1.2.0`
-- GNU gettext (`xgettext`)
-- `zip`, `unzip`, `sha256sum`
-- Git
+## Translation workflow
 
-## Translation sync
+The English runtime source is authoritative. Reviewed translation sources live in the six PO catalogs for `nl_NL`, `de_DE`, `fr_FR`, `es_ES`, `it_IT`, and `pt_PT`.
 
-Run:
+When translatable source changes, run:
 
 ```bash
-python3 tools/sync-i18n.py
+tools/i18n/update
 ```
 
-The script rebuilds the POT from production PHP sources, merges the six launch catalogs (`nl_NL`, `de_DE`, `fr_FR`, `es_ES`, `it_IT`, `pt_PT`), applies repository translation maps and fails if any active string is untranslated. PO files are the source catalogs; MO files are generated from them. `pt_PT` is European Portuguese.
+Review the resulting POT/PO/MO diff and commit it deliberately. This canonical update path is the only mutating localization authority.
+
+For read-only verification run:
+
+```bash
+tools/i18n/check
+```
+
+This verifies the canonical implementation reference, source/POT freshness, locale completeness, metadata, placeholders, shared translations, and reproducibility of committed MO files.
+
+The retired `tools/sync-i18n.py`, product translation JSON wrappers and `polib` workflow are not localization authorities and must not be restored.
 
 ## Conformance
 
@@ -29,32 +34,21 @@ Run:
 php tools/conformance.php
 ```
 
-The regression suite covers the builder-neutral boundary, dedicated Bricks elements, Golden Core Admin/Foundation ownership, Base dependency policy, domain security/privacy, pre-v1 no-legacy rules and retained public frontend APIs.
+Each `tests/*-regression.php` script runs in its own PHP process so dependency-loss checks cannot inherit constants, hooks or stubs from another regression. The suite covers Bootstrap/Base dependency policy, dependency-loss fail-closed behavior, public API/domain security, the builder-neutral boundary, Core Admin/Foundation ownership and the licensed Updates adapter contract.
 
 ## Release build
 
-Run:
+Run from the repository root:
 
 ```bash
-bash tools/build-release
+tools/build-release
 ```
 
-The builder fails closed when:
+The builder fails closed unless canonical localization, PHP lint, JavaScript syntax and Likes conformance pass. It packages only customer runtime files beneath the canonical `core-blueprint-likes/` root and writes a SHA-256 checksum only after archive validation.
 
-- the visible public version is not exactly `1.0.0-rc1`;
-- translations are incomplete or differ from the checked-in catalogs after sync;
-- any PHP file fails lint;
-- conformance fails;
-- the ZIP cannot be validated;
-- developer-only directories leak into the package.
+Successful builds create:
 
-Successful output is written to `dist/`:
+- `dist/core-blueprint-likes-1.0.0-rc1.zip`
+- `dist/core-blueprint-likes-1.0.0-rc1.zip.sha256`
 
-- `core-blueprint-likes-1.0.0-rc1.zip`
-- `core-blueprint-likes-1.0.0-rc1.zip.sha256`
-
-The ZIP always contains the canonical plugin root `core-blueprint-likes/`.
-
-## Maintenance
-
-When user-facing PHP strings change, add translations to `tools/i18n-translations*.json`, run the sync command and commit the resulting POT/PO/MO updates. When release contracts change, update the matching regression before changing the build gate. Do not weaken a gate merely to make a release pass.
+Do not bypass a failed release gate. Fix source or reviewed catalogs and rerun the canonical workflow.
