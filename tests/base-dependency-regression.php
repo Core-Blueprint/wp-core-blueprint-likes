@@ -24,6 +24,7 @@ $checks = [
 	'no obsolete Base product-version gate' => ! str_contains( $main, 'CB_CORE_VERSION' ),
 	'no retired inline API helper' => ! str_contains( $main, 'function cb_likes_api_compatible(' ),
 	'Requirements owns API compatibility' => str_contains( $requirements, 'public static function api_compatible(' ),
+	'Updates integration is behind readiness' => str_contains( $main, '// Suite integrations attach only after Base/Core and Likes contracts are ready.' ),
 ];
 
 $failed = array_keys( array_filter( $checks, static fn( bool $passed ): bool => ! $passed ) );
