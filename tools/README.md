@@ -24,6 +24,8 @@ tools/i18n/check
 
 This verifies the canonical implementation reference, source/POT freshness, locale completeness, metadata, placeholders, shared translations, and reproducibility of committed MO files.
 
+The retired `tools/sync-i18n.py`, product translation JSON wrappers and `polib` workflow are not localization authorities and must not be restored.
+
 ## Conformance
 
 Run:
@@ -32,7 +34,7 @@ Run:
 php tools/conformance.php
 ```
 
-The regression suite covers Bootstrap/Base dependency policy, dependency-loss fail-closed behavior, public API/domain security, the builder-neutral boundary, Core Admin/Foundation ownership and the licensed Updates adapter contract.
+Each `tests/*-regression.php` script runs in its own PHP process so dependency-loss checks cannot inherit constants, hooks or stubs from another regression. The suite covers Bootstrap/Base dependency policy, dependency-loss fail-closed behavior, public API/domain security, the builder-neutral boundary, Core Admin/Foundation ownership and the licensed Updates adapter contract.
 
 ## Release build
 
