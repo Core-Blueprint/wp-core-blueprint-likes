@@ -1,11 +1,6 @@
 <?php
 declare(strict_types=1);
 
-if ( defined( 'CB_LIKES_FILE' ) ) {
-	echo "Likes dependency-loss regression PASS (bootstrap already loaded; static gates covered)\n";
-	return;
-}
-
 define( 'ABSPATH', __DIR__ . '/' );
 
 final class WP_Error {
@@ -55,6 +50,8 @@ $expect( false === cb_likes_set_disliked( 1, 'post', 10, true ), 'Public dislike
 $expect( cb_likes_set_reaction( 1, 'post', 10, 'like' ) instanceof WP_Error, 'Public reaction mutation must return a fail-closed error.' );
 
 $expect( \CB\Likes\Service::set_reaction( 1, 'post', 10, 'like' ) instanceof WP_Error, 'Direct Service mutation must fail closed.' );
+$expect( \CB\Likes\Service::set_liked( 1, 'post', 10, true ) instanceof WP_Error, 'Direct Service like mutation must fail closed.' );
+$expect( \CB\Likes\Service::set_disliked( 1, 'post', 10, true ) instanceof WP_Error, 'Direct Service dislike mutation must fail closed.' );
 $expect( false === \CB\Likes\Repository::set_reaction( 1, 'post', 10, 'like' ), 'Direct Repository write must fail closed.' );
 $expect( false === \CB\Likes\Repository::clear_reaction( 1, 'post', 10 ), 'Direct Repository delete must fail closed.' );
 $expect( 0 === \CB\Likes\Repository::count( 'post', 10 ), 'Direct Repository read must fail closed.' );
