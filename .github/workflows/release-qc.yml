@@ -33,17 +33,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup PHP
+      - name: Setup PHP and WP-CLI
         uses: shivammathur/setup-php@2.37.2
         with:
           php-version: ${{ matrix.php }}
+          tools: wp-cli
           coverage: none
 
       - name: Install release build dependencies
         run: |
           sudo apt-get update -qq
           sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq gettext zip unzip
-          python3 -m pip install -q --disable-pip-version-check polib==1.2.0
 
       - name: Build and validate public RC1 package
         shell: bash

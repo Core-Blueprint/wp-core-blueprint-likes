@@ -2,73 +2,126 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+SLUG="core-blueprint-likes"
+ENTRY="$ROOT/core-blueprint-likes.php"
+DIST="$ROOT/dist"
+STAGE="$(mktemp -d)"
+LOCALES=(nl_NL de_DE fr_FR es_ES it_IT pt_PT)
+trap 'rm -rf "$STAGE"' EXIT
 
 fail() {
-  printf 'Release build failed: %s\n' "$*" >&2
+  printf 'Likes release build failed: %s\n' "$*" >&2
   exit 1
 }
 
-for command in php python3 xgettext zip unzip git sha256sum; do
+header_value() {
+  local file="$1" label="$2"
+  sed -n "s/^[[:space:]]*\\*[[:space:]]*${label}:[[:space:]]*//p" "$file" | head -n 1 | tr -d '\r'
+}
+
+define_value() {
+  local file="$1" name="$2"
+  sed -n "s/.*define([[:space:]]*['\"]${name}['\"][[:space:]]*,[[:space:]]*['\"]\\([^'\"]*\\)['\"].*/\\1/p" "$file" | head -n 1
+}
+
+[[ -f "$ENTRY" ]] || fail "plugin entrypoint is missing"
+VERSION="$(header_value "$ENTRY" 'Version')"
+REQUIRES_PHP="$(header_value "$ENTRY" 'Requires PHP')"
+REQUIRES_PLUGINS="$(header_value "$ENTRY" 'Requires Plugins')"
+CONSTANT_VERSION="$(define_value "$ENTRY" 'CB_LIKES_VERSION')"
+REQUIRED_API="$(define_value "$ENTRY" 'CB_LIKES_REQUIRED_API')"
+[[ -n "$VERSION" ]] || fail "plugin Version header is missing"
+[[ "$CONSTANT_VERSION" == "$VERSION" ]] || fail "Version header and CB_LIKES_VERSION differ"
+[[ "$REQUIRES_PHP" == '8.4' ]] || fail "Requires PHP must be 8.4, found ${REQUIRES_PHP:-missing}"
+[[ "$REQUIRES_PLUGINS" == 'core-blueprint' ]] || fail "Requires Plugins must be exactly core-blueprint"
+[[ "$REQUIRED_API" == '1.0' ]] || fail "CB_LIKES_REQUIRED_API must be 1.0, found ${REQUIRED_API:-missing}"
+
+for command in php python3 wp msgfmt node zip unzip sha256sum find sort touch; do
   command -v "$command" >/dev/null 2>&1 || fail "missing required command: $command"
 done
+php -r 'exit(version_compare(PHP_VERSION, "8.4", ">=") ? 0 : 1);' || fail "PHP 8.4 or newer is required"
 
-VERSION="1.0.0-rc1"
-SLUG="core-blueprint-likes"
-DIST="$ROOT/dist"
-PACKAGE_ROOT="$DIST/$SLUG"
-ZIP="$DIST/${SLUG}-${VERSION}.zip"
-CHECKSUM="$ZIP.sha256"
+"$ROOT/tools/i18n/check"
 
-actual_version="$(php -r '$s=file_get_contents("core-blueprint-likes.php"); if(!preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m)){exit(2);} echo trim($m[1]);')"
-[[ "$actual_version" == "$VERSION" ]] || fail "unexpected public version: $actual_version (expected $VERSION)"
-
-python3 tools/sync-i18n.py
-if ! git diff --quiet -- languages; then
-  git diff --name-only -- languages >&2
-  fail "translations are stale; commit the generated languages/ changes and rebuild"
-fi
-
-echo "PHP lint"
 while IFS= read -r -d '' file; do
   php -l "$file" >/dev/null || fail "PHP lint failed: $file"
-done < <(find . -path './.git' -prune -o -path './dist' -prune -o -path './vendor' -prune -o -type f -name '*.php' -print0)
+done < <(find "$ROOT" -type f -name '*.php' -not -path '*/.git/*' -not -path '*/dist/*' -not -path '*/build/*' -print0)
+while IFS= read -r -d '' file; do
+  node --check "$file" >/dev/null || fail "JavaScript syntax failed: $file"
+done < <(find "$ROOT/assets" -type f -name '*.js' -print0)
 
-php tools/conformance.php
+php "$ROOT/tools/conformance.php"
 
-rm -rf "$PACKAGE_ROOT" "$ZIP" "$CHECKSUM"
-mkdir -p "$PACKAGE_ROOT"
+PACKAGE_ROOT="$STAGE/$SLUG"
+ZIP="$DIST/$SLUG-$VERSION.zip"
+CHECKSUM="$ZIP.sha256"
+mkdir -p "$DIST" "$PACKAGE_ROOT"
+rm -f "$ZIP" "$CHECKSUM"
 
-# Build from an explicit production allowlist rather than copying the repository
-# and trying to remove developer-only paths afterwards.
-cp core-blueprint-likes.php README.md "$PACKAGE_ROOT/"
-if [[ -f THIRD-PARTY-LICENSES.md ]]; then
-  cp THIRD-PARTY-LICENSES.md "$PACKAGE_ROOT/"
+for path in core-blueprint-likes.php README.md CHANGELOG.md; do
+  [[ -f "$ROOT/$path" ]] || fail "required release file is missing: $path"
+  cp "$ROOT/$path" "$PACKAGE_ROOT/"
+done
+if [[ -f "$ROOT/THIRD-PARTY-LICENSES.md" ]]; then
+  cp "$ROOT/THIRD-PARTY-LICENSES.md" "$PACKAGE_ROOT/"
 fi
-cp -R assets languages src "$PACKAGE_ROOT/"
+for path in src assets languages; do
+  [[ -d "$ROOT/$path" ]] || fail "required release directory is missing: $path"
+  cp -R "$ROOT/$path" "$PACKAGE_ROOT/"
+done
 
-find "$PACKAGE_ROOT" -type f \( -name '.DS_Store' -o -name '*.map' \) -delete
+POT="$PACKAGE_ROOT/languages/core-blueprint-likes.pot"
+[[ -s "$POT" ]] || fail "canonical POT is missing from release staging"
+for locale in "${LOCALES[@]}"; do
+  po="$PACKAGE_ROOT/languages/core-blueprint-likes-${locale}.po"
+  mo="$PACKAGE_ROOT/languages/core-blueprint-likes-${locale}.mo"
+  [[ -s "$po" ]] || fail "reviewed PO is missing for $locale"
+  [[ -s "$mo" ]] || fail "reproducible committed MO is missing for $locale"
+done
 
+while IFS= read -r -d '' file; do
+  php -l "$file" >/dev/null || fail "staged PHP lint failed: $file"
+done < <(find "$PACKAGE_ROOT" -type f -name '*.php' -print0)
+while IFS= read -r -d '' file; do
+  node --check "$file" >/dev/null || fail "staged JavaScript syntax failed: $file"
+done < <(find "$PACKAGE_ROOT/assets" -type f -name '*.js' -print0)
+
+find "$PACKAGE_ROOT" -type f \( -name '.DS_Store' -o -name '*.map' -o -name '*.pyc' \) -delete
+find "$PACKAGE_ROOT" -type d -name '__pycache__' -prune -exec rm -rf {} +
+find "$PACKAGE_ROOT" -exec touch -t 198001010000 {} +
 (
-  cd "$DIST"
-  zip -X -q -r "$(basename "$ZIP")" "$SLUG"
-  sha256sum "$(basename "$ZIP")" > "$(basename "$CHECKSUM")"
+  cd "$STAGE"
+  zip -X -q "$ZIP" "$SLUG/"
+  find "$SLUG" -type f -print | LC_ALL=C sort | zip -X -q "$ZIP" -@
 )
 
 [[ -s "$ZIP" ]] || fail "release ZIP was not created"
-[[ -s "$CHECKSUM" ]] || fail "release checksum was not created"
-unzip -tq "$ZIP" >/dev/null || fail "release ZIP integrity check failed"
-
-leaks="$(unzip -Z1 "$ZIP" | grep -E "^${SLUG}/(tests|tools|\\.github|dist)(/|$)" || true)"
-if [[ -n "$leaks" ]]; then
-  printf '%s\n' "$leaks" >&2
-  fail "developer-only files leaked into the release package"
+unzip -tqq "$ZIP" || fail "release ZIP integrity check failed"
+ZIP_ENTRIES="$(unzip -Z1 "$ZIP")"
+FIRST_ENTRY="${ZIP_ENTRIES%%$'\n'*}"
+[[ "$FIRST_ENTRY" == "$SLUG/" ]] || fail "release ZIP root is not $SLUG/"
+if grep -Eq '(^|/)(\.git|\.github|tests|tools|docs|dist|build|node_modules|vendor)(/|$)' <<<"$ZIP_ENTRIES"; then
+  fail "development-only files leaked into the release ZIP"
 fi
+for required in "$SLUG/core-blueprint-likes.php" "$SLUG/README.md" "$SLUG/CHANGELOG.md" "$SLUG/languages/core-blueprint-likes.pot"; do
+  grep -Fxq "$required" <<<"$ZIP_ENTRIES" || fail "required release file missing from ZIP: $required"
+done
+for locale in "${LOCALES[@]}"; do
+  for ext in po mo; do
+    required="$SLUG/languages/core-blueprint-likes-${locale}.${ext}"
+    grep -Fxq "$required" <<<"$ZIP_ENTRIES" || fail "required catalog missing from ZIP: $required"
+  done
+done
 
-unzip -Z1 "$ZIP" | grep -qx "${SLUG}/core-blueprint-likes.php" \
-  || fail "release package does not preserve the canonical ${SLUG} root folder"
+PACKAGED_ENTRY="$PACKAGE_ROOT/core-blueprint-likes.php"
+[[ "$(header_value "$PACKAGED_ENTRY" 'Version')" == "$VERSION" ]] || fail "packaged Version header does not match source"
+[[ "$(define_value "$PACKAGED_ENTRY" 'CB_LIKES_VERSION')" == "$VERSION" ]] || fail "packaged version constant does not match source"
+[[ "$(header_value "$PACKAGED_ENTRY" 'Requires Plugins')" == 'core-blueprint' ]] || fail "packaged native Base dependency is missing"
 
-echo "Artifact: ${ZIP#$ROOT/}"
-echo "Checksum: ${CHECKSUM#$ROOT/}"
-cat "$CHECKSUM"
-echo "Likes release package: PASS"
+(
+  cd "$DIST"
+  sha256sum "$(basename "$ZIP")" > "$(basename "$CHECKSUM")"
+)
+[[ -s "$CHECKSUM" ]] || fail "release checksum was not created"
+SHA256="$(awk '{print $1}' "$CHECKSUM")"
+printf 'Likes release build: PASS\nPackage: %s\nCanonical root: %s/\nSHA-256: %s\n' "$ZIP" "$SLUG" "$SHA256"

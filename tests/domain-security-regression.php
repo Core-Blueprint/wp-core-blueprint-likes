@@ -14,6 +14,7 @@ $service    = $read( 'src/Service.php' );
 $rest       = $read( 'src/Rest/Controller.php' );
 $install    = strtolower( $read( 'src/Install.php' ) );
 $main       = $read( 'core-blueprint-likes.php' );
+$plugin     = $read( 'src/Plugin.php' );
 $renderer   = $read( 'src/Frontend/Renderer.php' );
 $repository = $read( 'src/Repository.php' );
 $targets    = $read( 'src/Targets.php' );
@@ -22,6 +23,10 @@ $checks = [
 	'reaction mutations enforce authorization' => str_contains( $service, 'Targets::user_can_like' ),
 	'dislikes enforce target configuration' => str_contains( $service, 'Settings::dislike_enabled_for_target' ),
 	'reaction persistence is centralized' => str_contains( $service, 'Repository::set_reaction' ),
+	'Service mutations re-check runtime readiness' => substr_count( $service, 'if ( ! self::runtime_ready() )' ) >= 3,
+	'Repository access is runtime gated' => substr_count( $repository, 'self::runtime_ready()' ) >= 10,
+	'Plugin boot re-checks runtime readiness' => str_contains( $plugin, "! \\cb_likes_runtime_ready()" ),
+	'public helpers re-check runtime readiness' => substr_count( $main, 'if ( ! cb_likes_runtime_ready() )' ) >= 7,
 	'REST requires authentication' => str_contains( $rest, 'is_user_logged_in' ),
 	'REST delegates mutations to Service' => str_contains( $rest, 'Service::set_reaction' ),
 	'one reaction per user target' => str_contains( $install, 'unique key user_target' ),

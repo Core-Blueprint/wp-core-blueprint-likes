@@ -13,7 +13,7 @@ function cb_likes_updates_expect( bool $condition, string $message ): void {
 }
 
 cb_likes_updates_expect( str_contains( $root, 'Update URI:        https://coreblueprint.io/' ), 'Canonical Update URI header must be declared.' );
-cb_likes_updates_expect( str_contains( $root, '\\CB\\Likes\\Integration\\Updates::init();' ), 'Updates adapter must attach before Likes runtime gate.' );
+cb_likes_updates_expect( str_contains( $root, '\\CB\\Likes\\Integration\\Updates::init();' ), 'Updates adapter must attach from the canonical runtime boundary.' );
 cb_likes_updates_expect( str_contains( $adapter, "[ self::class, 'register_product' ]" ), 'Updates hook must use the canonical parameterless callback.' );
 cb_likes_updates_expect( str_contains( $adapter, "'\\\\CB\\\\Updates\\\\ProductRegistry'" ), 'Adapter must target the central ProductRegistry.' );
 cb_likes_updates_expect( str_contains( $adapter, '$registry::register( [' ), 'Adapter must call the static ProductRegistry contract.' );
@@ -22,5 +22,16 @@ cb_likes_updates_expect( str_contains( $adapter, "'core-blueprint'" ), 'Canonica
 cb_likes_updates_expect( str_contains( $adapter, 'CB_LIKES_BASENAME' ), 'Adapter must advertise the actual plugin basename.' );
 cb_likes_updates_expect( str_contains( $adapter, 'CB_LIKES_VERSION' ), 'Adapter must advertise the installed version.' );
 cb_likes_updates_expect( str_contains( $adapter, "'software_uuid' => ''" ), 'Marketplace UUID must remain learnable rather than hardcoded.' );
+
+$runtime_gate = strrpos( $root, '\\CB\\Likes\\Support\\Requirements::runtime_ready()' );
+$contracts_gate = strrpos( $root, 'if ( ! cb_likes_base_contracts_ready() )' );
+$updates_init = strpos( $root, '\\CB\\Likes\\Integration\\Updates::init();' );
+$feature_boot = strrpos( $root, '\\CB\\Likes\\Plugin::boot();' );
+cb_likes_updates_expect(
+	false !== $runtime_gate && false !== $contracts_gate && false !== $updates_init && false !== $feature_boot
+		&& $runtime_gate < $contracts_gate && $contracts_gate < $updates_init && $updates_init < $feature_boot,
+	'Bootstrap order must be readiness -> product contracts -> Updates integration -> feature runtime.'
+);
+cb_likes_updates_expect( 1 === substr_count( $root, '\\CB\\Likes\\Integration\\Updates::init();' ), 'Updates adapter must attach exactly once.' );
 
 echo "Likes Updates adapter regression PASS\n";

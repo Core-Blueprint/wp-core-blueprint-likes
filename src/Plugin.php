@@ -17,6 +17,9 @@ final class Plugin {
 	private static bool $booted = false;
 
 	public static function boot(): void {
+		if ( ! function_exists( 'cb_likes_runtime_ready' ) || ! \cb_likes_runtime_ready() ) {
+			return;
+		}
 		if ( self::$booted ) {
 			return;
 		}
@@ -42,6 +45,9 @@ final class Plugin {
 	}
 
 	public static function register_settings(): void {
+		if ( ! function_exists( 'cb_likes_runtime_ready' ) || ! \cb_likes_runtime_ready() ) {
+			return;
+		}
 		register_setting( 'cb_likes_settings_group', Settings::OPTION, [
 			'type' => 'array',
 			'sanitize_callback' => [ Settings::class, 'sanitize' ],
@@ -50,6 +56,9 @@ final class Plugin {
 	}
 
 	public static function deleted_user( int $user_id ): void {
+		if ( ! function_exists( 'cb_likes_runtime_ready' ) || ! \cb_likes_runtime_ready() ) {
+			return;
+		}
 		Repository::delete_by_user( $user_id );
 		Repository::delete_target( Targets::USER, $user_id );
 	}
