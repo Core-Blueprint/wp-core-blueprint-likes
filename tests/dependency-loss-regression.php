@@ -30,6 +30,7 @@ function register_activation_hook( string $file, callable|string $callback ): vo
 function register_setting( mixed ...$args ): void {}
 function __( string $text, ?string $domain = null ): string { return $text; }
 function is_wp_error( mixed $value ): bool { return $value instanceof WP_Error; }
+function get_user_by( string $field, string $value ): object|false { return (object) [ 'ID' => 1 ]; }
 
 require dirname( __DIR__ ) . '/core-blueprint-likes.php';
 
@@ -58,6 +59,15 @@ $expect( 0 === \CB\Likes\Repository::count( 'post', 10 ), 'Direct Repository rea
 $expect( [] === \CB\Likes\Repository::rows_for_user( 1 ), 'Direct Repository export read must fail closed.' );
 $expect( 0 === \CB\Likes\Repository::delete_by_user( 1 ), 'Direct privacy/user delete must fail closed.' );
 \CB\Likes\Repository::delete_target( 'post', 10 );
+
+$expect( [] === \CB\Likes\Privacy\Integration::exporters( [] ), 'Privacy exporter must not register after dependency loss.' );
+$expect( [] === \CB\Likes\Privacy\Integration::erasers( [] ), 'Privacy eraser must not register after dependency loss.' );
+$export = \CB\Likes\Privacy\Integration::export( 'user@example.test' );
+$expect( [] === $export['data'] && true === $export['done'], 'Privacy export must fail closed without exposing data.' );
+$erase = \CB\Likes\Privacy\Integration::erase( 'user@example.test' );
+$expect( false === $erase['items_removed'], 'Privacy erase must not claim a mutation after dependency loss.' );
+$expect( true === $erase['items_retained'], 'Privacy erase must report retained data when it cannot execute.' );
+$expect( [] !== $erase['messages'], 'Privacy erase must explain why it could not execute.' );
 
 $before = count( $GLOBALS['cb_likes_test_hooks'] );
 \CB\Likes\Plugin::boot();
