@@ -2,6 +2,14 @@
 
 Lightweight privacy-first likes and optional dislikes for WordPress posts and users.
 
+## Requirements
+
+- WordPress 7.0+
+- PHP 8.4+
+- Core Blueprint Base with Core API `1.0` or a compatible newer `1.x` minor and the public Base contracts Likes consumes
+
+Core Blueprint Base is required. Likes refuses interactive activation when Base is missing or incompatible, and its runtime remains inactive until the required public Base contracts are available.
+
 ## 1.0.0-rc1 scope
 
 - Reactions are always account-based; guest reactions are never stored and no guest fingerprinting is used.
