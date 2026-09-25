@@ -12,6 +12,7 @@
  * Domain Path:       /languages
  * Requires at least: 7.0
  * Requires PHP:      8.4
+ * Requires Plugins:  core-blueprint
  *
  * @package CB_Likes
  */
@@ -104,8 +105,8 @@ function cb_likes_activate(): void {
 		}
 		deactivate_plugins( CB_LIKES_BASENAME );
 		wp_die(
-			esc_html( 'Core Blueprint Likes requires an active, Core API 1.x compatible Core Blueprint Base installation.' ),
-			esc_html( 'Core Blueprint dependency required' ),
+			esc_html__( 'Core Blueprint Likes requires an active, Core API 1.x compatible Core Blueprint Base installation.', 'core-blueprint-likes' ),
+			esc_html__( 'Core Blueprint dependency required', 'core-blueprint-likes' ),
 			[ 'back_link' => true ]
 		);
 	}
