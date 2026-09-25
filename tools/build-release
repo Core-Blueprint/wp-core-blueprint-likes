@@ -41,7 +41,7 @@ mkdir -p "$PACKAGE_ROOT"
 
 # Build from an explicit production allowlist rather than copying the repository
 # and trying to remove developer-only paths afterwards.
-cp core-blueprint-likes.php README.md "$PACKAGE_ROOT/"
+cp core-blueprint-likes.php readme.txt "$PACKAGE_ROOT/"
 if [[ -f THIRD-PARTY-LICENSES.md ]]; then
   cp THIRD-PARTY-LICENSES.md "$PACKAGE_ROOT/"
 fi
@@ -67,6 +67,8 @@ fi
 
 unzip -Z1 "$ZIP" | grep -qx "${SLUG}/core-blueprint-likes.php" \
   || fail "release package does not preserve the canonical ${SLUG} root folder"
+unzip -Z1 "$ZIP" | grep -qx "${SLUG}/readme.txt" \
+  || fail "release package is missing WordPress.org readme.txt"
 
 echo "Artifact: ${ZIP#$ROOT/}"
 echo "Checksum: ${CHECKSUM#$ROOT/}"
