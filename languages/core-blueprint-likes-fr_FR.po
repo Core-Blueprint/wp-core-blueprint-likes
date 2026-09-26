@@ -841,3 +841,96 @@ msgstr ""
 #. Description of the plugin.
 msgid "Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration."
 msgstr "Likes légers et respectueux de la vie privée, avec dislikes facultatifs, pour les publications et les utilisateurs WordPress, avec intégration Bricks facultative."
+
+msgid "Layout"
+msgstr "Mise en page"
+
+msgid "Button"
+msgstr "Bouton"
+
+msgid "Icon"
+msgstr "Icône"
+
+msgid "Count"
+msgstr "Nombre"
+
+msgid "Active state"
+msgstr "État actif"
+
+msgid "Disabled state"
+msgstr "État désactivé"
+
+msgid "Flex wrap"
+msgstr "Retour à la ligne flex"
+
+msgid "No wrap"
+msgstr "Sans retour à la ligne"
+
+msgid "Wrap"
+msgstr "Retour à la ligne"
+
+msgid "Wrap reverse"
+msgstr "Retour à la ligne inversé"
+
+msgid "Direction"
+msgstr "Direction"
+
+msgid "Align main axis"
+msgstr "Aligner l’axe principal"
+
+msgid "Align cross axis"
+msgstr "Aligner l’axe transversal"
+
+msgid "Column gap"
+msgstr "Espacement des colonnes"
+
+msgid "Row gap"
+msgstr "Espacement des lignes"
+
+msgid "Typography"
+msgstr "Typographie"
+
+msgid "Background"
+msgstr "Arrière-plan"
+
+msgid "Border"
+msgstr "Bordure"
+
+msgid "Padding"
+msgstr "Marge intérieure"
+
+msgid "Box shadow"
+msgstr "Ombre de boîte"
+
+msgid "Minimum height"
+msgstr "Hauteur minimale"
+
+msgid "Hover text color"
+msgstr "Couleur du texte au survol"
+
+msgid "Hover background color"
+msgstr "Couleur d’arrière-plan au survol"
+
+msgid "Hover border"
+msgstr "Bordure au survol"
+
+msgid "Focus text color"
+msgstr "Couleur du texte au focus"
+
+msgid "Focus background color"
+msgstr "Couleur d’arrière-plan au focus"
+
+msgid "Focus border"
+msgstr "Bordure au focus"
+
+msgid "Color"
+msgstr "Couleur"
+
+msgid "Size"
+msgstr "Taille"
+
+msgid "Icon color"
+msgstr "Couleur de l’icône"
+
+msgid "Opacity"
+msgstr "Opacité"

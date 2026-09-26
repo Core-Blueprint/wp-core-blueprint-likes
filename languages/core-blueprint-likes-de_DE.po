@@ -825,3 +825,96 @@ msgstr ""
 #. Description of the plugin.
 msgid "Lightweight privacy-first likes and optional dislikes for WordPress posts and users, with optional Bricks integration."
 msgstr "Schlanke, datenschutzfreundliche Likes und optionale Dislikes für WordPress-Beiträge und Benutzer, mit optionaler Bricks-Integration."
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Button"
+msgstr "Schaltfläche"
+
+msgid "Icon"
+msgstr "Symbol"
+
+msgid "Count"
+msgstr "Anzahl"
+
+msgid "Active state"
+msgstr "Aktiver Zustand"
+
+msgid "Disabled state"
+msgstr "Deaktivierter Zustand"
+
+msgid "Flex wrap"
+msgstr "Flex-Umbruch"
+
+msgid "No wrap"
+msgstr "Kein Umbruch"
+
+msgid "Wrap"
+msgstr "Umbruch"
+
+msgid "Wrap reverse"
+msgstr "Umbruch umkehren"
+
+msgid "Direction"
+msgstr "Richtung"
+
+msgid "Align main axis"
+msgstr "Hauptachse ausrichten"
+
+msgid "Align cross axis"
+msgstr "Querachse ausrichten"
+
+msgid "Column gap"
+msgstr "Spaltenabstand"
+
+msgid "Row gap"
+msgstr "Zeilenabstand"
+
+msgid "Typography"
+msgstr "Typografie"
+
+msgid "Background"
+msgstr "Hintergrund"
+
+msgid "Border"
+msgstr "Rahmen"
+
+msgid "Padding"
+msgstr "Innenabstand"
+
+msgid "Box shadow"
+msgstr "Box-Schatten"
+
+msgid "Minimum height"
+msgstr "Mindesthöhe"
+
+msgid "Hover text color"
+msgstr "Textfarbe bei Hover"
+
+msgid "Hover background color"
+msgstr "Hintergrundfarbe bei Hover"
+
+msgid "Hover border"
+msgstr "Rahmen bei Hover"
+
+msgid "Focus text color"
+msgstr "Textfarbe im Fokus"
+
+msgid "Focus background color"
+msgstr "Hintergrundfarbe im Fokus"
+
+msgid "Focus border"
+msgstr "Rahmen im Fokus"
+
+msgid "Color"
+msgstr "Farbe"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid "Icon color"
+msgstr "Symbolfarbe"
+
+msgid "Opacity"
+msgstr "Deckkraft"
