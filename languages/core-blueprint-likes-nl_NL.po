@@ -68,9 +68,8 @@ msgid "Core Blueprint Likes requires an active Core Blueprint Base plugin."
 msgstr "Core Blueprint Likes vereist een actieve Core Blueprint Base-plug-in."
 
 #: core-blueprint-likes.php:131
-#, fuzzy
 msgid "Core Blueprint Likes:"
-msgstr "Core Blueprint Likes"
+msgstr "Core Blueprint Likes:"
 
 #: src/Privacy/Integration.php:56
 msgid "Created at (UTC)"
