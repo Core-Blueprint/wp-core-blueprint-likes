@@ -45,7 +45,11 @@ if ( ! str_contains( $builder, '"$ROOT/tools/check"' ) ) {
 if ( str_contains( $builder, 'sync-i18n.py' ) ) {
 	throw new RuntimeException( 'Release builder must not invoke the retired mutating i18n sync.' );
 }
-if ( ! str_contains( $builder, 'mktemp -d' ) || ! str_contains( $builder, '.zip.sha256' ) ) {
+if (
+	! str_contains( $builder, 'mktemp -d' )
+	|| ! str_contains( $builder, 'CHECKSUM="$ZIP.sha256"' )
+	|| ! str_contains( $builder, 'sha256sum' )
+) {
 	throw new RuntimeException( 'Release builder must use temporary staging and emit a checksum sidecar.' );
 }
 
