@@ -21,7 +21,7 @@ $checks = [
 	'IntegrationGrid required' => str_contains( $normalized, 'CB\\Core\\UI\\IntegrationGrid' ),
 	'Icon renderer required' => str_contains( $normalized, 'CB\\Core\\UI\\Icon' ),
 	'no Base product-version gate' => ! str_contains( $main, 'CB_CORE_VERSION' ),
-	'no WordPress Requires Plugins header' => ! str_contains( $main, 'Requires Plugins:' ),
+	'WordPress Requires Plugins header declares Base' => 1 === preg_match( '/^\\s*\\*\\s*Requires Plugins:\\s+core-blueprint\\s*$/m', $main ),
 ];
 
 $failed = array_keys( array_filter( $checks, static fn( bool $passed ): bool => ! $passed ) );
