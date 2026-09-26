@@ -26,7 +26,7 @@ tools/i18n/check
 
 `check-reference` requires only Python and detects implementation drift without needing WP-CLI or GNU gettext.
 
-`update` is the only canonical mutating catalog command. It extracts a fresh POT from source with WordPress i18n tooling, merges the reviewed PO sources, removes obsolete entries, applies the suite-owned canonical dependency translations, validates formats and regenerates configured runtime artifacts.
+`update` is the only canonical mutating catalog command. It stages the complete update transactionally, extracts a fresh POT from source with WordPress i18n tooling, merges the reviewed PO sources, removes obsolete entries, applies the suite-owned canonical dependency translations, validates formats and regenerates configured runtime artifacts. Tracked catalogs are replaced only after every configured locale passes, so a failed update leaves the committed catalog set unchanged.
 
 `check` is read-only. It proves source/POT/PO parity, reviewed translation completeness, canonical dependency-copy translations, and reproducibility of any committed MO or static WordPress `*.l10n.php` artifacts.
 
@@ -51,3 +51,5 @@ The hierarchy is fixed:
 4. MO, JS JSON and static `*.l10n.php` files are generated runtime artifacts.
 
 A PO-backed runtime adapter may remain product-specific when it contains no independent translations and is regression-tested. Live machine translation is never a catalog authority.
+
+WordPress plugin metadata remains part of the normal POT surface. For non-linguistic identity fields such as Plugin Name, Plugin URI, Author and Author URI, `update` may fill an empty translation with the source value as a safe identity default. Existing reviewed translations are never overwritten. Linguistic metadata such as Description remains subject to the normal completeness gate and must be reviewed like any other translatable string.
