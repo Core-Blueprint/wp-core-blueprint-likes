@@ -2,75 +2,85 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+PACKAGE="core-blueprint-likes"
+MAIN_FILE="core-blueprint-likes.php"
+ENTRY="$ROOT/$MAIN_FILE"
+DIST="$ROOT/dist"
+STAGE="$(mktemp -d)"
+trap 'rm -rf "$STAGE"' EXIT
 
 fail() {
-  printf 'Release build failed: %s\n' "$*" >&2
+  printf 'Likes release build failed: %s\n' "$*" >&2
   exit 1
 }
 
-for command in php python3 xgettext zip unzip git sha256sum; do
+for command in php zip unzip python3 sha256sum find sort touch grep; do
   command -v "$command" >/dev/null 2>&1 || fail "missing required command: $command"
 done
 
-VERSION="1.0.0-rc1"
-SLUG="core-blueprint-likes"
-DIST="$ROOT/dist"
-PACKAGE_ROOT="$DIST/$SLUG"
-ZIP="$DIST/${SLUG}-${VERSION}.zip"
+[[ -f "$ENTRY" ]] || fail "plugin entrypoint is missing"
+
+VERSION="$(php -r '$s=file_get_contents($argv[1]); if(!preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m)){exit(2);} echo trim($m[1]);' "$ENTRY")"
+CONSTANT_VERSION="$(php -r '$s=file_get_contents($argv[1]); if(!preg_match("/define\\(\\s*[\\x27\\x22]CB_LIKES_VERSION[\\x27\\x22]\\s*,\\s*[\\x27\\x22]([^\\x27\\x22]+)[\\x27\\x22]/",$s,$m)){exit(2);} echo trim($m[1]);' "$ENTRY")"
+
+[[ -n "$VERSION" ]] || fail "plugin Version header is unavailable"
+[[ "$CONSTANT_VERSION" == "$VERSION" ]] || fail "Version header and CB_LIKES_VERSION differ"
+[[ "$VERSION" == "1.0.0-rc1" ]] || fail "unexpected public version: $VERSION (expected 1.0.0-rc1)"
+
+ZIP="$DIST/$PACKAGE-$VERSION.zip"
 CHECKSUM="$ZIP.sha256"
+PACKAGE_ROOT="$STAGE/$PACKAGE"
 
-actual_version="$(php -r '$s=file_get_contents("core-blueprint-likes.php"); if(!preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m)){exit(2);} echo trim($m[1]);')"
-[[ "$actual_version" == "$VERSION" ]] || fail "unexpected public version: $actual_version (expected $VERSION)"
+"$ROOT/tools/check"
 
-python3 tools/sync-i18n.py
-if ! git diff --quiet -- languages; then
-  git diff --name-only -- languages >&2
-  fail "translations are stale; commit the generated languages/ changes and rebuild"
-fi
+rm -rf "$DIST"
+mkdir -p "$DIST" "$PACKAGE_ROOT"
 
-echo "PHP lint"
-while IFS= read -r -d '' file; do
-  php -l "$file" >/dev/null || fail "PHP lint failed: $file"
-done < <(find . -path './.git' -prune -o -path './dist' -prune -o -path './vendor' -prune -o -type f -name '*.php' -print0)
+for path in   "$MAIN_FILE"   readme.txt   THIRD-PARTY-LICENSES.md   src   assets   languages; do
+  [[ -e "$ROOT/$path" ]] || fail "required release path is missing: $path"
+  cp -R "$ROOT/$path" "$PACKAGE_ROOT/"
+done
 
-php tools/conformance.php
-
-rm -rf "$PACKAGE_ROOT" "$ZIP" "$CHECKSUM"
-mkdir -p "$PACKAGE_ROOT"
-
-# Build from an explicit production allowlist rather than copying the repository
-# and trying to remove developer-only paths afterwards.
-cp core-blueprint-likes.php readme.txt "$PACKAGE_ROOT/"
-if [[ -f THIRD-PARTY-LICENSES.md ]]; then
-  cp THIRD-PARTY-LICENSES.md "$PACKAGE_ROOT/"
-fi
-cp -R assets languages src "$PACKAGE_ROOT/"
-
-find "$PACKAGE_ROOT" -type f \( -name '.DS_Store' -o -name '*.map' \) -delete
+find "$PACKAGE_ROOT" -type f \( -name '.DS_Store' -o -name '*.map' -o -name '*.pyc' \) -delete
+find "$PACKAGE_ROOT" -exec touch -t 198001010000 {} +
 
 (
-  cd "$DIST"
-  zip -X -q -r "$(basename "$ZIP")" "$SLUG"
-  sha256sum "$(basename "$ZIP")" > "$(basename "$CHECKSUM")"
+  cd "$STAGE"
+  zip -X -q "$ZIP" "$PACKAGE/"
+  find "$PACKAGE" -type f -print | LC_ALL=C sort | zip -X -q "$ZIP" -@
 )
 
 [[ -s "$ZIP" ]] || fail "release ZIP was not created"
-[[ -s "$CHECKSUM" ]] || fail "release checksum was not created"
-unzip -tq "$ZIP" >/dev/null || fail "release ZIP integrity check failed"
+unzip -tqq "$ZIP" || fail "release ZIP integrity check failed"
 
-leaks="$(unzip -Z1 "$ZIP" | grep -E "^${SLUG}/(tests|tools|\\.github|dist)(/|$)" || true)"
-if [[ -n "$leaks" ]]; then
-  printf '%s\n' "$leaks" >&2
-  fail "developer-only files leaked into the release package"
+ZIP_ENTRIES="$(unzip -Z1 "$ZIP")"
+[[ -n "$ZIP_ENTRIES" ]] || fail "release ZIP is empty"
+FIRST_ENTRY="${ZIP_ENTRIES%%$'\n'*}"
+[[ "$FIRST_ENTRY" == "$PACKAGE/" ]] || fail "release ZIP root is not $PACKAGE/"
+
+while IFS= read -r entry; do
+  [[ "$entry" == "$PACKAGE/"* ]] || fail "unexpected archive root entry: $entry"
+done <<<"$ZIP_ENTRIES"
+
+if grep -Eq '(^|/)(\.git|\.github|tests|tools|docs|dist|build|node_modules|vendor|\.venv)(/|$)' <<<"$ZIP_ENTRIES"; then
+  fail "development-only files leaked into the release ZIP"
 fi
 
-unzip -Z1 "$ZIP" | grep -qx "${SLUG}/core-blueprint-likes.php" \
-  || fail "release package does not preserve the canonical ${SLUG} root folder"
-unzip -Z1 "$ZIP" | grep -qx "${SLUG}/readme.txt" \
-  || fail "release package is missing WordPress.org readme.txt"
+grep -Fxq "$PACKAGE/$MAIN_FILE" <<<"$ZIP_ENTRIES"   || fail "release package is missing the canonical plugin entrypoint"
+grep -Fxq "$PACKAGE/readme.txt" <<<"$ZIP_ENTRIES"   || fail "release package is missing WordPress.org readme.txt"
 
-echo "Artifact: ${ZIP#$ROOT/}"
-echo "Checksum: ${CHECKSUM#$ROOT/}"
-cat "$CHECKSUM"
-echo "Likes release package: PASS"
+PACKAGED_ENTRY="$(unzip -p "$ZIP" "$PACKAGE/$MAIN_FILE")"
+PACKAGED_VERSION="$(printf '%s' "$PACKAGED_ENTRY" | php -r '$s=stream_get_contents(STDIN); preg_match("/Version:\\s+([^\\r\\n]+)/",$s,$m); echo trim($m[1] ?? "");')"
+PACKAGED_CONSTANT="$(printf '%s' "$PACKAGED_ENTRY" | php -r '$s=stream_get_contents(STDIN); preg_match("/define\\(\\s*[\\x27\\x22]CB_LIKES_VERSION[\\x27\\x22]\\s*,\\s*[\\x27\\x22]([^\\x27\\x22]+)[\\x27\\x22]/",$s,$m); echo trim($m[1] ?? "");')"
+
+[[ "$PACKAGED_VERSION" == "$VERSION" ]] || fail "packaged Version header differs from source"
+[[ "$PACKAGED_CONSTANT" == "$VERSION" ]] || fail "packaged version constant differs from source"
+
+(
+  cd "$DIST"
+  sha256sum "$(basename "$ZIP")" > "$(basename "$CHECKSUM")"
+)
+[[ -s "$CHECKSUM" ]] || fail "release checksum was not created"
+SHA256="$(awk '{print $1}' "$CHECKSUM")"
+
+printf 'Core Blueprint Likes release package: PASS\nVersion: %s\nArtifact: %s\nCanonical root: %s/\nChecksum: %s\nSHA-256: %s\n'   "$VERSION" "$ZIP" "$PACKAGE" "$CHECKSUM" "$SHA256"

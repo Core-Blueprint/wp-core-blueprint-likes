@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+fail() {
+  printf 'Likes checks failed: %s\n' "$*" >&2
+  exit 1
+}
+
+for command in php python3; do
+  command -v "$command" >/dev/null 2>&1 || fail "missing required command: $command"
+done
+
+PHP_VERSION="$(php -r 'echo PHP_VERSION;')"
+php -r 'exit(version_compare(PHP_VERSION, "8.4", ">=") ? 0 : 1);' || {
+  printf 'ERROR: PHP 8.4+ is required for Likes checks (found %s).\n' "$PHP_VERSION" >&2
+  exit 1
+}
+
+while IFS= read -r -d '' file; do
+  php -l "$file" >/dev/null || fail "PHP lint failed: $file"
+done < <(find . -path './.git' -prune -o -path './dist' -prune -o -path './vendor' -prune -o -type f -name '*.php' -print0)
+
+echo "PHP syntax: PASS"
+"$ROOT/tools/i18n/check"
+php "$ROOT/tools/conformance.php"
+
+echo "Core Blueprint Likes checks: PASS"
