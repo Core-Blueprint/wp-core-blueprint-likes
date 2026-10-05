@@ -33,10 +33,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup PHP
+      - name: Setup PHP and WP-CLI
         uses: shivammathur/setup-php@2.37.2
         with:
           php-version: ${{ matrix.php }}
+          tools: wp-cli
           coverage: none
 
       - name: Install release build dependencies
