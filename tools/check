@@ -27,4 +27,9 @@ echo "PHP syntax: PASS"
 "$ROOT/tools/i18n/check"
 php "$ROOT/tools/conformance.php"
 
+echo "== Likes regression suite =="
+for test in tests/*-regression.php; do
+  php "$test"
+done
+
 echo "Core Blueprint Likes checks: PASS"
