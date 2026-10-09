@@ -40,7 +40,7 @@ foreach ( $tabs as $tab ) {
 
 $checks += [
 	'canonical extension id exposed' => str_contains( $integration, "public const ID = 'core-blueprint-likes';" ),
-	'Settings Hub lifecycle registered' => str_contains( $integration, "add_action( 'cb_core_register_settings'" ) && str_contains( $integration, 'SettingsRegistry::register(' ),
+	'Settings Hub lifecycle registered' => str_contains( $integration, "add_action( 'core_blueprint_register_settings'" ) && str_contains( $integration, 'SettingsRegistry::register(' ),
 	'Community group registered' => str_contains( $integration, 'SettingsRegistry::GROUP_COMMUNITY' ),
 	'PageContent remains provider renderer' => str_contains( $integration, "'renderer'    => [ PageContent::class, 'render' ]" ),
 	'manage capability retained' => str_contains( $integration, "'capability'  => Capabilities::MANAGE" ),
@@ -62,7 +62,7 @@ $checks += [
 	'Clipboard requested semantically' => str_contains( $integration, "'foundations' => [ 'clipboard' ]" ),
 	'Integration Grid requested semantically' => str_contains( $integration, "'integration-grid'" ),
 	'Metric tiles requested semantically' => str_contains( $integration, "'metric-tiles'" ),
-	'Actions requested semantically' => str_contains( $integration, "'actions'" ),
+	'Public Buttons requested semantically' => str_contains( $integration, "'buttons'" ) && ! str_contains( $integration, "'actions'" ),
 	'Status requested semantically' => str_contains( $integration, "'status'" ),
 	'provider assets keyed by extension identity' => str_contains( $assets, "\$_GET['extension']" ) && str_contains( $assets, 'CoreBlueprint::ID !== $extension_id' ),
 	'Foundation interactive rows used' => str_contains( $post_types, '<details class="cb-core-interactive-row cb-likes-post-type' ) && str_contains( $post_types, '<summary class="cb-core-interactive-row__summary cb-likes-post-type__summary">' ),
@@ -76,9 +76,9 @@ $checks += [
 	'no private Clipboard handle' => ! str_contains( $assets, '@cb-core/clipboard' ) && ! str_contains( $assets, 'wp_enqueue_script_module' ),
 	'no standalone admin fallback CSS' => ! str_contains( $css, 'cb-likes-native' ),
 	'no DetailRows misuse' => ! str_contains( $page, 'DetailRows' ),
-	'SettingsRegistry runtime contract gated' => str_contains( $bootstrap, "class_exists( '\\\\CB\\\\Core\\\\Admin\\\\SettingsRegistry' )" ),
-	'IntegrationGrid runtime contract gated' => str_contains( $bootstrap, "class_exists( '\\\\CB\\\\Core\\\\UI\\\\IntegrationGrid' )" ) && str_contains( $bootstrap, "method_exists( '\\\\CB\\\\Core\\\\UI\\\\IntegrationGrid', 'render' )" ),
-	'Icon runtime contract gated' => str_contains( $bootstrap, "class_exists( '\\\\CB\\\\Core\\\\UI\\\\Icon' )" ) && str_contains( $bootstrap, "method_exists( '\\\\CB\\\\Core\\\\UI\\\\Icon', 'render' )" ),
+	'SettingsRegistry runtime contract gated' => str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\Admin\\\\SettingsRegistry' )" ),
+	'IntegrationGrid runtime contract gated' => str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\UI\\\\IntegrationGrid' )" ) && str_contains( $bootstrap, "method_exists( '\\\\CoreBlueprint\\\\Core\\\\UI\\\\IntegrationGrid', 'render' )" ),
+	'Icon runtime contract gated' => str_contains( $bootstrap, "class_exists( '\\\\CoreBlueprint\\\\Core\\\\UI\\\\Icon' )" ) && str_contains( $bootstrap, "method_exists( '\\\\CoreBlueprint\\\\Core\\\\UI\\\\Icon', 'render' )" ),
 	'RC1 version retained' => str_contains( $bootstrap, 'Version:           1.0.0-rc1' ) && str_contains( $bootstrap, "define( 'CB_LIKES_VERSION', '1.0.0-rc1' )" ),
 ];
 

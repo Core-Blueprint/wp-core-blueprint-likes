@@ -10,6 +10,9 @@ final class Repository {
 	public const DISLIKE = 'dislike';
 
 	public static function reaction_for_user( int $user_id, string $target_type, int $target_id ): ?string {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return null;
+		}
 		if ( $user_id <= 0 || $target_id <= 0 ) {
 			return null;
 		}
@@ -25,14 +28,23 @@ final class Repository {
 	}
 
 	public static function user_has_liked( int $user_id, string $target_type, int $target_id ): bool {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return false;
+		}
 		return self::LIKE === self::reaction_for_user( $user_id, $target_type, $target_id );
 	}
 
 	public static function user_has_disliked( int $user_id, string $target_type, int $target_id ): bool {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return false;
+		}
 		return self::DISLIKE === self::reaction_for_user( $user_id, $target_type, $target_id );
 	}
 
 	public static function set_reaction( int $user_id, string $target_type, int $target_id, string $reaction ): bool {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return false;
+		}
 		$reaction = self::normalize_reaction( $reaction );
 		if ( null === $reaction ) {
 			return false;
@@ -58,6 +70,9 @@ final class Repository {
 	}
 
 	public static function clear_reaction( int $user_id, string $target_type, int $target_id ): bool {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return false;
+		}
 		global $wpdb;
 		$result = $wpdb->delete(
 			Install::table(),
@@ -68,14 +83,23 @@ final class Repository {
 	}
 
 	public static function count( string $target_type, int $target_id ): int {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return 0;
+		}
 		return self::count_reaction( $target_type, $target_id, self::LIKE );
 	}
 
 	public static function dislike_count( string $target_type, int $target_id ): int {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return 0;
+		}
 		return self::count_reaction( $target_type, $target_id, self::DISLIKE );
 	}
 
 	public static function count_reaction( string $target_type, int $target_id, string $reaction ): int {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return 0;
+		}
 		$reaction = self::normalize_reaction( $reaction );
 		if ( $target_id <= 0 || null === $reaction ) {
 			return 0;
@@ -92,6 +116,9 @@ final class Repository {
 
 	/** @return int[] */
 	public static function liked_post_ids( int $user_id, int $limit = 100 ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return [];
+		}
 		if ( $user_id <= 0 ) {
 			return [];
 		}
@@ -109,6 +136,9 @@ final class Repository {
 	 *  @return int[]
 	 */
 	public static function most_liked_post_ids( array $post_types, int $limit = 100 ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return [];
+		}
 		$post_types = array_values( array_filter( array_map( 'sanitize_key', $post_types ) ) );
 		if ( [] === $post_types ) {
 			return [];
@@ -124,6 +154,9 @@ final class Repository {
 	}
 
 	public static function total_count( ?string $reaction = null ): int {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return 0;
+		}
 		global $wpdb;
 		$table = Install::table();
 		if ( null === $reaction ) {
@@ -137,17 +170,26 @@ final class Repository {
 	}
 
 	public static function unique_user_count(): int {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return 0;
+		}
 		global $wpdb;
 		$table = Install::table();
 		return (int) $wpdb->get_var( "SELECT COUNT(DISTINCT user_id) FROM {$table}" );
 	}
 
 	public static function delete_target( string $target_type, int $target_id ): void {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return;
+		}
 		global $wpdb;
 		$wpdb->delete( Install::table(), [ 'target_type' => Targets::normalize_type( $target_type ), 'target_id' => $target_id ], [ '%s', '%d' ] );
 	}
 
 	public static function delete_by_user( int $user_id ): int {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return 0;
+		}
 		global $wpdb;
 		$result = $wpdb->delete( Install::table(), [ 'user_id' => $user_id ], [ '%d' ] );
 		return false === $result ? 0 : (int) $result;
@@ -155,6 +197,9 @@ final class Repository {
 
 	/** @return array<int,array<string,mixed>> */
 	public static function rows_for_user( int $user_id, int $offset = 0, int $limit = 100 ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return [];
+		}
 		global $wpdb;
 		$table = Install::table();
 		$rows = $wpdb->get_results( $wpdb->prepare(

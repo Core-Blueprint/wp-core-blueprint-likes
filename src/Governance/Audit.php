@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace CB\Likes\Governance;
 
 use CB\Likes\Settings;
+use CoreBlueprint\Core\Governance\EventRegistry;
+use CoreBlueprint\Core\Log\AuditLog;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +23,7 @@ final class Audit {
 	public static function init(): void {
 		add_action( 'updated_option', [ __CLASS__, 'option_updated' ], 10, 3 );
 		add_action( 'added_option', [ __CLASS__, 'option_added' ], 10, 2 );
-		add_filter( 'cb_core_event_labels', [ __CLASS__, 'register_event_labels' ] );
+		add_action( 'init', [ __CLASS__, 'register_event' ], 10 );
 	}
 
 	public static function option_updated( string $option, mixed $old_value, mixed $value ): void {
@@ -40,19 +42,19 @@ final class Audit {
 		self::log_settings_change( [], $value );
 	}
 
-	/**
-	 * Contribute Likes labels to the central Core Blueprint audit catalog.
-	 *
-	 * @param array<string,string> $labels Existing labels.
-	 * @return array<string,string>
-	 */
-	public static function register_event_labels( array $labels ): array {
-		$labels['likes_settings_changed'] = __( 'Likes: settings changed', 'core-blueprint-likes' );
-		return $labels;
+	/** Register the settings-change event using Base's public EventRegistry. */
+	public static function register_event(): void {
+		if ( ! class_exists( EventRegistry::class ) ) {
+			return;
+		}
+		EventRegistry::register( [
+			'id'    => self::EVENT_SETTINGS_CHANGED,
+			'label' => __( 'Likes: settings changed', 'core-blueprint-likes' ),
+		] );
 	}
 
 	private static function log_settings_change( mixed $old_value, mixed $new_value ): void {
-		if ( ! class_exists( '\\CB\\Core\\Log\\AuditLog' ) ) {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() || ! class_exists( AuditLog::class ) ) {
 			return;
 		}
 
@@ -75,7 +77,7 @@ final class Audit {
 			$context['changed_truncated'] = true;
 		}
 
-		\CB\Core\Log\AuditLog::log( self::EVENT_SETTINGS_CHANGED, 'notice', $context );
+		AuditLog::log( self::EVENT_SETTINGS_CHANGED, 'notice', $context );
 	}
 
 	/**

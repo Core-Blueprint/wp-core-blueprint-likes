@@ -8,6 +8,9 @@ defined( 'ABSPATH' ) || exit;
 final class Service {
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int}|\WP_Error */
 	public static function set_reaction( int $user_id, string $target_type, int $target_id, ?string $reaction ): array|\WP_Error {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return new \WP_Error( 'cb_likes_base_unavailable', cb_likes_dependency_message(), [ 'status' => 503 ] );
+		}
 		$type = Targets::normalize_type( $target_type );
 		$reaction = null === $reaction || '' === $reaction ? null : sanitize_key( $reaction );
 		if ( null !== $reaction && ! in_array( $reaction, [ Repository::LIKE, Repository::DISLIKE ], true ) ) {
@@ -43,6 +46,9 @@ final class Service {
 
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int}|\WP_Error */
 	public static function set_liked( int $user_id, string $target_type, int $target_id, bool $liked ): array|\WP_Error {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return new \WP_Error( 'cb_likes_base_unavailable', cb_likes_dependency_message(), [ 'status' => 503 ] );
+		}
 		$current = Repository::reaction_for_user( $user_id, $target_type, $target_id );
 		if ( $liked ) {
 			return self::set_reaction( $user_id, $target_type, $target_id, Repository::LIKE );
@@ -54,6 +60,9 @@ final class Service {
 
 	/** @return array{reaction:?string,liked:bool,disliked:bool,count:int,like_count:int,dislike_count:int}|\WP_Error */
 	public static function set_disliked( int $user_id, string $target_type, int $target_id, bool $disliked ): array|\WP_Error {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return new \WP_Error( 'cb_likes_base_unavailable', cb_likes_dependency_message(), [ 'status' => 503 ] );
+		}
 		$current = Repository::reaction_for_user( $user_id, $target_type, $target_id );
 		if ( $disliked ) {
 			return self::set_reaction( $user_id, $target_type, $target_id, Repository::DISLIKE );

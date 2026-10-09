@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace CB\Likes\Integration;
 
-use CB\Core\Admin\SettingsRegistry;
-use CB\Core\Dashboard\CardRegistry;
-use CB\Core\ExtensionRegistry;
+use CoreBlueprint\Core\Admin\SettingsRegistry;
+use CoreBlueprint\Core\Dashboard\CardRegistry;
+use CoreBlueprint\Core\ExtensionRegistry;
 use CB\Likes\Admin\PageContent;
 use CB\Likes\Capabilities;
 use CB\Likes\Repository;
@@ -17,11 +17,11 @@ final class CoreBlueprint {
 	public const ID = 'core-blueprint-likes';
 
 	public static function init(): void {
-		add_action( 'cb_core_register_settings', [ __CLASS__, 'register_settings_provider' ] );
-		add_action( 'cb_core_register_extensions', [ __CLASS__, 'register_extension' ] );
-		add_filter( 'cb_core_module_status_definitions', [ __CLASS__, 'register_status_definition' ] );
+		add_action( 'core_blueprint_register_settings', [ __CLASS__, 'register_settings_provider' ] );
+		add_action( 'core_blueprint_register_extensions', [ __CLASS__, 'register_extension' ] );
+		add_filter( 'core_blueprint_module_status_definitions', [ __CLASS__, 'register_status_definition' ] );
 		add_filter( 'plugin_action_links_' . CB_LIKES_BASENAME, [ __CLASS__, 'plugin_links' ] );
-		add_action( 'cb_core_dashboard_register_cards', [ __CLASS__, 'register_dashboard_shortcuts' ] );
+		add_action( 'core_blueprint_dashboard_register_cards', [ __CLASS__, 'register_dashboard_shortcuts' ] );
 	}
 
 	public static function register_dashboard_shortcuts(): void {
@@ -45,7 +45,7 @@ final class CoreBlueprint {
 				'renderer'    => [ PageContent::class, 'render' ],
 				'requirements' => [
 					'foundations' => [ 'clipboard' ],
-					'components'  => [ 'actions', 'cards', 'metric-tiles', 'nav-tabs', 'fields', 'disclosure', 'form-controls', 'integration-grid', 'status' ],
+					'components'  => [ 'buttons', 'cards', 'metric-tiles', 'nav-tabs', 'fields', 'disclosure', 'form-controls', 'integration-grid', 'status' ],
 				],
 			]
 		);

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace CB\Likes\Admin;
 
-use CB\Core\Admin\SettingsRegistry;
-use CB\Core\UI\IntegrationGrid;
+use CoreBlueprint\Core\Admin\SettingsRegistry;
+use CoreBlueprint\Core\UI\IntegrationGrid;
 use CB\Likes\Integration\CoreBlueprint;
 use CB\Likes\Settings;
 
