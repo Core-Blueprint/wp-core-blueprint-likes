@@ -14,12 +14,12 @@ $normalized = str_replace( '\\\\', '\\', $main );
 $checks = [
 	'public version stays RC1' => str_contains( $main, 'Version:           1.0.0-rc1' ) && str_contains( $main, "define( 'CB_LIKES_VERSION', '1.0.0-rc1' );" ),
 	'Core API 1.0 contract' => str_contains( $main, "define( 'CB_LIKES_REQUIRED_API', '1.0' );" ),
-	'ExtensionRegistry required' => str_contains( $normalized, 'CB\\Core\\ExtensionRegistry' ),
-	'SettingsRegistry required' => str_contains( $normalized, 'CB\\Core\\Admin\\SettingsRegistry' ),
-	'PageRegistry no longer required' => ! str_contains( $normalized, 'CB\\Core\\Admin\\PageRegistry' ),
-	'public Page contract no longer required' => ! str_contains( $normalized, 'CB\\Core\\Admin\\Page' ),
-	'IntegrationGrid required' => str_contains( $normalized, 'CB\\Core\\UI\\IntegrationGrid' ),
-	'Icon renderer required' => str_contains( $normalized, 'CB\\Core\\UI\\Icon' ),
+	'ExtensionRegistry required' => str_contains( $normalized, 'CoreBlueprint\\Core\\ExtensionRegistry' ),
+	'SettingsRegistry required' => str_contains( $normalized, 'CoreBlueprint\\Core\\Admin\\SettingsRegistry' ),
+	'PageRegistry no longer required' => ! str_contains( $normalized, 'CoreBlueprint\\Core\\Admin\\PageRegistry' ),
+	'public Page contract no longer required' => ! str_contains( $normalized, 'CoreBlueprint\\Core\\Admin\\Page' ),
+	'IntegrationGrid required' => str_contains( $normalized, 'CoreBlueprint\\Core\\UI\\IntegrationGrid' ),
+	'Icon renderer required' => str_contains( $normalized, 'CoreBlueprint\\Core\\UI\\Icon' ),
 	'no Base product-version gate' => ! str_contains( $main, 'CB_CORE_VERSION' ),
 	'WordPress Requires Plugins header declares Base' => 1 === preg_match( '/^\\s*\\*\\s*Requires Plugins:\\s+core-blueprint\\s*$/m', $main ),
 ];

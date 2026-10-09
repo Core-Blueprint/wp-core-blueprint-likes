@@ -180,7 +180,7 @@ function cb_likes_set_disliked( int $user_id, string $target_type, int $target_i
 /** Public API: set one mutually exclusive reaction (`like`, `dislike` or null). */
 function cb_likes_set_reaction( int $user_id, string $target_type, int $target_id, ?string $reaction ): array|\WP_Error {
 	if ( ! cb_likes_base_ready() ) {
-		return new \WP_Error( 'cb_likes_base_unavailable', 'Core Blueprint Base is not available.', [ 'status' => 503 ] );
+		return new \WP_Error( 'cb_likes_base_unavailable', cb_likes_dependency_message(), [ 'status' => 503 ] );
 	}
 	return \CB\Likes\Service::set_reaction( $user_id, $target_type, $target_id, $reaction );
 }
