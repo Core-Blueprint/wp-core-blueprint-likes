@@ -17,6 +17,9 @@ final class Integration {
 	 *  @return array<string,mixed>
 	 */
 	public static function exporters( array $exporters ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return $exporters;
+		}
 		$exporters['core-blueprint-likes'] = [
 			'exporter_friendly_name' => __( 'Core Blueprint Likes', 'core-blueprint-likes' ),
 			'callback' => [ __CLASS__, 'export' ],
@@ -28,6 +31,9 @@ final class Integration {
 	 *  @return array<string,mixed>
 	 */
 	public static function erasers( array $erasers ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return $erasers;
+		}
 		$erasers['core-blueprint-likes'] = [
 			'eraser_friendly_name' => __( 'Core Blueprint Likes', 'core-blueprint-likes' ),
 			'callback' => [ __CLASS__, 'erase' ],
@@ -37,6 +43,9 @@ final class Integration {
 
 	/** @return array{data:array<int,mixed>,done:bool} */
 	public static function export( string $email, int $page = 1 ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return [ 'data' => [], 'done' => true ];
+		}
 		$user = get_user_by( 'email', $email );
 		if ( ! $user ) {
 			return [ 'data' => [], 'done' => true ];
@@ -63,6 +72,9 @@ final class Integration {
 
 	/** @return array{items_removed:bool,items_retained:bool,messages:string[],done:bool} */
 	public static function erase( string $email, int $page = 1 ): array {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return [ 'items_removed' => false, 'items_retained' => true, 'messages' => [ cb_likes_dependency_message() ], 'done' => true ];
+		}
 		$user = get_user_by( 'email', $email );
 		$removed = $user ? Repository::delete_by_user( (int) $user->ID ) > 0 : false;
 		return [ 'items_removed' => $removed, 'items_retained' => false, 'messages' => [], 'done' => true ];

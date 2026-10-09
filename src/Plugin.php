@@ -50,6 +50,9 @@ final class Plugin {
 	}
 
 	public static function deleted_user( int $user_id ): void {
+		if ( ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
+			return;
+		}
 		Repository::delete_by_user( $user_id );
 		Repository::delete_target( Targets::USER, $user_id );
 	}
