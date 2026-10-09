@@ -16,8 +16,8 @@ final class Fields {
 	}
 
 	public static function disclosure_icon(): string {
-		return \CB\Core\UI\Icon::render( 'expand', [
-			'size'  => \CB\Core\UI\Icon::SIZE_COMPACT,
+		return \CoreBlueprint\Core\UI\Icon::render( 'expand', [
+			'size'  => \CoreBlueprint\Core\UI\Icon::SIZE_COMPACT,
 			'class' => 'cb-core-interactive-row__icon cb-core-chevron cb-likes-disclosure-icon',
 		] );
 	}

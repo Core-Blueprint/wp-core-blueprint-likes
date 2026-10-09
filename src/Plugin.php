@@ -17,7 +17,7 @@ final class Plugin {
 	private static bool $booted = false;
 
 	public static function boot(): void {
-		if ( self::$booted ) {
+		if ( self::$booted || ! function_exists( 'cb_likes_base_ready' ) || ! cb_likes_base_ready() ) {
 			return;
 		}
 		self::$booted = true;
@@ -26,7 +26,7 @@ final class Plugin {
 
 		add_action( 'admin_init', [ __CLASS__, 'register_settings' ] );
 		add_filter( 'option_page_capability_cb_likes_settings_group', static fn(): string => Capabilities::MANAGE );
-		add_filter( 'cb_core_capability_catalog', [ Capabilities::class, 'register_catalog' ] );
+		add_filter( 'core_blueprint_capability_catalog', [ Capabilities::class, 'register_catalog' ] );
 		add_action( 'before_delete_post', static fn( int $post_id ): mixed => Repository::delete_target( Targets::POST, $post_id ) );
 		add_action( 'deleted_user', [ __CLASS__, 'deleted_user' ], 10, 1 );
 
