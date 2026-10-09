@@ -83,6 +83,27 @@ namespace {
 	\CB\Likes\Plugin::boot();
 	check_likes( ! in_array( 'admin_init', $GLOBALS['likes_hooks'], true ), 'Plugin boot must not mutate state without Base.' );
 
+	// The repository and privacy bridges must be inert while Base is unavailable.
+	check_likes( null === \CB\Likes\Repository::reaction_for_user( 3, 'post', 123 ), 'Repository must not read the database.' );
+	check_likes( 0 === \CB\Likes\Repository::count( 'post', 123 ), 'Repository counts must return zero.' );
+	check_likes( 0 === \CB\Likes\Repository::dislike_count( 'post', 123 ), 'Repository dislike counts must return zero.' );
+	check_likes( 0 === \CB\Likes\Repository::total_count(), 'Repository totals must return zero.' );
+	check_likes( 0 === \CB\Likes\Repository::unique_user_count(), 'Repository distinct counts must return zero.' );
+	check_likes( [] === \CB\Likes\Repository::liked_post_ids( 3 ), 'Repository liked posts must be empty.' );
+	check_likes( [] === \CB\Likes\Repository::most_liked_post_ids( [ 'post' ] ), 'Repository most liked posts must be empty.' );
+	check_likes( [] === \CB\Likes\Repository::rows_for_user( 3 ), 'Repository privacy rows must be empty.' );
+	check_likes( ! \CB\Likes\Repository::set_reaction( 3, 'post', 123, 'like' ), 'Repository direct mutation must be blocked.' );
+	check_likes( ! \CB\Likes\Repository::clear_reaction( 3, 'post', 123 ), 'Repository direct deletion must be blocked.' );
+	check_likes( 0 === \CB\Likes\Repository::delete_by_user( 3 ), 'Repository privacy deletion must be blocked.' );
+	\CB\Likes\Repository::delete_target( 'post', 123 );
+	\CB\Likes\Plugin::deleted_user( 3 );
+	check_likes( [] === \CB\Likes\Privacy\Integration::exporters( [] ), 'Privacy exporter registration must be withheld.' );
+	check_likes( [] === \CB\Likes\Privacy\Integration::erasers( [] ), 'Privacy eraser registration must be withheld.' );
+	$export = \CB\Likes\Privacy\Integration::export( 'nobody@example.test' );
+	check_likes( [] === $export['data'], 'Privacy exporter must not read without Base.' );
+	$erase = \CB\Likes\Privacy\Integration::erase( 'nobody@example.test' );
+	check_likes( ! $erase['items_removed'] && $erase['items_retained'], 'Privacy eraser must not report deletion on Base loss.' );
+
 	check_likes( cb_likes_api_compatible( '1.2', '1.0' ), 'Current compatible API must be accepted.' );
 	check_likes( ! cb_likes_api_compatible( '2.0', '1.0' ), 'New API major must be refused.' );
 	check_likes( ! cb_likes_api_compatible( 'bogus', '1.0' ), 'Malformed API must be refused.' );
