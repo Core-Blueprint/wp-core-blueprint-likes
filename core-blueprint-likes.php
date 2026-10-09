@@ -73,12 +73,12 @@ function cb_likes_base_ready(): bool {
 		return false;
 	}
 
-	return class_exists( '\\CB\\Core\\ExtensionRegistry' )
-		&& class_exists( '\\CB\\Core\\Admin\\SettingsRegistry' )
-		&& class_exists( '\\CB\\Core\\UI\\IntegrationGrid' )
-		&& method_exists( '\\CB\\Core\\UI\\IntegrationGrid', 'render' )
-		&& class_exists( '\\CB\\Core\\UI\\Icon' )
-		&& method_exists( '\\CB\\Core\\UI\\Icon', 'render' );
+	return class_exists( '\\CoreBlueprint\\Core\\ExtensionRegistry' )
+		&& class_exists( '\\CoreBlueprint\\Core\\Admin\\SettingsRegistry' )
+		&& class_exists( '\\CoreBlueprint\\Core\\UI\\IntegrationGrid' )
+		&& method_exists( '\\CoreBlueprint\\Core\\UI\\IntegrationGrid', 'render' )
+		&& class_exists( '\\CoreBlueprint\\Core\\UI\\Icon' )
+		&& method_exists( '\\CoreBlueprint\\Core\\UI\\Icon', 'render' );
 }
 
 function cb_likes_dependency_message(): string {
@@ -141,37 +141,46 @@ add_action( 'plugins_loaded', static function (): void {
 
 /** Public API: return the number of likes for a target. */
 function cb_likes_count( string $target_type, int $target_id ): int {
-	return \CB\Likes\Repository::count( $target_type, $target_id );
+	return cb_likes_base_ready() ? \CB\Likes\Repository::count( $target_type, $target_id ) : 0;
 }
 
 /** Public API: determine whether a user likes a target. */
 function cb_likes_user_has_liked( int $user_id, string $target_type, int $target_id ): bool {
-	return \CB\Likes\Repository::user_has_liked( $user_id, $target_type, $target_id );
+	return cb_likes_base_ready() && \CB\Likes\Repository::user_has_liked( $user_id, $target_type, $target_id );
 }
 
 /** Public API: set a user's like state for a valid target. */
 function cb_likes_set_liked( int $user_id, string $target_type, int $target_id, bool $liked ): bool {
+	if ( ! cb_likes_base_ready() ) {
+		return false;
+	}
 	$result = \CB\Likes\Service::set_liked( $user_id, $target_type, $target_id, $liked );
 	return ! is_wp_error( $result ) && (bool) $result['liked'];
 }
 
 /** Public API: return the number of dislikes for a target. */
 function cb_likes_dislike_count( string $target_type, int $target_id ): int {
-	return \CB\Likes\Repository::dislike_count( $target_type, $target_id );
+	return cb_likes_base_ready() ? \CB\Likes\Repository::dislike_count( $target_type, $target_id ) : 0;
 }
 
 /** Public API: determine whether a user dislikes a target. */
 function cb_likes_user_has_disliked( int $user_id, string $target_type, int $target_id ): bool {
-	return \CB\Likes\Repository::user_has_disliked( $user_id, $target_type, $target_id );
+	return cb_likes_base_ready() && \CB\Likes\Repository::user_has_disliked( $user_id, $target_type, $target_id );
 }
 
 /** Public API: set a user's dislike state for a valid target. */
 function cb_likes_set_disliked( int $user_id, string $target_type, int $target_id, bool $disliked ): bool {
+	if ( ! cb_likes_base_ready() ) {
+		return false;
+	}
 	$result = \CB\Likes\Service::set_disliked( $user_id, $target_type, $target_id, $disliked );
 	return ! is_wp_error( $result ) && (bool) $result['disliked'];
 }
 
 /** Public API: set one mutually exclusive reaction (`like`, `dislike` or null). */
 function cb_likes_set_reaction( int $user_id, string $target_type, int $target_id, ?string $reaction ): array|\WP_Error {
+	if ( ! cb_likes_base_ready() ) {
+		return new \WP_Error( 'cb_likes_base_unavailable', 'Core Blueprint Base is not available.', [ 'status' => 503 ] );
+	}
 	return \CB\Likes\Service::set_reaction( $user_id, $target_type, $target_id, $reaction );
 }
